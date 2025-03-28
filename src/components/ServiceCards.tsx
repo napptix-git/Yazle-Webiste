@@ -39,57 +39,100 @@ const serviceData = [
 ];
 
 const ServiceCard: React.FC<ServiceProps & { 
-  isActive: boolean, 
+  isFlipped: boolean;
+  isExpanded: boolean;
   onCardClick: () => void 
 }> = ({ 
   title, 
   description, 
   icon,
   index,
-  isActive,
+  isFlipped,
+  isExpanded,
   onCardClick
 }) => {
+  const offset = index * 40; // Offset for staggered layout
+  const zIndex = 4 - index; // Ensure proper stacking order
+  
   return (
-    <motion.div
-      className={`absolute w-[320px] h-[420px] rounded-xl overflow-hidden transition-all duration-300 ease-in-out ${
-        isActive ? 'z-10 scale-105' : 'z-0'
-      }`}
+    <div
+      className="absolute top-0"
       style={{
-        left: `${index * 80}px`,
-        transform: `perspective(1000px) rotateY(${isActive ? 0 : index * 15}deg)`,
-        transformOrigin: 'bottom left',
-        filter: isActive ? 'none' : 'brightness(0.7)',
-      }}
-      whileHover={{ 
-        scale: 1.05,
-        zIndex: 10,
+        left: isExpanded ? `${index * 300}px` : `${offset}px`,
+        zIndex: isFlipped ? 10 : zIndex,
+        transition: "all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+        transform: `
+          perspective(1500px) 
+          rotateY(${isFlipped ? '0deg' : '0deg'}) 
+          ${isExpanded ? 'translateX(0)' : ''}
+        `,
+        transformOrigin: 'center',
       }}
       onClick={onCardClick}
     >
-      <div className="bg-white text-black h-full p-6 flex flex-col justify-between border border-white/10 rounded-xl shadow-lg">
-        <div className="flex flex-col items-center">
-          <div className="bg-black w-16 h-16 rounded-full flex items-center justify-center mb-4">
-            {icon}
+      <div 
+        className="relative w-[280px] h-[400px] card-container cursor-pointer"
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: isFlipped ? 'rotateY(0deg)' : 'rotateY(0deg)',
+          transition: 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        }}
+      >
+        {/* Front of card */}
+        <div 
+          className={`absolute w-full h-full rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden 
+            ${isFlipped ? 'z-10 shadow-[0_0_15px_rgba(41,221,59,0.3)]' : 'z-20'}`}
+          style={{
+            backfaceVisibility: 'hidden',
+            background: 'white',
+            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            transition: 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+          }}
+        >
+          <div className="flex flex-col justify-center items-center h-full">
+            <div className="text-black text-xl font-bold tracking-tight">
+              {title}
+            </div>
           </div>
-          
-          <h3 className="text-xl font-bold text-black mb-3">{title}</h3>
-          
-          <p className="text-gray-600 text-center">{description}</p>
         </div>
         
-        <button 
-          className="mt-4 px-4 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors"
+        {/* Back of card (content side) */}
+        <div 
+          className={`absolute w-full h-full bg-white text-black rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden
+            ${isFlipped ? 'z-20' : 'z-10'}`}
+          style={{
+            backfaceVisibility: 'hidden',
+            transform: isFlipped ? 'rotateY(0deg)' : 'rotateY(180deg)',
+            transition: 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+          }}
         >
-          Learn more
-        </button>
+          <div className="p-6 flex flex-col h-full justify-between">
+            <div className="flex flex-col items-center">
+              <div className="bg-black w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                {icon}
+              </div>
+              
+              <h3 className="text-xl font-bold text-black mb-3">{title}</h3>
+              
+              <p className="text-gray-600 text-center">{description}</p>
+            </div>
+            
+            <button 
+              className="mt-4 px-4 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors"
+            >
+              Learn more
+            </button>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const ServiceCards: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
+  const [expandedCards, setExpandedCards] = useState(false);
+  const [flippedCardIndexes, setFlippedCardIndexes] = useState<number[]>([]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -98,14 +141,51 @@ const ServiceCards: React.FC = () => {
 
   const opacity = useTransform(scrollYProgress, [0.1, 0.25], [0, 1]);
   const scale = useTransform(scrollYProgress, [0.1, 0.3], [0.8, 1]);
-
+  
+  // Track scroll progress to trigger animations
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange(value => {
+      // Expand cards first
+      if (value > 0.3 && !expandedCards) {
+        setExpandedCards(true);
+      } else if (value < 0.2 && expandedCards) {
+        setExpandedCards(false);
+        setFlippedCardIndexes([]);
+      }
+      
+      // Then flip cards one by one
+      if (expandedCards) {
+        if (value > 0.4 && !flippedCardIndexes.includes(0)) {
+          setFlippedCardIndexes(prev => [...prev, 0]);
+        }
+        if (value > 0.5 && !flippedCardIndexes.includes(1)) {
+          setFlippedCardIndexes(prev => [...prev, 1]);
+        }
+        if (value > 0.6 && !flippedCardIndexes.includes(2)) {
+          setFlippedCardIndexes(prev => [...prev, 2]);
+        }
+        if (value > 0.7 && !flippedCardIndexes.includes(3)) {
+          setFlippedCardIndexes(prev => [...prev, 3]);
+        }
+      }
+    });
+    
+    return () => unsubscribe();
+  }, [scrollYProgress, expandedCards, flippedCardIndexes]);
+  
   const handleCardClick = (index: number) => {
-    setActiveCardIndex(activeCardIndex === index ? null : index);
+    if (expandedCards) {
+      if (flippedCardIndexes.includes(index)) {
+        setFlippedCardIndexes(flippedCardIndexes.filter(i => i !== index));
+      } else {
+        setFlippedCardIndexes([...flippedCardIndexes, index]);
+      }
+    }
   };
 
   return (
-    <section id="solutions" className="py-24 bg-black" ref={containerRef}>
-      <div className="container mx-auto text-center mb-12">
+    <section id="solutions" className="py-32 bg-black" ref={containerRef}>
+      <div className="container mx-auto text-center mb-16">
         <motion.h2 
           className="text-3xl md:text-4xl font-bold mb-4 text-white"
           style={{ opacity, scale }}
@@ -120,20 +200,23 @@ const ServiceCards: React.FC = () => {
         </motion.p>
       </div>
       
-      <div className="container mx-auto px-4 overflow-hidden">
+      <div className="container mx-auto px-4">
         <motion.div 
-          className="relative h-[500px] max-w-4xl mx-auto"
+          className="relative h-[500px] max-w-[1000px] mx-auto"
           style={{ opacity, scale }}
         >
-          {serviceData.map((service, index) => (
-            <ServiceCard 
-              key={index}
-              {...service}
-              index={index}
-              isActive={activeCardIndex === index}
-              onCardClick={() => handleCardClick(index)}
-            />
-          ))}
+          <div className="relative h-[400px]" style={{ perspective: '1500px' }}>
+            {serviceData.map((service, index) => (
+              <ServiceCard 
+                key={index}
+                {...service}
+                index={index}
+                isFlipped={flippedCardIndexes.includes(index)}
+                isExpanded={expandedCards}
+                onCardClick={() => handleCardClick(index)}
+              />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
