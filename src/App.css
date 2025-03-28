@@ -43,6 +43,6 @@
 }
 
 /* Add styles for clickable elements when using custom cursor */
-a, button, [role="button"], input, select, textarea, .clickable {
+a, button, [role="button"], input, select, textarea, .clickable, html, body {
   cursor: none !important;
 }
