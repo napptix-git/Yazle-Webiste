@@ -41,16 +41,3 @@
 .read-the-docs {
   color: #888;
 }
-
-/* Add styles for clickable elements when using custom cursor */
-a, button, [role="button"], input, select, textarea, .clickable, html, body {
-  cursor: none !important;
-  * {
-    cursor: none !important;
-  }
-}
-
-/* Force cursor: none on all elements */
-* {
-  cursor: none !important;
-}

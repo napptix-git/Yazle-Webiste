@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Building2, Gamepad2 } from 'lucide-react';
@@ -8,7 +7,7 @@ const AudienceCards: React.FC = () => {
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   return (
-    <section id="audience" className="py-16 bg-gradient-to-b from-napptix-dark via-white to-white">
+    <section id="audience" className="py-24 bg-gradient-to-b from-napptix-dark via-white to-white">
       <div className="container mx-auto text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Who We Serve</h2>
         <p className="text-napptix-light-grey max-w-2xl mx-auto">
@@ -86,10 +85,6 @@ const AudienceCards: React.FC = () => {
                 </Button>
               </div>
             </div>
-            
-            <div className={`absolute bottom-0 left-0 right-0 h-1 bg-napptix-purple transition-all duration-500 ${
-              activeCard === 'advertisers' ? 'opacity-100' : 'opacity-0'
-            }`}></div>
           </motion.div>
           
           {/* Publishers Card */}
@@ -148,10 +143,6 @@ const AudienceCards: React.FC = () => {
                 Learn More
               </Button>
             </div>
-            
-            <div className={`absolute bottom-0 left-0 right-0 h-1 bg-napptix-orange transition-all duration-500 ${
-              activeCard === 'publishers' ? 'opacity-100' : 'opacity-0'
-            }`}></div>
           </motion.div>
         </div>
       </div>

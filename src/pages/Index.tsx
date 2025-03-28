@@ -6,16 +6,12 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
-import ServicesWheel from '@/components/ServicesWheel';
+import ServiceCards from '@/components/ServiceCards';
 import Footer from '@/components/Footer';
-import CustomCursor from '@/components/CustomCursor';
 
 const Index = () => {
   return (
     <div className="min-h-screen">
-      {/* Custom Cursor */}
-      <CustomCursor />
-      
       {/* Navbar */}
       <Navbar />
       
@@ -30,13 +26,13 @@ const Index = () => {
       </section>
       
       {/* Advertisers and Publishers Section */}
-      <section id="audience">
+      <section id="audience" className="mt-24">
         <AudienceCards />
       </section>
       
-      {/* Services Wheel */}
+      {/* Services Cards */}
       <section id="solutions">
-        <ServicesWheel />
+        <ServiceCards />
       </section>
       
       {/* Footer */}
