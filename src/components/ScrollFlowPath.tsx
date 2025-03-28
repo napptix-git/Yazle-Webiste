@@ -19,6 +19,16 @@ const ScrollFlowPath: React.FC = () => {
     { id: 'solutions', label: 'Solutions' }
   ];
   
+  // Pre-calculate all section progress transforms outside of the render loop
+  // This ensures we don't create new hooks during render
+  const sectionProgressTransforms = sections.map((_, index) => {
+    return useTransform(
+      scrollYProgress, 
+      [index * 0.25, index * 0.25 + 0.2], 
+      [0, 1]
+    );
+  });
+  
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -43,13 +53,10 @@ const ScrollFlowPath: React.FC = () => {
         
         {/* Section indicators */}
         {sections.map((section, index) => {
-          const sectionProgress = useTransform(
-            scrollYProgress, 
-            // Adjust these values to control when each dot lights up
-            [index * 0.25, index * 0.25 + 0.2], 
-            [0, 1]
-          );
+          // Use the pre-calculated transform
+          const sectionProgress = sectionProgressTransforms[index];
           
+          // Derive scale and opacity from the sectionProgress
           const sectionScale = useTransform(sectionProgress, [0, 1], [1, 1.5]);
           const sectionOpacity = useTransform(sectionProgress, [0, 1], [0.5, 1]);
           
