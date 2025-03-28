@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -47,4 +48,9 @@ a, button, [role="button"], input, select, textarea, .clickable, html, body {
   * {
     cursor: none !important;
   }
+}
+
+/* Force cursor: none on all elements */
+* {
+  cursor: none !important;
 }

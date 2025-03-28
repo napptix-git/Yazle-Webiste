@@ -34,24 +34,23 @@ const CustomCursor = () => {
   return (
     <motion.div
       className="fixed pointer-events-none z-50"
+      style={{
+        x: mousePosition.x - 16,
+        y: mousePosition.y - 16,
+        position: 'fixed',
+        pointerEvents: 'none',
+        zIndex: 9999,
+      }}
+      initial={false}
       animate={{
-        x: mousePosition.x,
-        y: mousePosition.y,
+        x: mousePosition.x - 16,
+        y: mousePosition.y - 16,
       }}
       transition={{
         type: 'spring',
-        damping: 20,
-        stiffness: 300,
-        restDelta: 0.001
-      }}
-      style={{
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        translateX: '0px',
-        translateY: '0px',
-        pointerEvents: 'none',
-        zIndex: 9999,
+        damping: 45,
+        stiffness: 400,
+        mass: 0.1
       }}
     >
       {/* Main cursor circle with gradient border */}
