@@ -8,16 +8,16 @@ import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
 import ServicesWheel from '@/components/ServicesWheel';
 import Footer from '@/components/Footer';
-import ScrollFlowPath from '@/components/ScrollFlowPath';
+import CustomCursor from '@/components/CustomCursor';
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      {/* Custom Cursor */}
+      <CustomCursor />
+      
       {/* Navbar */}
       <Navbar />
-      
-      {/* Scroll Flow Path */}
-      <ScrollFlowPath />
       
       {/* Hero Section */}
       <section id="hero">
