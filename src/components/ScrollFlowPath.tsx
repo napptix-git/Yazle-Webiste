@@ -19,15 +19,28 @@ const ScrollFlowPath: React.FC = () => {
     { id: 'solutions', label: 'Solutions' }
   ];
   
-  // Pre-calculate all section progress transforms outside of the render loop
-  // This ensures we don't create new hooks during render
-  const sectionProgressTransforms = sections.map((_, index) => {
-    return useTransform(
-      scrollYProgress, 
-      [index * 0.25, index * 0.25 + 0.2], 
-      [0, 1]
-    );
-  });
+  // Pre-calculate all transforms OUTSIDE of the render method
+  const sectionProgress0 = useTransform(scrollYProgress, [0 * 0.25, 0 * 0.25 + 0.2], [0, 1]);
+  const sectionProgress1 = useTransform(scrollYProgress, [1 * 0.25, 1 * 0.25 + 0.2], [0, 1]);
+  const sectionProgress2 = useTransform(scrollYProgress, [2 * 0.25, 2 * 0.25 + 0.2], [0, 1]);
+  const sectionProgress3 = useTransform(scrollYProgress, [3 * 0.25, 3 * 0.25 + 0.2], [0, 1]);
+  
+  // Create arrays for transforms instead of using map (which can cause hook order issues)
+  const sectionProgresses = [sectionProgress0, sectionProgress1, sectionProgress2, sectionProgress3];
+  
+  // Pre-calculate all scale and opacity transforms
+  const sectionScale0 = useTransform(sectionProgress0, [0, 1], [1, 1.5]);
+  const sectionScale1 = useTransform(sectionProgress1, [0, 1], [1, 1.5]);
+  const sectionScale2 = useTransform(sectionProgress2, [0, 1], [1, 1.5]);
+  const sectionScale3 = useTransform(sectionProgress3, [0, 1], [1, 1.5]);
+  
+  const sectionOpacity0 = useTransform(sectionProgress0, [0, 1], [0.5, 1]);
+  const sectionOpacity1 = useTransform(sectionProgress1, [0, 1], [0.5, 1]);
+  const sectionOpacity2 = useTransform(sectionProgress2, [0, 1], [0.5, 1]);
+  const sectionOpacity3 = useTransform(sectionProgress3, [0, 1], [0.5, 1]);
+  
+  const sectionScales = [sectionScale0, sectionScale1, sectionScale2, sectionScale3];
+  const sectionOpacities = [sectionOpacity0, sectionOpacity1, sectionOpacity2, sectionOpacity3];
   
   useEffect(() => {
     setMounted(true);
@@ -52,53 +65,44 @@ const ScrollFlowPath: React.FC = () => {
         />
         
         {/* Section indicators */}
-        {sections.map((section, index) => {
-          // Use the pre-calculated transform
-          const sectionProgress = sectionProgressTransforms[index];
-          
-          // Derive scale and opacity from the sectionProgress
-          const sectionScale = useTransform(sectionProgress, [0, 1], [1, 1.5]);
-          const sectionOpacity = useTransform(sectionProgress, [0, 1], [0.5, 1]);
-          
-          return (
-            <motion.div
-              key={section.id}
-              className="absolute w-12 h-12 flex items-center justify-center pointer-events-auto cursor-pointer"
+        {sections.map((section, index) => (
+          <motion.div
+            key={section.id}
+            className="absolute w-12 h-12 flex items-center justify-center pointer-events-auto cursor-pointer"
+            style={{
+              top: `calc(${index * 33}% - 6px)`,
+              left: '50%',
+              x: '-50%',
+            }}
+            whileHover={{ scale: 1.2 }}
+            onClick={() => {
+              const element = document.getElementById(section.id);
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
+            <motion.div 
+              className="relative w-3 h-3 rounded-full bg-white z-10"
               style={{
-                top: `calc(${index * 33}% - 6px)`,
-                left: '50%',
-                x: '-50%',
+                scale: sectionScales[index],
+                opacity: sectionOpacities[index],
+                backgroundColor: sectionProgresses[index].get() > 0.5 ? '#29dd3b' : 'white',
               }}
-              whileHover={{ scale: 1.2 }}
-              onClick={() => {
-                const element = document.getElementById(section.id);
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
+            />
+            
+            {/* Label for the section */}
+            <motion.span 
+              className="absolute left-6 ml-2 text-sm text-white whitespace-nowrap"
+              style={{
+                opacity: sectionOpacities[index],
+                color: sectionProgresses[index].get() > 0.5 ? '#29dd3b' : 'white',
               }}
             >
-              <motion.div 
-                className="relative w-3 h-3 rounded-full bg-white z-10"
-                style={{
-                  scale: sectionScale,
-                  opacity: sectionOpacity,
-                  backgroundColor: sectionProgress.get() > 0.5 ? '#29dd3b' : 'white',
-                }}
-              />
-              
-              {/* Label for the section */}
-              <motion.span 
-                className="absolute left-6 ml-2 text-sm text-white whitespace-nowrap"
-                style={{
-                  opacity: sectionOpacity,
-                  color: sectionProgress.get() > 0.5 ? '#29dd3b' : 'white',
-                }}
-              >
-                {section.label}
-              </motion.span>
-            </motion.div>
-          );
-        })}
+              {section.label}
+            </motion.span>
+          </motion.div>
+        ))}
       </div>
       
       {/* Scroll indicator at the bottom */}
