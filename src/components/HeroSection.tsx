@@ -52,14 +52,15 @@ const HeroSection: React.FC = () => {
     };
   }, []);
   
-  // Create particles
+  // Create particles with increased density
   const initParticles = () => {
     if (!canvasRef.current) return;
     
     const canvas = canvasRef.current;
     particles.current = [];
     
-    const particleCount = Math.min(100, Math.floor(canvas.width * canvas.height / 10000));
+    // Increased particle count by reducing the divisor
+    const particleCount = Math.min(250, Math.floor(canvas.width * canvas.height / 5000));
     
     for (let i = 0; i < particleCount; i++) {
       particles.current.push({
@@ -148,11 +149,11 @@ const HeroSection: React.FC = () => {
             transform: `translate(${(mousePosition.x - window.innerWidth / 2) / 50}px, ${(mousePosition.y - window.innerHeight / 2) / 50}px)`,
           }}
         >
-          Reach Every <span className="text-gradient">Gamer</span>
+          Reach Every <span className="gamer-text">Gamer</span>
         </motion.h1>
         
         <motion.p 
-          className="text-xl md:text-2xl text-napptix-light-grey max-w-3xl mx-auto mb-8"
+          className="text-xl md:text-2xl text-napptix-light-grey max-w-3xl mx-auto mb-8 font-roboto-mono"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -167,7 +168,7 @@ const HeroSection: React.FC = () => {
         >
           <a 
             href="#solutions" 
-            className="bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold py-3 px-8 rounded-full inline-block transition-all"
+            className="bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold py-3 px-8 rounded-full inline-block transition-all font-roboto-mono"
           >
             Discover Our Solutions
           </a>

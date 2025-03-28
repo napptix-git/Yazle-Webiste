@@ -114,11 +114,11 @@ const ServiceCard: React.FC<ServiceProps & {
               
               <h3 className="text-xl font-bold text-black mb-3">{title}</h3>
               
-              <p className="text-gray-600 text-center">{description}</p>
+              <p className="text-gray-600 text-center font-roboto-mono">{description}</p>
             </div>
             
             <button 
-              className="mt-4 px-4 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors"
+              className="mt-4 px-4 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors font-roboto-mono"
             >
               Learn more
             </button>
@@ -133,6 +133,7 @@ const ServiceCards: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [expandedCards, setExpandedCards] = useState(false);
   const [flippedCardIndexes, setFlippedCardIndexes] = useState<number[]>([]);
+  const [lockScroll, setLockScroll] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -148,9 +149,11 @@ const ServiceCards: React.FC = () => {
       // Expand cards first
       if (value > 0.3 && !expandedCards) {
         setExpandedCards(true);
+        setLockScroll(true); // Lock scroll when cards start expanding
       } else if (value < 0.2 && expandedCards) {
         setExpandedCards(false);
         setFlippedCardIndexes([]);
+        setLockScroll(false); // Unlock scroll when cards collapse
       }
       
       // Then flip cards one by one
@@ -166,12 +169,42 @@ const ServiceCards: React.FC = () => {
         }
         if (value > 0.7 && !flippedCardIndexes.includes(3)) {
           setFlippedCardIndexes(prev => [...prev, 3]);
+          // Unlock scroll after last card is flipped
+          setTimeout(() => setLockScroll(false), 600);
         }
       }
     });
     
     return () => unsubscribe();
   }, [scrollYProgress, expandedCards, flippedCardIndexes]);
+  
+  // Prevent scroll when animations are playing
+  useEffect(() => {
+    const preventScroll = (e: Event) => {
+      if (lockScroll) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+      return true;
+    };
+
+    if (lockScroll) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('wheel', preventScroll, { passive: false });
+      window.addEventListener('touchmove', preventScroll, { passive: false });
+    } else {
+      document.body.style.overflow = '';
+      window.removeEventListener('wheel', preventScroll);
+      window.removeEventListener('touchmove', preventScroll);
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('wheel', preventScroll);
+      window.removeEventListener('touchmove', preventScroll);
+    };
+  }, [lockScroll]);
   
   const handleCardClick = (index: number) => {
     if (expandedCards) {
@@ -193,7 +226,7 @@ const ServiceCards: React.FC = () => {
           Our Services
         </motion.h2>
         <motion.p 
-          className="text-gray-400 max-w-2xl mx-auto"
+          className="text-gray-400 max-w-2xl mx-auto font-roboto-mono"
           style={{ opacity, scale }}
         >
           Comprehensive advertising solutions across the gaming ecosystem
