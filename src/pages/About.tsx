@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -126,7 +125,7 @@ const About: React.FC = () => {
   // Combine the two arrays
   const allTeamMembers = [...teamMembers, ...additionalMembers];
 
-  // Add animation for the team member cards
+  // Add animation for the team member cards with reduced delay
   useEffect(() => {
     // Initialize smooth scroll with GSAP
     const smoother = gsap.from(document.documentElement, {
@@ -139,26 +138,26 @@ const About: React.FC = () => {
       ease: "power2.out",
     });
 
-    // Add revealing animation to each team member card
+    // Add revealing animation to each team member card with reduced delay
     const teamCards = document.querySelectorAll('.team-member-card');
     teamCards.forEach((card, index) => {
       gsap.fromTo(
         card,
         { 
           opacity: 0, 
-          y: 30 
+          y: 20 
         },
         { 
           opacity: 1, 
           y: 0,
-          duration: 0.8,
-          delay: index * 0.1,
+          duration: 0.5, // Faster duration
+          delay: index * 0.05, // Much smaller delay between cards
           scrollTrigger: {
             trigger: card,
-            start: "top bottom-=100",
+            start: "top bottom-=50", // Trigger earlier
             toggleActions: "play none none reverse"
           },
-          ease: "power2.out"
+          ease: "power1.out" // Smoother easing
         }
       );
 

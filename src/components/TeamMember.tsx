@@ -21,7 +21,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
   
   return (
     <div 
-      className="flex flex-col md:flex-row h-full overflow-hidden rounded-lg transition-transform duration-500"
+      className="flex flex-col md:flex-row h-full overflow-hidden rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -40,7 +40,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
               href={linkedinUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`p-2 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+              className={`p-2 transition-all duration-200 ${isHovered ? 'opacity-100 scale-105' : 'opacity-0'}`}
             >
               <ArrowUpRight className="text-white w-6 h-6" />
             </a>
@@ -52,7 +52,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
         <img 
           src={imageSrc} 
           alt={name} 
-          className="w-full h-full object-cover" 
+          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" 
         />
       </div>
     </div>
