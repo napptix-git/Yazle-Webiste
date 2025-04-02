@@ -1,11 +1,17 @@
 
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone } from 'lucide-react';
+import FooterGame from './FooterGame';
 
 const Footer: React.FC = () => {
   return (
     <footer className="bg-napptix-dark text-white py-12">
       <div className="container mx-auto px-4">
+        {/* Game section */}
+        <div className="mb-12">
+          <FooterGame />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-1">

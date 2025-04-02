@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -24,11 +25,11 @@ const Navbar: React.FC = () => {
   }, []);
   
   const navLinks = [
-    { title: 'Home', href: '#' },
-    { title: 'Solutions', href: '#solutions' },
-    { title: 'For Advertisers', href: '#audience' },
-    { title: 'For Publishers', href: '#audience' },
-    { title: 'Contact', href: '#' },
+    { title: 'Solutions', href: '/solutions' },
+    { title: 'Advertisers', href: '/advertisers' },
+    { title: 'Publishers', href: '/publishers' },
+    { title: 'About Us', href: '/about' },
+    { title: 'Contact', href: '/contact' },
   ];
   
   return (
@@ -40,34 +41,27 @@ const Navbar: React.FC = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
-            {/* Logo */}
-            <a href="#" className="text-white font-montserrat font-bold text-2xl">
+            {/* Logo - aligned to the left */}
+            <a href="/" className="text-white font-montserrat font-bold text-2xl mr-auto">
               <span className="text-gradient">Napptix</span>
             </a>
             
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - centered */}
             <nav className="hidden md:flex space-x-8">
               {navLinks.map((link, index) => (
-                <a 
+                <Link 
                   key={index}
-                  href={link.href}
+                  to={link.href}
                   className="text-white opacity-80 hover:opacity-100 transition-opacity"
                 >
                   {link.title}
-                </a>
+                </Link>
               ))}
             </nav>
             
-            {/* Contact Button */}
-            <div className="hidden md:block">
-              <button className="bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold py-2 px-5 rounded-full transition-all">
-                Get Started
-              </button>
-            </div>
-            
             {/* Mobile Menu Button */}
             <button 
-              className="md:hidden text-white"
+              className="md:hidden text-white ml-4"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -88,21 +82,15 @@ const Navbar: React.FC = () => {
           <div className="container mx-auto px-4 py-8">
             <nav className="flex flex-col space-y-6">
               {navLinks.map((link, index) => (
-                <a 
+                <Link 
                   key={index}
-                  href={link.href}
+                  to={link.href}
                   className="text-white text-xl font-medium py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.title}
-                </a>
+                </Link>
               ))}
-              <button 
-                className="bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold py-3 px-6 rounded-full transition-all w-full mt-4"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Get Started
-              </button>
             </nav>
           </div>
         </motion.div>
