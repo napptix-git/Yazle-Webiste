@@ -2,14 +2,14 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Github, Youtube, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import RandomGameSelector from './games/RandomGameSelector';
 
 const Footer: React.FC = () => {
   return (
     <footer className="relative h-screen w-full bg-black overflow-hidden">
-      {/* Game Container (Full Screen) */}
-      <div className="absolute inset-0 w-full h-full z-10">
-        <RandomGameSelector />
+      {/* Plain Background */}
+      <div className="absolute inset-0 w-full h-full z-10 bg-black">
+        {/* Background gradient for visual interest */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-black opacity-50"></div>
       </div>
       
       {/* Top Navigation Bar */}

@@ -172,20 +172,21 @@ const ServiceCards: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [previousScrollY]);
 
-  // Start the card flip sequence when scrolled to this section
+  // Enhanced scroll-triggered animation with improved reverse functionality
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (value) => {
+      // Improved scroll trigger thresholds for better user experience
       if (scrollDirection === 'down') {
         if (value > 0.2 && currentFlippedIndex === -1) {
           // Start the sequence when scrolled into view
           setCurrentFlippedIndex(0);
         }
-      } else {
-        // Reverse direction - start flipping from the last card
-        if (value < 0.8 && currentFlippedIndex === -1 && flippedCards.some(flipped => flipped)) {
+      } else if (scrollDirection === 'up') {
+        // Reverse direction - start unflipping cards from the last flipped card
+        if (value < 0.8 && flippedCards.some(flipped => flipped)) {
           // Find the last flipped card
           const lastFlippedIndex = flippedCards.lastIndexOf(true);
-          if (lastFlippedIndex >= 0) {
+          if (lastFlippedIndex >= 0 && !reversingCards[lastFlippedIndex]) {
             // Set it to start reversing
             setReversingCards(prev => {
               const newState = [...prev];
@@ -198,7 +199,7 @@ const ServiceCards: React.FC = () => {
     });
     
     return () => unsubscribe();
-  }, [scrollYProgress, currentFlippedIndex, flippedCards, scrollDirection]);
+  }, [scrollYProgress, currentFlippedIndex, flippedCards, scrollDirection, reversingCards]);
   
   // Handle the completion of a card flip
   const handleFlipComplete = (index: number) => {

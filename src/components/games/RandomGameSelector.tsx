@@ -1,26 +1,11 @@
+import React from 'react';
 
-import React, { useEffect, useState } from 'react';
-import RunnerGame from './RunnerGame';
-import BreakoutGame from './BreakoutGame';
-import SpaceInvadersGame from './SpaceInvadersGame';
-
-type GameType = 'runner' | 'breakout' | 'space-invaders';
-
+// This component is no longer used for games in the footer
+// Kept as a placeholder in case it's referenced elsewhere
 const RandomGameSelector: React.FC = () => {
-  const [selectedGame, setSelectedGame] = useState<GameType>('breakout');
-
-  useEffect(() => {
-    // Choose a random game on component mount
-    const games: GameType[] = ['runner', 'breakout', 'space-invaders'];
-    const randomIndex = Math.floor(Math.random() * games.length);
-    setSelectedGame(games[randomIndex]);
-  }, []);
-
   return (
-    <div className="w-full h-full">
-      {selectedGame === 'runner' && <RunnerGame />}
-      {selectedGame === 'breakout' && <BreakoutGame />}
-      {selectedGame === 'space-invaders' && <SpaceInvadersGame />}
+    <div className="w-full h-full bg-black">
+      {/* Games removed from footer as requested */}
     </div>
   );
 };
