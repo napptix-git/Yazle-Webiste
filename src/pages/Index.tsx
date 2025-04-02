@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 import Navbar from '@/components/Navbar';
@@ -8,8 +8,37 @@ import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
 import ServiceCards from '@/components/ServiceCards';
 import Footer from '@/components/Footer';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
+  // Initialize GSAP smooth scrolling
+  useEffect(() => {
+    // Scroll to top when page loads
+    window.scrollTo(0, 0);
+    
+    // Initialize smooth scroll with GSAP
+    const smoother = gsap.from(document.documentElement, {
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.2,
+      },
+      ease: "power2.out",
+    });
+
+    return () => {
+      // Clean up
+      if (smoother) {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-black">
       {/* Navbar */}

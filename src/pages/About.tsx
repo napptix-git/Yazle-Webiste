@@ -1,7 +1,13 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TeamMember from '@/components/TeamMember';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 const About: React.FC = () => {
   // Team member data with consistent image formats
@@ -120,6 +126,69 @@ const About: React.FC = () => {
   // Combine the two arrays
   const allTeamMembers = [...teamMembers, ...additionalMembers];
 
+  // Add animation for the team member cards
+  useEffect(() => {
+    // Initialize smooth scroll with GSAP
+    const smoother = gsap.from(document.documentElement, {
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.2,
+      },
+      ease: "power2.out",
+    });
+
+    // Add revealing animation to each team member card
+    const teamCards = document.querySelectorAll('.team-member-card');
+    teamCards.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { 
+          opacity: 0, 
+          y: 30 
+        },
+        { 
+          opacity: 1, 
+          y: 0,
+          duration: 0.8,
+          delay: index * 0.1,
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom-=100",
+            toggleActions: "play none none reverse"
+          },
+          ease: "power2.out"
+        }
+      );
+
+      // Add glow animation similar to the "Gamer" text
+      const nameElement = card.querySelector('.member-name');
+      if (nameElement) {
+        gsap.to(nameElement, {
+          textShadow: "0 0 15px rgba(41, 221, 59, 0.5), 0 0 20px rgba(41, 221, 59, 0.2)",
+          color: "#fff",
+          repeat: -1,
+          yoyo: true,
+          duration: 2,
+          ease: "sine.inOut"
+        });
+      }
+    });
+
+    return () => {
+      // Clean up
+      if (smoother) {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      }
+    };
+  }, []);
+
+  // Ensure navigation links scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
@@ -142,19 +211,25 @@ const About: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
             <p className="text-2xl text-white/80 mb-12">
               Ideas shape the world,<br />
-              our people shape ideas
+              our people shape <span className="gamer-text glow-green" style={{ 
+                background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
+                WebkitBackgroundClip: 'text',
+                textShadow: '0 0 15px rgba(41, 221, 59, 0.7)',
+                animation: 'text-flicker 4s linear infinite'
+              }}>ideas</span>
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
               {allTeamMembers.map((member, index) => (
-                <TeamMember 
-                  key={index}
-                  name={member.name}
-                  position={member.position}
-                  imageSrc={member.imageSrc}
-                  linkedinUrl={member.linkedinUrl}
-                  bgColor={member.bgColor}
-                />
+                <div key={index} className="team-member-card">
+                  <TeamMember 
+                    name={member.name}
+                    position={member.position}
+                    imageSrc={member.imageSrc}
+                    linkedinUrl={member.linkedinUrl}
+                    bgColor={member.bgColor}
+                  />
+                </div>
               ))}
             </div>
           </div>

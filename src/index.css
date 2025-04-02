@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Syne:wght@700;800&family=Roboto+Mono:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -43,17 +44,37 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-black text-white font-roboto-mono;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-syne font-extrabold;
   }
+}
+
+/* Ensure smooth scrolling and proper behavior when using navigation links */
+html.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 @layer components {
@@ -145,6 +166,16 @@
   
   .footer-content {
     @apply relative z-20 pt-12 pb-8;
+  }
+
+  /* Team member card animations */
+  .team-member-card {
+    @apply transition-all duration-500;
+    transform-style: preserve-3d;
+  }
+  
+  .team-member-card:hover {
+    transform: translateY(-5px);
   }
 }
 
@@ -242,31 +273,6 @@
   }
   70% {
     transform: translateY(-4px) rotateY(60deg);
-  }
-  100% {
-    transform: translateY(0) rotateY(0deg);
-  }
-}
-
-/* Original wave effect animations (keeping for backward compatibility) */
-@keyframes wave-effect {
-  0% {
-    transform: translateY(0) rotateY(0deg);
-  }
-  50% {
-    transform: translateY(-5px) rotateY(90deg);
-  }
-  100% {
-    transform: translateY(0) rotateY(180deg);
-  }
-}
-
-@keyframes reverse-wave-effect {
-  0% {
-    transform: translateY(0) rotateY(180deg);
-  }
-  50% {
-    transform: translateY(-5px) rotateY(90deg);
   }
   100% {
     transform: translateY(0) rotateY(0deg);

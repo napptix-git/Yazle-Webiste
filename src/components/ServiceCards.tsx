@@ -7,6 +7,11 @@ import {
   Globe, 
   Trophy,
 } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 interface ServiceProps {
   title: string;
@@ -40,7 +45,6 @@ const serviceData = [
 
 const ServiceCard: React.FC<ServiceProps & { 
   isFlipped: boolean;
-  isReversing: boolean;
   onFlipComplete: () => void;
 }> = ({ 
   title, 
@@ -48,7 +52,6 @@ const ServiceCard: React.FC<ServiceProps & {
   icon,
   index,
   isFlipped,
-  isReversing,
   onFlipComplete
 }) => {
   
@@ -65,9 +68,7 @@ const ServiceCard: React.FC<ServiceProps & {
           transformStyle: 'preserve-3d',
           animation: isFlipped 
             ? 'smooth-wave-effect 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards'
-            : isReversing 
-              ? 'smooth-reverse-wave-effect 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards'
-              : 'none',
+            : 'none',
         }}
         onAnimationEnd={onFlipComplete}
       >
@@ -122,22 +123,7 @@ const ServiceCard: React.FC<ServiceProps & {
 const ServiceCards: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  // Track which card is currently flipped
-  const [currentFlippedIndex, setCurrentFlippedIndex] = useState(-1);
-  const [previousScrollY, setPreviousScrollY] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState<'down' | 'up'>('down');
-  // State to track if animations are in progress
-  const [animationsInProgress, setAnimationsInProgress] = useState(false);
-  
-  // State to track if each card is flipped
-  const [flippedCards, setFlippedCards] = useState<boolean[]>(
-    Array(serviceData.length).fill(false)
-  );
-  
-  // State to track if each card is reversing
-  const [reversingCards, setReversingCards] = useState<boolean[]>(
-    Array(serviceData.length).fill(false)
-  );
+  const [flippedCards, setFlippedCards] = useState<boolean[]>([false, false, false, false]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -152,146 +138,63 @@ const ServiceCards: React.FC = () => {
     };
   }, []);
 
-  // Lock/unlock scroll when animations are happening
+  // Initialize GSAP smooth scrolling
   useEffect(() => {
-    if (animationsInProgress) {
-      // Store the current scroll position and lock scrolling
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-    } else {
-      // Restore scroll position when animations finish
-      const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-      }
-    }
-  }, [animationsInProgress]);
-
-  // Use the useScroll hook to track scroll progress within this section
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-  
-  // Track scroll direction
-  useEffect(() => {
-    const handleScroll = () => {
-      if (animationsInProgress) return; // Skip scroll tracking during animations
-      
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > previousScrollY) {
-        setScrollDirection('down');
-      } else if (currentScrollY < previousScrollY) {
-        setScrollDirection('up');
-      }
-      setPreviousScrollY(currentScrollY);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [previousScrollY, animationsInProgress]);
-
-  // Check if any animations are in progress
-  useEffect(() => {
-    // If any card is flipping or reversing, animations are in progress
-    const hasActiveAnimations = flippedCards.some((isFlipped, index) => 
-      (isFlipped && index === currentFlippedIndex) || reversingCards[index]
-    );
-    
-    setAnimationsInProgress(hasActiveAnimations);
-  }, [flippedCards, reversingCards, currentFlippedIndex]);
-
-  // Enhanced scroll-triggered animation with improved reverse functionality
-  useEffect(() => {
-    if (animationsInProgress) return; // Skip scroll triggers during animations
-    
-    const unsubscribe = scrollYProgress.on("change", (value) => {
-      // Improved scroll trigger thresholds for better user experience
-      if (scrollDirection === 'down') {
-        if (value > 0.2 && currentFlippedIndex === -1) {
-          // Start the sequence when scrolled into view
-          setCurrentFlippedIndex(0);
-        }
-      } else if (scrollDirection === 'up') {
-        // Reverse direction - start unflipping cards from the last flipped card
-        if (value < 0.8 && flippedCards.some(flipped => flipped)) {
-          // Find the last flipped card
-          const lastFlippedIndex = flippedCards.lastIndexOf(true);
-          if (lastFlippedIndex >= 0 && !reversingCards[lastFlippedIndex]) {
-            // Set it to start reversing
-            setReversingCards(prev => {
-              const newState = [...prev];
-              newState[lastFlippedIndex] = true;
-              return newState;
-            });
-          }
-        }
-      }
+    // Initialize smooth scroll with GSAP
+    const smoother = gsap.from(document.documentElement, {
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.2,
+      },
+      ease: "power2.out",
     });
-    
-    return () => unsubscribe();
-  }, [scrollYProgress, currentFlippedIndex, flippedCards, scrollDirection, reversingCards, animationsInProgress]);
-  
-  // Handle the completion of a card flip
-  const handleFlipComplete = (index: number) => {
-    if (scrollDirection === 'down' && flippedCards[index] && index < serviceData.length - 1) {
-      // Move to the next card
-      setTimeout(() => {
-        setCurrentFlippedIndex(index + 1);
-      }, 300); // Longer delay before flipping the next card for smoother sequence
-    } else if (scrollDirection === 'up' && reversingCards[index]) {
-      // Card has completed reversal, update states
-      setFlippedCards(prev => {
-        const newState = [...prev];
-        newState[index] = false;
-        return newState;
-      });
-      
-      setReversingCards(prev => {
-        const newState = [...prev];
-        newState[index] = false;
-        return newState;
-      });
-      
-      // If there's a card before this one, start reversing it
-      if (index > 0 && flippedCards[index - 1]) {
-        setTimeout(() => {
-          setReversingCards(prev => {
+
+    return () => {
+      // Clean up
+      if (smoother) {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      }
+    };
+  }, []);
+
+  // Use the scroll trigger to flip cards
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    // Create scroll triggers for each card
+    serviceData.forEach((_, index) => {
+      let trigger = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: `top+=${300 + (index * 150)}px center`,
+        onEnter: () => {
+          setFlippedCards(prev => {
             const newState = [...prev];
-            newState[index - 1] = true;
+            newState[index] = true;
             return newState;
           });
-        }, 300); // Longer delay for smoother transition
-      }
-    }
-    
-    // Check if all animations are complete
-    const allComplete = index === serviceData.length - 1 || 
-                       (reversingCards[index] && index === 0);
-                       
-    if (allComplete) {
-      // Add a small delay before allowing scrolling again
-      setTimeout(() => {
-        setAnimationsInProgress(false);
-      }, 200);
-    }
-  };
-  
-  // Update flippedCards state when currentFlippedIndex changes
-  useEffect(() => {
-    if (currentFlippedIndex >= 0 && currentFlippedIndex < serviceData.length) {
-      setFlippedCards(prev => {
-        const newState = [...prev];
-        newState[currentFlippedIndex] = true;
-        return newState;
+        },
+        onLeaveBack: () => {
+          setFlippedCards(prev => {
+            const newState = [...prev];
+            newState[index] = false;
+            return newState;
+          });
+        }
       });
-    }
-  }, [currentFlippedIndex]);
+    });
+
+    return () => {
+      // Clean up all scroll triggers
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
+  const handleFlipComplete = (index: number) => {
+    // Add any specific logic after flip completes if needed
+    console.log(`Card ${index} flip completed`);
+  };
 
   return (
     <motion.section 
@@ -334,7 +237,6 @@ const ServiceCards: React.FC = () => {
                 {...service}
                 index={index}
                 isFlipped={flippedCards[index]}
-                isReversing={reversingCards[index]}
                 onFlipComplete={() => handleFlipComplete(index)}
               />
             </motion.div>

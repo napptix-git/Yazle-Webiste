@@ -21,7 +21,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
   
   return (
     <div 
-      className="flex flex-col md:flex-row h-full overflow-hidden rounded-lg"
+      className="flex flex-col md:flex-row h-full overflow-hidden rounded-lg transition-transform duration-500"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -31,7 +31,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
         </div>
         <div className="mt-auto flex items-end justify-between">
           <div>
-            <h3 className="text-2xl font-bold text-white">{name.split(' ')[0]}</h3>
+            <h3 className="text-2xl font-bold text-white member-name">{name.split(' ')[0]}</h3>
             <h3 className="text-2xl font-bold text-white">{name.split(' ').slice(1).join(' ')}</h3>
           </div>
           
