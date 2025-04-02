@@ -1,6 +1,6 @@
 
-import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   Gamepad, 
   MonitorPlay, 
@@ -39,31 +39,31 @@ const serviceData = [
 ];
 
 const ServiceCard: React.FC<ServiceProps & { 
-  isFlipped: boolean;
-  onCardClick: () => void 
+  progress: number
 }> = ({ 
   title, 
   description, 
   icon,
   index,
-  isFlipped,
-  onCardClick
+  progress
 }) => {
+  // Calculate when this card should flip based on its index and the scroll progress
+  const flipThreshold = 0.1 + (index * 0.15); // Stagger the flip animations
+  const isFlipped = progress > flipThreshold;
   
   return (
     <div
-      className={`service-card relative ${index === 0 ? 'md:ml-0' : `md:ml-${index * 6}`} mb-8`}
-      onClick={onCardClick}
+      className="service-card relative"
       style={{
-        zIndex: isFlipped ? 10 : 4 - index,
+        zIndex: 4 - index,
       }}
     >
       <div 
-        className="relative w-[280px] h-[400px] card-container cursor-pointer"
+        className="relative w-[280px] h-[400px] card-container"
         style={{
           transformStyle: 'preserve-3d',
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-          transition: 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+          transition: 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
         }}
       >
         {/* Front of card */}
@@ -73,8 +73,6 @@ const ServiceCard: React.FC<ServiceProps & {
           style={{
             backfaceVisibility: 'hidden',
             background: 'white',
-            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-            transition: 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
           }}
         >
           <div className="flex flex-col justify-center items-center h-full">
@@ -90,8 +88,7 @@ const ServiceCard: React.FC<ServiceProps & {
             ${isFlipped ? 'z-20' : 'z-10'}`}
           style={{
             backfaceVisibility: 'hidden',
-            transform: isFlipped ? 'rotateY(0deg)' : 'rotateY(180deg)',
-            transition: 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+            transform: 'rotateY(180deg)',
           }}
         >
           <div className="p-6 flex flex-col h-full justify-between">
@@ -118,23 +115,37 @@ const ServiceCard: React.FC<ServiceProps & {
 };
 
 const ServiceCards: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [flippedCardIndexes, setFlippedCardIndexes] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const handleCardClick = (index: number) => {
-    if (flippedCardIndexes.includes(index)) {
-      setFlippedCardIndexes(flippedCardIndexes.filter(i => i !== index));
-    } else {
-      setFlippedCardIndexes([...flippedCardIndexes, index]);
-    }
-  };
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  // Use the useScroll hook to track scroll progress within this section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Transform scroll progress to be used for card flipping
+  const progress = useTransform(scrollYProgress, [0.1, 0.7], [0, 1]);
 
   return (
-    <section 
+    <motion.section 
       id="solutions" 
-      className="py-32 bg-black relative" 
-      ref={containerRef}
-      style={{ position: 'relative' }} // Add position relative to fix Framer Motion warning
+      className="py-32 bg-black relative min-h-screen flex flex-col items-center justify-center"
+      ref={sectionRef}
+      style={{ position: 'relative' }} // Add position relative for scroll tracking
     >
       <div className="container mx-auto text-center mb-16">
         <motion.h2 
@@ -158,29 +169,24 @@ const ServiceCards: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-center items-center md:space-x-6 flex-wrap">
+        <div className={`flex ${isMobile ? 'flex-col items-center' : 'flex-row justify-center items-center'} gap-6`}>
           {serviceData.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ 
-                duration: 0.5,
-                delay: index * 0.1 
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <ServiceCard 
                 {...service}
                 index={index}
-                isFlipped={flippedCardIndexes.includes(index)}
-                onCardClick={() => handleCardClick(index)}
+                progress={progress as any}
               />
             </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
