@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -28,6 +27,8 @@ export default {
         inter: ['Inter', 'sans-serif'],
         'syne': ['Syne', 'sans-serif'],
         'roboto-mono': ['Roboto Mono', 'monospace'],
+        'dela-gothic': ['Dela Gothic One', 'sans-serif'],
+        'manrope': ['Manrope', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
