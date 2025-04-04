@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
             <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl mr-4">
               <div className="h-20 md:h-24 lg:h-28">
                 <img 
-                  src="/lovable-uploads/6e100c42-279f-4ff0-8321-04d4fcd5505d.png" 
+                  src="/lovable-uploads/7e37018c-0f01-42d2-985d-387b678ef821.png" 
                   alt="Napptix" 
                   className="h-full w-auto object-contain" 
                 />

@@ -1,6 +1,5 @@
-
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   Gamepad, 
   MonitorPlay, 
@@ -9,18 +8,12 @@ import {
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollLock } from 'gsap/ScrollLock';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 // Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger, ScrollLock);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-interface ServiceProps {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  index: number;
-}
-
+// Service data remains unchanged
 const serviceData = [
   {
     title: "In-Game",
@@ -43,6 +36,14 @@ const serviceData = [
     icon: <Trophy className="h-10 w-10 text-[#29dd3b]" />,
   },
 ];
+
+// ServiceCard component remains unchanged
+interface ServiceProps {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  index: number;
+}
 
 const ServiceCard: React.FC<ServiceProps & { 
   isFlipped: boolean;
@@ -188,27 +189,26 @@ const ServiceCards: React.FC = () => {
       return cardTrigger;
     });
 
-    // Apply scroll lock when animations are in progress
+    // Custom scroll lock implementation
+    let lastScrollPosition = window.scrollY;
+    
     const scrollLockEffect = () => {
       if (isScrollLocked) {
-        gsap.to(window, { 
-          scrollTo: window.scrollY, 
-          duration: 0.3, 
-          overwrite: true,
-          onComplete: () => setIsScrollLocked(false)
-        });
+        window.scrollTo(0, lastScrollPosition);
+      } else {
+        lastScrollPosition = window.scrollY;
       }
     };
 
-    // Enable the scroll lock effect
-    gsap.ticker.add(scrollLockEffect);
+    // Add scroll event listener for custom scroll locking
+    window.addEventListener('scroll', scrollLockEffect, { passive: false });
 
     return () => {
       // Clean up
       triggers.forEach(trigger => trigger.kill());
-      gsap.ticker.remove(scrollLockEffect);
+      window.removeEventListener('scroll', scrollLockEffect);
     };
-  }, [flippedCards, isScrollLocked]);
+  }, [flippedCards, isScrollLocked, flipProgress]);
 
   const handleFlipComplete = (index: number) => {
     // Add any specific logic after flip completes if needed
