@@ -45,8 +45,8 @@ const Contact: React.FC = () => {
           <WorldMap />
         </div>
         
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">Contact Us</h1>
-        <div className="text-napptix-light-grey space-y-6 max-w-2xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-syne font-extrabold text-white mb-8">Contact Us</h1>
+        <div className="text-napptix-light-grey space-y-6 max-w-2xl mx-auto text-lg">
           <p className="text-center">
             Have questions about our advertising solutions? Interested in partnering with us?
             Fill out the form below and our team will get back to you shortly.
@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col">
-                <label htmlFor="name" className="text-white mb-2">Name</label>
+                <label htmlFor="name" className="text-white mb-2 text-lg">Name</label>
                 <input
                   type="text"
                   id="name"
@@ -68,7 +68,7 @@ const Contact: React.FC = () => {
               </div>
               
               <div className="flex flex-col">
-                <label htmlFor="email" className="text-white mb-2">Email</label>
+                <label htmlFor="email" className="text-white mb-2 text-lg">Email</label>
                 <input
                   type="email"
                   id="email"
@@ -82,7 +82,7 @@ const Contact: React.FC = () => {
             </div>
             
             <div className="flex flex-col">
-              <label htmlFor="company" className="text-white mb-2">Company</label>
+              <label htmlFor="company" className="text-white mb-2 text-lg">Company</label>
               <input
                 type="text"
                 id="company"
@@ -94,7 +94,7 @@ const Contact: React.FC = () => {
             </div>
             
             <div className="flex flex-col">
-              <label htmlFor="message" className="text-white mb-2">Message</label>
+              <label htmlFor="message" className="text-white mb-2 text-lg">Message</label>
               <textarea
                 id="message"
                 rows={5}
@@ -110,7 +110,7 @@ const Contact: React.FC = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold py-3 px-8 rounded-full transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                className="bg-napptix-purple hover:bg-napptix-purple/80 text-white font-bold py-3 px-8 rounded-full transition-all disabled:opacity-70 disabled:cursor-not-allowed text-lg"
               >
                 {submitting ? 'Sending...' : 'Send Message'}
               </button>
@@ -121,12 +121,12 @@ const Contact: React.FC = () => {
             <h3 className="text-xl font-bold text-white mb-4 text-center">Other Ways to Reach Us</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="text-center">
-                <p className="font-bold text-white">Email</p>
-                <p>info@napptix.com</p>
+                <p className="font-bold text-white text-lg">Email</p>
+                <p className="text-lg">info@napptix.com</p>
               </div>
               <div className="text-center">
-                <p className="font-bold text-white">Phone</p>
-                <p>+1 (555) 123-4567</p>
+                <p className="font-bold text-white text-lg">Phone</p>
+                <p className="text-lg">+1 (555) 123-4567</p>
               </div>
             </div>
           </div>

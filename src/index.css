@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Dela+Gothic+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Dela+Gothic+One&family=Syne:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -48,14 +48,14 @@
   }
 
   body {
-    @apply bg-black text-white font-manrope;
+    @apply bg-black text-white font-manrope text-lg;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-dela-gothic font-normal;
+    @apply font-syne font-extrabold;
   }
 }
 
