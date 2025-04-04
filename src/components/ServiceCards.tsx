@@ -37,7 +37,7 @@ const serviceData = [
   },
 ];
 
-// ServiceCard component remains unchanged
+// ServiceCard component with improved animation handling
 interface ServiceProps {
   title: string;
   description: string;
@@ -128,9 +128,7 @@ const ServiceCards: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [flippedCards, setFlippedCards] = useState<boolean[]>([false, false, false, false]);
   const [flipProgress, setFlipProgress] = useState<number[]>([0, 0, 0, 0]);
-  const [isScrollLocked, setIsScrollLocked] = useState(false);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
-  const lastScrollY = useRef<number>(0);
 
   useEffect(() => {
     const checkMobile = () => {
