@@ -71,7 +71,7 @@ const ServiceCard: React.FC<ServiceProps & {
         style={{
           transformStyle: 'preserve-3d',
           transform: `rotateY(${flipProgress * 180}deg)`,
-          transition: isFlipped || flipProgress === 0 ? 'none' : 'transform 0.3s ease-out',
+          transition: 'none', // Remove transition for smooth GSAP control
         }}
         onAnimationEnd={onFlipComplete}
       >
@@ -129,6 +129,8 @@ const ServiceCards: React.FC = () => {
   const [flippedCards, setFlippedCards] = useState<boolean[]>([false, false, false, false]);
   const [flipProgress, setFlipProgress] = useState<number[]>([0, 0, 0, 0]);
   const [isScrollLocked, setIsScrollLocked] = useState(false);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef<number>(0);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -143,42 +145,56 @@ const ServiceCards: React.FC = () => {
     };
   }, []);
 
-  // Initialize scroll-triggered animations
+  // Initialize scroll-triggered animations with improved settings
   useEffect(() => {
     if (!sectionRef.current) return;
     
     // Clear any existing triggers
     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     
+    // Create a scroll trigger for the whole section
+    const sectionTrigger = ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top center",
+      end: "bottom center",
+      pin: true, // Pin the section
+      pinSpacing: true,
+      anticipatePin: 1, // Improves pin performance
+    });
+
     // Create a scroll trigger for each card
     const triggers = serviceData.map((_, index) => {
+      // Calculate the progress range for each card
+      const progressStart = index / serviceData.length;
+      const progressEnd = (index + 1) / serviceData.length;
+      
       const cardTrigger = ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: `top+=${300 + (index * 100)}px center`,
-        end: `top+=${300 + (index * 100) + 200}px center`,
-        scrub: 0.5, // Smooth scrubbing effect
-        onEnter: () => {
-          // When entering forward (scrolling down)
-          setIsScrollLocked(true);
-          setTimeout(() => setIsScrollLocked(false), 300); // Unlock after animation completes
-        },
-        onLeaveBack: () => {
-          // When leaving backward (scrolling up)
-          setIsScrollLocked(true);
-          setTimeout(() => setIsScrollLocked(false), 300);
-        },
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.5, // Smooth scrubbing effect - adjust this number for smoother animation
+        pin: false, // Section is already pinned
         onUpdate: (self) => {
+          // Map the overall scroll progress to individual card progress
+          const overallProgress = self.progress;
+          // Calculate normalized progress for this specific card (0-1)
+          const normalizedCardProgress = gsap.utils.clamp(
+            0,
+            1,
+            (overallProgress - progressStart) / (progressEnd - progressStart)
+          );
+          
           // Update flip progress based on scroll position
           const newProgress = [...flipProgress];
-          newProgress[index] = self.progress;
+          newProgress[index] = normalizedCardProgress;
           setFlipProgress(newProgress);
           
           // Update flipped state when progress passes threshold
-          if (self.progress > 0.5 && !flippedCards[index]) {
+          if (normalizedCardProgress > 0.5 && !flippedCards[index]) {
             const newFlipped = [...flippedCards];
             newFlipped[index] = true;
             setFlippedCards(newFlipped);
-          } else if (self.progress < 0.5 && flippedCards[index]) {
+          } else if (normalizedCardProgress < 0.5 && flippedCards[index]) {
             const newFlipped = [...flippedCards];
             newFlipped[index] = false;
             setFlippedCards(newFlipped);
@@ -189,26 +205,12 @@ const ServiceCards: React.FC = () => {
       return cardTrigger;
     });
 
-    // Custom scroll lock implementation
-    let lastScrollPosition = window.scrollY;
-    
-    const scrollLockEffect = () => {
-      if (isScrollLocked) {
-        window.scrollTo(0, lastScrollPosition);
-      } else {
-        lastScrollPosition = window.scrollY;
-      }
-    };
-
-    // Add scroll event listener for custom scroll locking
-    window.addEventListener('scroll', scrollLockEffect, { passive: false });
-
     return () => {
       // Clean up
+      sectionTrigger.kill();
       triggers.forEach(trigger => trigger.kill());
-      window.removeEventListener('scroll', scrollLockEffect);
     };
-  }, [flippedCards, isScrollLocked, flipProgress]);
+  }, [flippedCards, flipProgress]);
 
   const handleFlipComplete = (index: number) => {
     // Add any specific logic after flip completes if needed
@@ -244,7 +246,10 @@ const ServiceCards: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4">
-        <div className={`flex ${isMobile ? 'flex-col items-center' : 'flex-row justify-center items-center'} gap-6`}>
+        <div 
+          ref={cardsContainerRef}
+          className={`flex ${isMobile ? 'flex-col items-center' : 'flex-row justify-center items-center'} gap-6`}
+        >
           {serviceData.map((service, index) => (
             <motion.div
               key={index}
