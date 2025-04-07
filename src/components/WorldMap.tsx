@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
@@ -42,7 +41,6 @@ const WorldMap: React.FC = () => {
     }
   ];
   
-  // Draw lines between locations
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
   useEffect(() => {
@@ -52,7 +50,6 @@ const WorldMap: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     
-    // Set canvas dimensions to match the parent container
     const resizeCanvas = () => {
       const container = canvas.parentElement;
       if (container) {
@@ -62,20 +59,17 @@ const WorldMap: React.FC = () => {
       }
     };
     
-    // Draw lines between points
     const drawConnections = () => {
       if (!ctx) return;
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Calculate actual pixel positions
       const points = offices.map(office => ({
         x: (office.x / 100) * canvas.width,
         y: (office.y / 100) * canvas.height,
         color: office.color
       }));
       
-      // Animate connection drawing
       let progress = 0;
       const animate = () => {
         if (progress >= 1) return;
@@ -83,7 +77,6 @@ const WorldMap: React.FC = () => {
         progress += 0.01;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // Draw connections with progress
         for (let i = 0; i < points.length; i++) {
           for (let j = i + 1; j < points.length; j++) {
             const startPoint = points[i];
@@ -114,14 +107,11 @@ const WorldMap: React.FC = () => {
         }
       };
       
-      // Start animation
       requestAnimationFrame(animate);
     };
     
-    // Initial setup
     resizeCanvas();
     
-    // Handle window resize
     window.addEventListener('resize', resizeCanvas);
     
     return () => {
@@ -134,7 +124,6 @@ const WorldMap: React.FC = () => {
       <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Global Presence</h2>
       
       <div className="relative w-full">
-        {/* World Map Background with Canvas Overlay */}
         <div className="w-full aspect-[2/1] overflow-hidden relative">
           <canvas 
             ref={canvasRef} 
@@ -146,7 +135,6 @@ const WorldMap: React.FC = () => {
             className="w-full object-contain brightness-[0.8] opacity-60"
           />
           
-          {/* Location Labels */}
           {offices.map((office, index) => (
             <motion.div
               key={office.city}
@@ -170,7 +158,6 @@ const WorldMap: React.FC = () => {
         </div>
       </div>
       
-      {/* Office Locations List */}
       <div className="mt-16 space-y-8">
         {offices.map((office) => (
           <div key={office.city} className="border-b border-white/20 pb-8">
@@ -182,7 +169,6 @@ const WorldMap: React.FC = () => {
         ))}
       </div>
       
-      {/* Region Tabs */}
       <div className="flex flex-wrap justify-center gap-4 mt-16">
         {["Worldwide", "APAC", "MEA", "Europe", "Americas"].map((region, index) => (
           <button
