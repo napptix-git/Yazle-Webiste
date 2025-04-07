@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -73,7 +74,7 @@ const ServiceCard: React.FC<ServiceProps & {
         onAnimationEnd={onFlipComplete}
       >
         <div 
-          className={`absolute w-full h-full rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden 
+          className={`absolute w-full h-full rounded-xl overflow-hidden shadow-xl border border-white/10 
             ${flipProgress > 0.5 ? 'z-10 shadow-[0_0_15px_rgba(41,221,59,0.3)]' : 'z-20'}`}
           style={{
             backfaceVisibility: 'hidden',
@@ -88,7 +89,7 @@ const ServiceCard: React.FC<ServiceProps & {
         </div>
         
         <div 
-          className={`absolute w-full h-full bg-white text-black rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden
+          className={`absolute w-full h-full bg-white text-black rounded-xl overflow-hidden shadow-xl border border-white/10
             ${flipProgress > 0.5 ? 'z-20' : 'z-10'}`}
           style={{
             backfaceVisibility: 'hidden',
@@ -141,8 +142,10 @@ const ServiceCards: React.FC = () => {
   useEffect(() => {
     if (!sectionRef.current) return;
     
+    // Clean up existing triggers to prevent memory leaks
     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     
+    // Create a section trigger for pinning
     const sectionTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
       start: "top top",
@@ -152,6 +155,7 @@ const ServiceCards: React.FC = () => {
       anticipatePin: 1,
     });
 
+    // Create individual triggers for each card flip animation
     const triggers = serviceData.map((_, index) => {
       const progressStart = index / serviceData.length;
       const progressEnd = (index + 1) / serviceData.length;
@@ -162,8 +166,11 @@ const ServiceCards: React.FC = () => {
         end: "bottom bottom",
         scrub: 0.5,
         onUpdate: (self) => {
+          if (!sectionRef.current) return;
+          
           const overallProgress = self.progress;
           
+          // Map the overall scroll progress to individual card flip progress
           const normalizedCardProgress = gsap.utils.mapRange(
             progressStart, 
             progressEnd, 
@@ -174,22 +181,31 @@ const ServiceCards: React.FC = () => {
           
           const clampedProgress = gsap.utils.clamp(0, 1, normalizedCardProgress);
           
-          const newProgress = [...flipProgress];
-          newProgress[index] = clampedProgress;
-          setFlipProgress(newProgress);
+          // Update flip progress for individual cards
+          setFlipProgress(prev => {
+            const newProgress = [...prev];
+            newProgress[index] = clampedProgress;
+            return newProgress;
+          });
           
-          const newFlipped = [...flippedCards];
-          newFlipped[index] = clampedProgress > 0.5;
-          setFlippedCards(newFlipped);
+          // Update flipped state for individual cards
+          setFlippedCards(prev => {
+            const newFlipped = [...prev];
+            newFlipped[index] = clampedProgress > 0.5;
+            return newFlipped;
+          });
         }
       });
     });
 
+    // Cleanup function
     return () => {
-      sectionTrigger.kill();
-      triggers.forEach(trigger => trigger.kill());
+      if (sectionTrigger) sectionTrigger.kill();
+      triggers.forEach(trigger => {
+        if (trigger) trigger.kill();
+      });
     };
-  }, [flippedCards, flipProgress]);
+  }, []);
 
   const handleFlipComplete = (index: number) => {
     console.log(`Card ${index} flip completed`);

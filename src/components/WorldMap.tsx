@@ -29,8 +29,6 @@ const WorldMap: React.FC = () => {
   
   return (
     <div className="relative w-full max-w-5xl mx-auto mb-20">
-      <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Global Presence</h2>
-      
       <div className="relative w-full">
         <div className="w-full aspect-[2/1] overflow-hidden relative">
           <img 

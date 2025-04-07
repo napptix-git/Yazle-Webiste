@@ -149,6 +149,7 @@ const Advertisers: React.FC = () => {
     chart: useRef<HTMLDivElement>(null)
   };
   const [barsAnimated, setBarsAnimated] = useState(false);
+  const chartBarsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     // Animation for the performance chart
@@ -172,16 +173,26 @@ const Advertisers: React.FC = () => {
         });
 
         return () => {
-          trigger.kill();
+          if (trigger) trigger.kill();
         };
       }, sectionRefs.chart);
 
       const animateBars = () => {
-        gsap.from(".chart-bar", {
-          height: 0,
-          duration: 1.5,
-          ease: "power3.out",
-          stagger: 0.2,
+        // Ensure all bars are initially at 0 height
+        chartBarsRef.current.forEach((bar) => {
+          if (bar) {
+            // Store the original height as a data attribute
+            const targetHeight = bar.dataset.targetHeight || "0%";
+            gsap.set(bar, { height: "0%" });
+            
+            // Animate to the target height
+            gsap.to(bar, {
+              height: targetHeight,
+              duration: 1.5,
+              ease: "power3.out",
+              stagger: 0.2,
+            });
+          }
         });
       };
 
@@ -479,8 +490,10 @@ const Advertisers: React.FC = () => {
                 
                 <div className="w-16 flex flex-col items-center">
                   <div 
+                    ref={el => chartBarsRef.current[0] = el}
+                    data-target-height="60%"
                     className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: '60%' }}
+                    style={{ height: "0%" }}
                   ></div>
                   <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
                   <p className="text-white font-bold">Traditional</p>
@@ -488,8 +501,10 @@ const Advertisers: React.FC = () => {
                 
                 <div className="w-16 flex flex-col items-center">
                   <div 
+                    ref={el => chartBarsRef.current[1] = el}
+                    data-target-height="85%"
                     className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: '85%' }}
+                    style={{ height: "0%" }}
                   ></div>
                   <p className="mt-2 text-napptix-light-grey text-sm">CTR</p>
                   <p className="text-white font-bold">Napptix</p>
@@ -497,8 +512,10 @@ const Advertisers: React.FC = () => {
                 
                 <div className="w-16 flex flex-col items-center">
                   <div 
+                    ref={el => chartBarsRef.current[2] = el}
+                    data-target-height="40%"
                     className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: '40%' }}
+                    style={{ height: "0%" }}
                   ></div>
                   <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
                   <p className="text-white font-bold">Traditional</p>
@@ -506,8 +523,10 @@ const Advertisers: React.FC = () => {
                 
                 <div className="w-16 flex flex-col items-center">
                   <div 
+                    ref={el => chartBarsRef.current[3] = el}
+                    data-target-height="90%"
                     className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: '90%' }}
+                    style={{ height: "0%" }}
                   ></div>
                   <p className="mt-2 text-napptix-light-grey text-sm">Engagement</p>
                   <p className="text-white font-bold">Napptix</p>
@@ -515,8 +534,10 @@ const Advertisers: React.FC = () => {
                 
                 <div className="w-16 flex flex-col items-center">
                   <div 
+                    ref={el => chartBarsRef.current[4] = el}
+                    data-target-height="45%"
                     className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
-                    style={{ height: '45%' }}
+                    style={{ height: "0%" }}
                   ></div>
                   <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
                   <p className="text-white font-bold">Traditional</p>
@@ -524,8 +545,10 @@ const Advertisers: React.FC = () => {
                 
                 <div className="w-16 flex flex-col items-center">
                   <div 
+                    ref={el => chartBarsRef.current[5] = el}
+                    data-target-height="80%"
                     className="chart-bar w-full bg-[#29dd3b] rounded-t-md"
-                    style={{ height: '80%' }}
+                    style={{ height: "0%" }}
                   ></div>
                   <p className="mt-2 text-napptix-light-grey text-sm">Recall</p>
                   <p className="text-white font-bold">Napptix</p>
