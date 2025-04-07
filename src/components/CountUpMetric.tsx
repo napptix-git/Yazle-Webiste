@@ -8,6 +8,7 @@ interface CountUpMetricProps {
   suffix?: string;
   title: string;
   description?: string;
+  className?: string; // Added className prop
 }
 
 const CountUpMetric: React.FC<CountUpMetricProps> = ({ 
@@ -16,7 +17,8 @@ const CountUpMetric: React.FC<CountUpMetricProps> = ({
   prefix = '', 
   suffix = '', 
   title,
-  description
+  description,
+  className
 }) => {
   const [count, setCount] = useState(0);
   const countRef = useRef<HTMLDivElement>(null);
@@ -74,7 +76,7 @@ const CountUpMetric: React.FC<CountUpMetricProps> = ({
       className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 hover:border-[#29dd3b]/30 transition-all duration-300 hover:shadow-[0_0_15px_rgba(41,221,59,0.1)]"
     >
       <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-      <div className="text-3xl md:text-4xl font-bold text-[#29dd3b] my-4">
+      <div className={`text-3xl md:text-4xl font-bold text-[#29dd3b] my-4 ${className || ''}`}>
         {prefix}{formattedCount}{suffix}
       </div>
       {description && (
