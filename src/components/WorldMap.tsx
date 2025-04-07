@@ -7,6 +7,7 @@ interface Office {
   address: string;
   x: number;
   y: number;
+  color: string;
 }
 
 const WorldMap: React.FC = () => {
@@ -14,26 +15,30 @@ const WorldMap: React.FC = () => {
     { 
       city: "Mumbai", 
       address: "102, Firdos Apartments, Waroda Road Bandra West, Mumbai, Maharashtra 400050",
-      x: 70, 
-      y: 52
+      x: 76, 
+      y: 58,
+      color: "#ff9f7f"
     },
     { 
       city: "Dubai", 
       address: "302, Building 08, Media City, Dubai",
       x: 65, 
-      y: 48
+      y: 48,
+      color: "#8bffb0"
     },
     { 
-      city: "Singapore", 
-      address: "20 Collyer Quay, #09-01, Singapore 049319",
-      x: 76, 
-      y: 58
+      city: "New York", 
+      address: "350 5th Ave, New York, NY 10118, United States",
+      x: 20, 
+      y: 38,
+      color: "#8e99ff"
     },
     { 
-      city: "Delhi", 
-      address: "45, Connaught Place, New Delhi, India 110001",
-      x: 72, 
-      y: 50
+      city: "Amsterdam", 
+      address: "Herengracht 595, 1017 CE Amsterdam, Netherlands",
+      x: 47, 
+      y: 28,
+      color: "#ff7aef"
     }
   ];
   
@@ -62,13 +67,12 @@ const WorldMap: React.FC = () => {
       if (!ctx) return;
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = 'rgba(41, 221, 59, 0.5)';
-      ctx.lineWidth = 1;
       
       // Calculate actual pixel positions
       const points = offices.map(office => ({
         x: (office.x / 100) * canvas.width,
-        y: (office.y / 100) * canvas.height
+        y: (office.y / 100) * canvas.height,
+        color: office.color
       }));
       
       // Animate connection drawing
@@ -84,6 +88,16 @@ const WorldMap: React.FC = () => {
           for (let j = i + 1; j < points.length; j++) {
             const startPoint = points[i];
             const endPoint = points[j];
+            
+            const gradient = ctx.createLinearGradient(
+              startPoint.x, startPoint.y, 
+              endPoint.x, endPoint.y
+            );
+            gradient.addColorStop(0, startPoint.color);
+            gradient.addColorStop(1, endPoint.color);
+            
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 1;
             
             const currentX = startPoint.x + (endPoint.x - startPoint.x) * progress;
             const currentY = startPoint.y + (endPoint.y - startPoint.y) * progress;
@@ -129,7 +143,7 @@ const WorldMap: React.FC = () => {
           <img 
             src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a.png" 
             alt="World Map" 
-            className="w-full object-contain brightness-[1.5] contrast-[0.9] invert"
+            className="w-full object-contain brightness-[0.8] opacity-60"
           />
           
           {/* Location Labels */}
@@ -145,9 +159,10 @@ const WorldMap: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: index * 0.2, duration: 0.5 }}
             >
-              <div className="absolute w-2 h-2 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-              <div className="absolute w-4 h-4 bg-white/20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-              <div className="absolute text-white text-sm font-bold -translate-x-1/2 mt-2 whitespace-nowrap">
+              <div 
+                className="px-6 py-2 rounded-full text-center font-medium text-black -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
+                style={{ backgroundColor: office.color }}
+              >
                 {office.city}
               </div>
             </motion.div>

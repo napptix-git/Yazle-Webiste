@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -16,8 +17,11 @@ const HeroSection: React.FC = () => {
   const particles = useRef<Particle[]>([]);
   const animationFrameId = useRef<number>(0);
   const colors = ['#8B5CF6', '#F97316', '#0EA5E9'];
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     if (!canvasRef.current) return;
     
     const canvas = canvasRef.current;
@@ -68,7 +72,7 @@ const HeroSection: React.FC = () => {
   };
   
   useEffect(() => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current || !mounted) return;
     
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -115,7 +119,17 @@ const HeroSection: React.FC = () => {
     return () => {
       cancelAnimationFrame(animationFrameId.current);
     };
-  }, [mousePosition]);
+  }, [mousePosition, mounted]);
+  
+  // For smoother animation without dependencies on mouse position
+  const getParallaxStyle = () => {
+    if (!mounted) return {};
+    
+    return {
+      transform: `translate(${(mousePosition.x - window.innerWidth / 2) / 50}px, ${(mousePosition.y - window.innerHeight / 2) / 50}px)`,
+      transition: "transform 0.1s ease-out"
+    };
+  };
   
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -130,9 +144,7 @@ const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          style={{
-            transform: `translate(${(mousePosition.x - window.innerWidth / 2) / 50}px, ${(mousePosition.y - window.innerHeight / 2) / 50}px)`,
-          }}
+          style={getParallaxStyle()}
         >
           Reach Every <span className="text-[#29dd3b]">Gamer</span>
         </motion.h1>

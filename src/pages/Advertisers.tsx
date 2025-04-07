@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CountUpMetric from '@/components/CountUpMetric';
@@ -149,27 +148,46 @@ const Advertisers: React.FC = () => {
     stats: useRef<HTMLDivElement>(null),
     chart: useRef<HTMLDivElement>(null)
   };
+  const [barsAnimated, setBarsAnimated] = useState(false);
 
   useEffect(() => {
     // Animation for the performance chart
     if (sectionRefs.chart.current) {
       const ctx = gsap.context(() => {
+        const trigger = ScrollTrigger.create({
+          trigger: sectionRefs.chart.current,
+          start: "top 80%",
+          onEnter: () => {
+            if (!barsAnimated) {
+              animateBars();
+              setBarsAnimated(true);
+            }
+          },
+          onEnterBack: () => {
+            if (!barsAnimated) {
+              animateBars();
+              setBarsAnimated(true);
+            }
+          }
+        });
+
+        return () => {
+          trigger.kill();
+        };
+      }, sectionRefs.chart);
+
+      const animateBars = () => {
         gsap.from(".chart-bar", {
           height: 0,
           duration: 1.5,
           ease: "power3.out",
           stagger: 0.2,
-          scrollTrigger: {
-            trigger: sectionRefs.chart.current,
-            start: "top 80%",
-            toggleActions: "play none none none"
-          }
         });
-      }, sectionRefs.chart);
+      };
 
       return () => ctx.revert();
     }
-  }, []);
+  }, [barsAnimated]);
 
   return (
     <div className="min-h-screen bg-black">
@@ -457,10 +475,8 @@ const Advertisers: React.FC = () => {
           <div className="relative h-[300px] md:h-[400px] p-6 border border-napptix-grey/20 rounded-xl bg-black">
             <div className="absolute bottom-0 w-full max-w-4xl mx-auto left-0 right-0 px-8 pb-8">
               <div className="relative h-[280px] flex items-end justify-around gap-4">
-                {/* X-axis */}
                 <div className="absolute bottom-0 left-0 right-0 h-px bg-napptix-grey/20"></div>
                 
-                {/* Chart bars */}
                 <div className="w-16 flex flex-col items-center">
                   <div 
                     className="chart-bar w-full bg-[#29dd3b]/80 rounded-t-md"
