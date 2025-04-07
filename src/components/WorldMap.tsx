@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -11,42 +10,7 @@ interface Office {
 
 const WorldMap: React.FC = () => {
   const offices: Office[] = [
-    { 
-      city: "Mumbai", 
-      address: "102, Firdos Apartments, Waroda Road Bandra West, Mumbai, Maharashtra 400050",
-      x: 76, 
-      y: 58
-    },
-    { 
-      city: "Dubai", 
-      address: "302, Building 08, Media City, Dubai",
-      x: 65, 
-      y: 48
-    },
-    { 
-      city: "New York", 
-      address: "350 5th Ave, New York, NY 10118, United States",
-      x: 25, 
-      y: 40
-    },
-    { 
-      city: "Amsterdam", 
-      address: "Herengracht 595, 1017 CE Amsterdam, Netherlands",
-      x: 47, 
-      y: 32
-    },
-    { 
-      city: "Singapore", 
-      address: "10 Anson Road, #10-11 International Plaza, Singapore 079903",
-      x: 80, 
-      y: 62
-    },
-    { 
-      city: "Delhi", 
-      address: "145, Shahpur Jat, Siri Fort, New Delhi, Delhi 110049",
-      x: 72, 
-      y: 48
-    }
+    // Other cities can be added here in the future if needed
   ];
   
   const [activeRegion, setActiveRegion] = useState("Worldwide");
@@ -55,10 +19,7 @@ const WorldMap: React.FC = () => {
     if (region === "Worldwide") return offices;
     
     const regionMap: {[key: string]: string[]} = {
-      "APAC": ["Mumbai", "Singapore", "Delhi"],
-      "MEA": ["Dubai"],
-      "Europe": ["Amsterdam"],
-      "Americas": ["New York"]
+      // Removed regions since we don't have any cities currently
     };
     
     return offices.filter(office => regionMap[region]?.includes(office.city));
@@ -113,21 +74,24 @@ const WorldMap: React.FC = () => {
         ))}
       </div>
       
-      <div className="flex flex-wrap justify-center gap-4 mt-16">
-        {["Worldwide", "APAC", "MEA", "Europe", "Americas"].map((region) => (
-          <button
-            key={region}
-            className={`px-6 py-2 rounded-full text-lg transition-all ${
-              region === activeRegion 
-                ? "bg-white text-black" 
-                : "bg-white/10 text-white hover:bg-white/20"
-            }`}
-            onClick={() => setActiveRegion(region)}
-          >
-            {region}
-          </button>
-        ))}
-      </div>
+      {/* Only show region selector if we have offices */}
+      {offices.length > 0 && (
+        <div className="flex flex-wrap justify-center gap-4 mt-16">
+          {["Worldwide", "APAC", "MEA", "Europe", "Americas"].map((region) => (
+            <button
+              key={region}
+              className={`px-6 py-2 rounded-full text-lg transition-all ${
+                region === activeRegion 
+                  ? "bg-white text-black" 
+                  : "bg-white/10 text-white hover:bg-white/20"
+              }`}
+              onClick={() => setActiveRegion(region)}
+            >
+              {region}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
