@@ -193,22 +193,16 @@ const About: React.FC = () => {
       <Navbar />
       
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">About Us</h1>
-        <div className="text-napptix-light-grey font-roboto-mono space-y-6">
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">About Us</h1>
+        <div className="text-napptix-light-grey font-roboto-mono space-y-6 max-w-3xl mx-auto text-center">
           <p>
             Napptix is a pioneering force in the gaming advertising industry, dedicated to creating
             meaningful connections between brands and gamers through innovative advertising solutions.
           </p>
           
-          <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Mission</h2>
-          <p>
-            To revolutionize gaming advertising by developing technologies that enhance rather than
-            interrupt the gaming experience, creating value for players, developers, and advertisers alike.
-          </p>
-          
           <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
-            <p className="text-2xl text-white/80 mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Our People</h2>
+            <p className="text-2xl text-white/80 mb-12 text-center">
               Ideas shape the world,<br />
               our people shape <span className="gamer-text glow-green" style={{ 
                 background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
@@ -233,21 +227,21 @@ const About: React.FC = () => {
             </div>
           </div>
           
-          <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Values</h2>
+          <h2 className="text-3xl font-bold text-white mt-12 mb-6 text-center">Our Values</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-              <h3 className="text-xl font-bold text-white mb-4">Innovation</h3>
+              <h3 className="text-xl font-bold text-white mb-4 text-center">Innovation</h3>
               <p>We constantly push the boundaries of what's possible in gaming advertising.</p>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-              <h3 className="text-xl font-bold text-white mb-4">Integrity</h3>
+              <h3 className="text-xl font-bold text-white mb-4 text-center">Integrity</h3>
               <p>We prioritize transparency and ethical practices in all our operations.</p>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-              <h3 className="text-xl font-bold text-white mb-4">Player-First</h3>
+              <h3 className="text-xl font-bold text-white mb-4 text-center">Player-First</h3>
               <p>We believe that advertising should enhance, not detract from, the gaming experience.</p>
             </div>
           </div>
