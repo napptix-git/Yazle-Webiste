@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { MapPin } from 'lucide-react';
 
 interface Office {
   city: string;
@@ -136,12 +137,17 @@ const WorldMap: React.FC = () => {
               transition={{ delay: index * 0.2, duration: 0.5 }}
             >
               <div className="relative">
-                <div className={`absolute w-36 h-10 ${office.color} rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center`}>
-                  <span className="text-black font-bold text-lg">
-                    {office.city}
-                  </span>
+                {/* Location pin marker */}
+                <div className={`absolute -translate-x-1/2 -translate-y-1/2`}>
+                  <MapPin 
+                    className={`text-${office.color.replace('bg-', '')} animate-pulse`} 
+                    size={24}
+                    strokeWidth={2.5}
+                    fill="rgba(255, 255, 255, 0.2)"
+                  />
                 </div>
-                <div className={`absolute w-44 h-14 ${office.color}/40 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse`}></div>
+                {/* Glowing effect around pin */}
+                <div className={`absolute w-8 h-8 ${office.color}/30 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse`}></div>
               </div>
             </motion.div>
           ))}
