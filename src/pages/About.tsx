@@ -16,14 +16,14 @@ const About: React.FC = () => {
       position: "Co-Founder & CEO",
       imageSrc: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1374&auto=format&fit=crop",
       linkedinUrl: "https://linkedin.com/in/example",
-      bgColor: "bg-[#2f2b3a]"
+      bgColor: "bg-gradient-to-br from-purple-100/20 via-teal-100/20 to-rose-100/20"
     },
     {
       name: "Sarah Kim",
       position: "Co-Founder & COO",
       imageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop",
       linkedinUrl: "https://linkedin.com/in/example2",
-      bgColor: "bg-[#3c2b3a]"
+      bgColor: "bg-gradient-to-br from-rose-100/20 via-purple-100/20 to-teal-100/20"
     },
     {
       name: "Michael Chen",
@@ -192,20 +192,35 @@ const About: React.FC = () => {
     <div className="min-h-screen bg-black">
       <Navbar />
       
-      <div className="container mx-auto pt-32 pb-20 px-4 text-center">
+      <div className="container mx-auto pt-32 pb-20 px-4">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">About Us</h1>
-        <div className="text-napptix-light-grey font-roboto-mono space-y-6 max-w-3xl mx-auto">
+        <div className="text-napptix-light-grey font-roboto-mono space-y-6">
           <p>
             Napptix is a pioneering force in the gaming advertising industry, dedicated to creating
             meaningful connections between brands and gamers through innovative advertising solutions.
           </p>
           
-          <div className="mt-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-16">Our People</h2>
+          <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Mission</h2>
+          <p>
+            To revolutionize gaming advertising by developing technologies that enhance rather than
+            interrupt the gaming experience, creating value for players, developers, and advertisers alike.
+          </p>
+          
+          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
+            <p className="text-2xl text-white/80 mb-12">
+              Ideas shape the world,<br />
+              our people shape <span className="gamer-text glow-green" style={{ 
+                background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
+                WebkitBackgroundClip: 'text',
+                textShadow: '0 0 15px rgba(41, 221, 59, 0.7)',
+                animation: 'text-flicker 4s linear infinite'
+              }}>ideas</span>
+            </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-              {allTeamMembers.slice(0, 6).map((member, index) => (
-                <div key={index} className="team-member-card h-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+              {allTeamMembers.map((member, index) => (
+                <div key={index} className="team-member-card">
                   <TeamMember 
                     name={member.name}
                     position={member.position}
@@ -218,7 +233,7 @@ const About: React.FC = () => {
             </div>
           </div>
           
-          <h2 className="text-3xl font-bold text-white mt-20 mb-8">Our Values</h2>
+          <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Values</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">

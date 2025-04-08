@@ -56,17 +56,6 @@ const ServiceCard: React.FC<ServiceProps & {
   flipProgress,
   onFlipComplete
 }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    if (!cardRef.current) return;
-    
-    gsap.to(cardRef.current, {
-      rotateY: flipProgress * 180,
-      duration: 0.8,
-      ease: "power2.inOut",
-    });
-  }, [flipProgress]);
   
   return (
     <div
@@ -76,10 +65,10 @@ const ServiceCard: React.FC<ServiceProps & {
       }}
     >
       <div 
-        ref={cardRef}
         className="relative w-[280px] h-[400px] card-container"
         style={{
           transformStyle: 'preserve-3d',
+          transform: `rotateY(${flipProgress * 180}deg)`,
           transition: 'none',
         }}
         onAnimationEnd={onFlipComplete}
