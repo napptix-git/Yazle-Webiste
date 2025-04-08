@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 interface Office {
@@ -7,83 +6,26 @@ interface Office {
   address: string;
   x: number;
   y: number;
-  color: string;
 }
 
 const WorldMap: React.FC = () => {
   const offices: Office[] = [
-    {
-      city: "Dubai",
-      address: "Business Bay, Dubai, United Arab Emirates",
-      x: 23,
-      y: 25,
-      color: "bg-green-400"
-    },
-    {
-      city: "Delhi",
-      address: "Connaught Place, New Delhi, India",
-      x: 38,
-      y: 25,
-      color: "bg-purple-400"
-    },
-    {
-      city: "Mumbai",
-      address: "Bandra Kurla Complex, Mumbai, India",
-      x: 30,
-      y: 35,
-      color: "bg-orange-400"
-    },
-    {
-      city: "Singapore",
-      address: "Marina Bay, Singapore",
-      x: 58,
-      y: 40,
-      color: "bg-blue-400"
-    }
+    // Other cities can be added here in the future if needed
   ];
   
-  const [activeRegion] = useState("Worldwide");
-  const [animateLines, setAnimateLines] = useState(false);
-  
-  useEffect(() => {
-    // Start line animation after component mounts
-    const timer = setTimeout(() => {
-      setAnimateLines(true);
-    }, 500);
-    
-    return () => clearTimeout(timer);
-  }, []);
+  const [activeRegion, setActiveRegion] = useState("Worldwide");
   
   const filterOfficesByRegion = (region: string) => {
     if (region === "Worldwide") return offices;
     
     const regionMap: {[key: string]: string[]} = {
-      "MEA": ["Dubai"],
-      "APAC": ["Delhi", "Mumbai", "Singapore"]
+      // Removed regions since we don't have any cities currently
     };
     
     return offices.filter(office => regionMap[region]?.includes(office.city));
   };
   
   const filteredOffices = filterOfficesByRegion(activeRegion);
-  
-  const getLineCoordinates = (index: number) => {
-    if (index === offices.length - 1) {
-      return {
-        x1: `${offices[index].x}%`,
-        y1: `${offices[index].y}%`,
-        x2: `${offices[0].x}%`,
-        y2: `${offices[0].y}%`
-      };
-    }
-    
-    return {
-      x1: `${offices[index].x}%`,
-      y1: `${offices[index].y}%`,
-      x2: `${offices[index + 1].x}%`,
-      y2: `${offices[index + 1].y}%`
-    };
-  };
   
   return (
     <div className="relative w-full max-w-5xl mx-auto mb-20">
@@ -94,34 +36,6 @@ const WorldMap: React.FC = () => {
             alt="World Map" 
             className="w-full object-contain"
           />
-          
-          {/* Connecting lines between offices */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
-            {filteredOffices.map((office, index) => {
-              const lineCoords = getLineCoordinates(index);
-              const lineTotalLength = Math.sqrt(
-                Math.pow((parseFloat(lineCoords.x2) - parseFloat(lineCoords.x1)) / 100 * 1000, 2) + 
-                Math.pow((parseFloat(lineCoords.y2) - parseFloat(lineCoords.y1)) / 100 * 500, 2)
-              );
-              
-              return (
-                <motion.line
-                  key={`line-${office.city}`}
-                  x1={lineCoords.x1}
-                  y1={lineCoords.y1}
-                  x2={lineCoords.x2}
-                  y2={lineCoords.y2}
-                  stroke="rgba(255, 255, 255, 0.4)"
-                  strokeWidth="1.5"
-                  strokeDasharray={lineTotalLength}
-                  strokeDashoffset={animateLines ? 0 : lineTotalLength}
-                  initial={{ strokeDashoffset: lineTotalLength }}
-                  animate={{ strokeDashoffset: animateLines ? 0 : lineTotalLength }}
-                  transition={{ duration: 1.5, delay: index * 0.5 }}
-                />
-              );
-            })}
-          </svg>
           
           {filteredOffices.map((office, index) => (
             <motion.div
@@ -136,12 +50,11 @@ const WorldMap: React.FC = () => {
               transition={{ delay: index * 0.2, duration: 0.5 }}
             >
               <div className="relative">
-                <div className={`absolute w-36 h-10 ${office.color} rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center`}>
-                  <span className="text-black font-bold text-lg">
-                    {office.city}
-                  </span>
+                <div className="absolute w-3 h-3 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute w-8 h-8 bg-white/20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-ping"></div>
+                <div className="text-white font-medium text-sm absolute whitespace-nowrap translate-y-2">
+                  {office.city}
                 </div>
-                <div className={`absolute w-44 h-14 ${office.color}/40 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse`}></div>
               </div>
             </motion.div>
           ))}
@@ -158,6 +71,25 @@ const WorldMap: React.FC = () => {
           </div>
         ))}
       </div>
+      
+      {/* Only show region selector if we have offices */}
+      {offices.length > 0 && (
+        <div className="flex flex-wrap justify-center gap-4 mt-16">
+          {["Worldwide", "APAC", "MEA", "Europe", "Americas"].map((region) => (
+            <button
+              key={region}
+              className={`px-6 py-2 rounded-full text-lg transition-all ${
+                region === activeRegion 
+                  ? "bg-white text-black" 
+                  : "bg-white/10 text-white hover:bg-white/20"
+              }`}
+              onClick={() => setActiveRegion(region)}
+            >
+              {region}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
