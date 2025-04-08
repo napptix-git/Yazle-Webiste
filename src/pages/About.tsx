@@ -192,29 +192,23 @@ const About: React.FC = () => {
     <div className="min-h-screen bg-black">
       <Navbar />
       
-      <div className="container mx-auto pt-32 pb-20 px-4">
+      <div className="container mx-auto pt-32 pb-20 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">About Us</h1>
-        <div className="text-napptix-light-grey font-roboto-mono space-y-6">
+        <div className="text-napptix-light-grey font-roboto-mono space-y-6 max-w-3xl mx-auto">
           <p>
             Napptix is a pioneering force in the gaming advertising industry, dedicated to creating
             meaningful connections between brands and gamers through innovative advertising solutions.
-          </p>
-          
-          <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Mission</h2>
-          <p>
-            To revolutionize gaming advertising by developing technologies that enhance rather than
-            interrupt the gaming experience, creating value for players, developers, and advertisers alike.
           </p>
           
           <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
             <p className="text-2xl text-white/80 mb-12">
               Ideas shape the world,<br />
-              our people shape <span className="gamer-text glow-green" style={{ 
+              our people shape <span className="gamer-text" style={{ 
                 background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
                 WebkitBackgroundClip: 'text',
-                textShadow: '0 0 15px rgba(41, 221, 59, 0.7)',
-                animation: 'text-flicker 4s linear infinite'
+                color: 'transparent',
+                textShadow: '0 0 15px rgba(41, 221, 59, 0.7)'
               }}>ideas</span>
             </p>
             

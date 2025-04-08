@@ -18,28 +18,28 @@ const WorldMap: React.FC = () => {
       address: "Bandra Kurla Complex, Mumbai, India",
       x: 47,
       y: 52,
-      color: "bg-orange-400"
+      color: "bg-orange-600" // Darker orange
     },
     {
       city: "Dubai",
       address: "Business Bay, Dubai, United Arab Emirates",
       x: 28,
       y: 42,
-      color: "bg-green-400"
+      color: "bg-green-600" // Darker green
     },
     {
       city: "Delhi",
       address: "Connaught Place, New Delhi, India",
       x: 44,
       y: 38,
-      color: "bg-purple-400"
+      color: "bg-purple-600" // Darker purple
     },
     {
       city: "Singapore",
       address: "Marina Bay, Singapore",
       x: 62,
       y: 63,
-      color: "bg-blue-400"
+      color: "bg-blue-600" // Darker blue
     }
   ];
   
@@ -147,7 +147,7 @@ const WorldMap: React.FC = () => {
                   />
                 </div>
                 {/* Glowing effect around pin */}
-                <div className={`absolute w-8 h-8 ${office.color}/30 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse`}></div>
+                <div className={`absolute w-8 h-8 ${office.color}/40 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse`}></div>
               </div>
             </motion.div>
           ))}
