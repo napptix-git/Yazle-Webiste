@@ -150,27 +150,23 @@ const About: React.FC = () => {
         { 
           opacity: 1, 
           y: 0,
-          duration: 0.5, // Faster duration
-          delay: index * 0.05, // Much smaller delay between cards
+          duration: 0.5,
+          delay: index * 0.05,
           scrollTrigger: {
             trigger: card,
-            start: "top bottom-=50", // Trigger earlier
+            start: "top bottom-=50",
             toggleActions: "play none none reverse"
           },
-          ease: "power1.out" // Smoother easing
+          ease: "power1.out"
         }
       );
 
-      // Add glow animation similar to the "Gamer" text
+      // Remove the glow animation effect for the member name
       const nameElement = card.querySelector('.member-name');
       if (nameElement) {
         gsap.to(nameElement, {
-          textShadow: "0 0 15px rgba(41, 221, 59, 0.5), 0 0 20px rgba(41, 221, 59, 0.2)",
-          color: "#fff",
-          repeat: -1,
-          yoyo: true,
-          duration: 2,
-          ease: "sine.inOut"
+          clearProps: "textShadow,color",
+          duration: 0
         });
       }
     });
@@ -200,21 +196,16 @@ const About: React.FC = () => {
             meaningful connections between brands and gamers through innovative advertising solutions.
           </p>
           
-          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg">
+          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg w-full min-h-screen">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Our People</h2>
             <p className="text-2xl text-white/80 mb-12 text-center">
               Ideas shape the world,<br />
-              our people shape <span className="gamer-text glow-green" style={{ 
-                background: 'linear-gradient(90deg, #29dd3b, #fff, #29dd3b)',
-                WebkitBackgroundClip: 'text',
-                textShadow: '0 0 15px rgba(41, 221, 59, 0.7)',
-                animation: 'text-flicker 4s linear infinite'
-              }}>ideas</span>
+              our people shape <span className="text-[#29dd3b] font-bold">ideas</span>
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 h-full">
               {allTeamMembers.map((member, index) => (
-                <div key={index} className="team-member-card">
+                <div key={index} className="team-member-card h-96">
                   <TeamMember 
                     name={member.name}
                     position={member.position}
@@ -230,17 +221,17 @@ const About: React.FC = () => {
           <h2 className="text-3xl font-bold text-white mt-12 mb-6 text-center">Our Values</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-64 flex flex-col justify-center">
               <h3 className="text-xl font-bold text-white mb-4 text-center">Innovation</h3>
               <p>We constantly push the boundaries of what's possible in gaming advertising.</p>
             </div>
             
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-64 flex flex-col justify-center">
               <h3 className="text-xl font-bold text-white mb-4 text-center">Integrity</h3>
               <p>We prioritize transparency and ethical practices in all our operations.</p>
             </div>
             
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-64 flex flex-col justify-center">
               <h3 className="text-xl font-bold text-white mb-4 text-center">Player-First</h3>
               <p>We believe that advertising should enhance, not detract from, the gaming experience.</p>
             </div>

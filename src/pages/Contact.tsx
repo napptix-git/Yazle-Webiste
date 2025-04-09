@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
       <Navbar />
       
       <div className="container mx-auto pt-24 pb-20 px-4">
-        <div className="mb-16">
+        <div className="mb-16 w-full">
           <WorldMap />
         </div>
         

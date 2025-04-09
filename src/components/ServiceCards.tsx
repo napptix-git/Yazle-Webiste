@@ -69,7 +69,7 @@ const ServiceCard: React.FC<ServiceProps & {
         style={{
           transformStyle: 'preserve-3d',
           transform: `rotateY(${flipProgress * 180}deg)`,
-          transition: 'none',
+          transition: 'transform 0.8s ease', // Added smoother transition
         }}
         onAnimationEnd={onFlipComplete}
       >
@@ -155,7 +155,7 @@ const ServiceCards: React.FC = () => {
       anticipatePin: 1,
     });
 
-    // Create individual triggers for each card flip animation
+    // Create individual triggers for each card flip animation with slower timing
     const triggers = serviceData.map((_, index) => {
       const progressStart = index / serviceData.length;
       const progressEnd = (index + 1) / serviceData.length;
@@ -164,7 +164,7 @@ const ServiceCards: React.FC = () => {
         trigger: sectionRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.5,
+        scrub: 1, // Increased from 0.5 to 1 for slower animations
         onUpdate: (self) => {
           if (!sectionRef.current) return;
           
@@ -249,7 +249,7 @@ const ServiceCards: React.FC = () => {
               key={index}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }} // Increased duration for smoother animations
             >
               <ServiceCard 
                 {...service}

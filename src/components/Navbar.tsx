@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -47,9 +48,9 @@ const Navbar: React.FC = () => {
         }`}
       >
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-2">
+          <div className="flex justify-between items-center py-1">
             <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl mr-4">
-              <div className="h-20 md:h-24 lg:h-24">
+              <div className="h-16 md:h-18 lg:h-18">
                 <img 
                   src="/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png" 
                   alt="Napptix" 
