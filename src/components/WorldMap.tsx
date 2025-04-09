@@ -47,7 +47,7 @@ const WorldMap: React.FC = () => {
           <img 
             src="/lovable-uploads/de1f01a3-c2a1-49bf-89d7-0f5535044663.png" 
             alt="World Map" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover filter brightness-150 contrast-125 saturate-50 opacity-90"
           />
           
           {offices.map((office, index) => (
