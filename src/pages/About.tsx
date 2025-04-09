@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -160,15 +161,6 @@ const About: React.FC = () => {
           ease: "power1.out"
         }
       );
-
-      // Remove the glow animation effect for the member name
-      const nameElement = card.querySelector('.member-name');
-      if (nameElement) {
-        gsap.to(nameElement, {
-          clearProps: "textShadow,color",
-          duration: 0
-        });
-      }
     });
 
     return () => {
@@ -196,7 +188,7 @@ const About: React.FC = () => {
             meaningful connections between brands and gamers through innovative advertising solutions.
           </p>
           
-          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg w-full min-h-screen">
+          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg w-full min-h-[100vh]">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Our People</h2>
             <p className="text-2xl text-white/80 mb-12 text-center">
               Ideas shape the world,<br />
@@ -205,7 +197,7 @@ const About: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 h-full">
               {allTeamMembers.map((member, index) => (
-                <div key={index} className="team-member-card h-96">
+                <div key={index} className="team-member-card h-[50vh]">
                   <TeamMember 
                     name={member.name}
                     position={member.position}
@@ -221,17 +213,17 @@ const About: React.FC = () => {
           <h2 className="text-3xl font-bold text-white mt-12 mb-6 text-center">Our Values</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-64 flex flex-col justify-center">
+            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-72 flex flex-col justify-center">
               <h3 className="text-xl font-bold text-white mb-4 text-center">Innovation</h3>
               <p>We constantly push the boundaries of what's possible in gaming advertising.</p>
             </div>
             
-            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-64 flex flex-col justify-center">
+            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-72 flex flex-col justify-center">
               <h3 className="text-xl font-bold text-white mb-4 text-center">Integrity</h3>
               <p>We prioritize transparency and ethical practices in all our operations.</p>
             </div>
             
-            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-64 flex flex-col justify-center">
+            <div className="bg-napptix-dark p-10 rounded-xl border border-napptix-grey/20 h-72 flex flex-col justify-center">
               <h3 className="text-xl font-bold text-white mb-4 text-center">Player-First</h3>
               <p>We believe that advertising should enhance, not detract from, the gaming experience.</p>
             </div>

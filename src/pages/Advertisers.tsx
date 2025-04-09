@@ -144,13 +144,22 @@ const testimonials = [
   }
 ];
 
+const analyticsData = [
+  { category: "CTR", traditional: 60, napptix: 85 },
+  { category: "Engagement", traditional: 40, napptix: 90 },
+  { category: "Recall", traditional: 45, napptix: 80 }
+];
+
 const Advertisers: React.FC = () => {
-  // Custom bar chart implementation with plain HTML/CSS instead of recharts
   const barChartRef = useRef<HTMLDivElement>(null);
   const [chartAnimated, setChartAnimated] = useState(false);
   
   useEffect(() => {
+    // Clean up existing triggers to prevent memory leaks
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    
     if (barChartRef.current) {
+      // Create a new animation for the chart
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting && !chartAnimated) {
@@ -172,7 +181,7 @@ const Advertisers: React.FC = () => {
   }, [chartAnimated]);
   
   const animateChart = () => {
-    const bars = document.querySelectorAll('.bar-column .bar');
+    const bars = document.querySelectorAll('.analytics-bar');
     bars.forEach((bar, index) => {
       const height = bar.getAttribute('data-height') || '0%';
       gsap.fromTo(
@@ -463,7 +472,7 @@ const Advertisers: React.FC = () => {
         </div>
       </section>
       
-      {/* Section 6: Analytics Breakdown - Using custom CSS-based chart instead of recharts */}
+      {/* Section 6: Analytics Breakdown - Completely reworked bar graph */}
       <section className="py-16 bg-napptix-dark">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-center">Analytics Breakdown</h2>
@@ -472,141 +481,52 @@ const Advertisers: React.FC = () => {
           </p>
           
           <div ref={barChartRef} className="bg-black p-6 rounded-xl border border-napptix-grey/20">
-            <h3 className="text-xl font-bold text-white mb-6">Performance Comparison</h3>
+            <h3 className="text-xl font-bold text-white mb-8">Performance Comparison</h3>
             
-            <div className="flex flex-col">
-              <div className="h-[400px] relative">
-                {/* Chart background grid */}
-                <div className="absolute left-0 right-0 bottom-0 top-0">
-                  {[0, 25, 50, 75, 100].map((value, i) => (
-                    <div 
-                      key={i}
-                      className="absolute left-0 right-0 border-t border-napptix-grey/10"
-                      style={{ bottom: `${value}%` }}
-                    >
-                      <span className="absolute -left-6 -translate-y-1/2 text-xs text-napptix-light-grey">
-                        {value}%
-                      </span>
+            <div className="grid grid-cols-3 gap-8 h-[400px] relative">
+              {analyticsData.map((item, index) => (
+                <div key={index} className="flex flex-col items-center justify-end h-full">
+                  <div className="relative w-full flex justify-center gap-6 h-[300px]">
+                    {/* Traditional bar */}
+                    <div className="flex flex-col items-center justify-end w-12 md:w-16 h-full">
+                      <div 
+                        className="analytics-bar w-full bg-gray-500 rounded-t-md transition-all duration-1000 relative group"
+                        data-height={`${item.traditional}%`}
+                        style={{ height: '0%' }}
+                      >
+                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                          {item.traditional}%
+                        </div>
+                      </div>
+                      <p className="text-xs text-white mt-2">Traditional</p>
                     </div>
-                  ))}
+                    
+                    {/* Napptix bar */}
+                    <div className="flex flex-col items-center justify-end w-12 md:w-16 h-full">
+                      <div 
+                        className="analytics-bar w-full bg-[#29dd3b] rounded-t-md transition-all duration-1000 relative group"
+                        data-height={`${item.napptix}%`}
+                        style={{ height: '0%' }}
+                      >
+                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                          {item.napptix}%
+                        </div>
+                      </div>
+                      <p className="text-xs text-white mt-2">Napptix</p>
+                    </div>
+                  </div>
+                  
+                  <h4 className="text-white text-center mt-4 text-lg">{item.category}</h4>
                 </div>
-                
-                {/* Actual chart bars */}
-                <div className="absolute left-0 right-0 bottom-0 top-0 flex justify-around items-end pt-8 pb-16">
-                  <div className="bar-column flex flex-col items-center">
-                    <div className="relative w-10 md:w-16 group">
-                      <div 
-                        className="bar bg-gray-500 w-full rounded-t-md transition-all duration-1000" 
-                        data-height="60%"
-                        style={{ height: '0%' }}
-                      ></div>
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
-                        60% CTR
-                      </div>
-                    </div>
-                    <div className="text-center mt-4">
-                      <p className="text-napptix-light-grey text-xs md:text-sm">CTR</p>
-                      <p className="text-white text-xs md:text-sm">Traditional</p>
-                    </div>
-                  </div>
-                  
-                  <div className="bar-column flex flex-col items-center">
-                    <div className="relative w-10 md:w-16 group">
-                      <div 
-                        className="bar bg-[#29dd3b] w-full rounded-t-md transition-all duration-1000" 
-                        data-height="85%"
-                        style={{ height: '0%' }}
-                      ></div>
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
-                        85% CTR
-                      </div>
-                    </div>
-                    <div className="text-center mt-4">
-                      <p className="text-napptix-light-grey text-xs md:text-sm">CTR</p>
-                      <p className="text-white text-xs md:text-sm">Napptix</p>
-                    </div>
-                  </div>
-                  
-                  <div className="bar-column flex flex-col items-center">
-                    <div className="relative w-10 md:w-16 group">
-                      <div 
-                        className="bar bg-gray-500 w-full rounded-t-md transition-all duration-1000" 
-                        data-height="40%"
-                        style={{ height: '0%' }}
-                      ></div>
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
-                        40% Engagement
-                      </div>
-                    </div>
-                    <div className="text-center mt-4">
-                      <p className="text-napptix-light-grey text-xs md:text-sm">Engagement</p>
-                      <p className="text-white text-xs md:text-sm">Traditional</p>
-                    </div>
-                  </div>
-                  
-                  <div className="bar-column flex flex-col items-center">
-                    <div className="relative w-10 md:w-16 group">
-                      <div 
-                        className="bar bg-[#29dd3b] w-full rounded-t-md transition-all duration-1000" 
-                        data-height="90%"
-                        style={{ height: '0%' }}
-                      ></div>
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
-                        90% Engagement
-                      </div>
-                    </div>
-                    <div className="text-center mt-4">
-                      <p className="text-napptix-light-grey text-xs md:text-sm">Engagement</p>
-                      <p className="text-white text-xs md:text-sm">Napptix</p>
-                    </div>
-                  </div>
-                  
-                  <div className="bar-column flex flex-col items-center">
-                    <div className="relative w-10 md:w-16 group">
-                      <div 
-                        className="bar bg-gray-500 w-full rounded-t-md transition-all duration-1000" 
-                        data-height="45%"
-                        style={{ height: '0%' }}
-                      ></div>
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
-                        45% Recall
-                      </div>
-                    </div>
-                    <div className="text-center mt-4">
-                      <p className="text-napptix-light-grey text-xs md:text-sm">Recall</p>
-                      <p className="text-white text-xs md:text-sm">Traditional</p>
-                    </div>
-                  </div>
-                  
-                  <div className="bar-column flex flex-col items-center">
-                    <div className="relative w-10 md:w-16 group">
-                      <div 
-                        className="bar bg-[#29dd3b] w-full rounded-t-md transition-all duration-1000" 
-                        data-height="80%"
-                        style={{ height: '0%' }}
-                      ></div>
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs p-1 rounded whitespace-nowrap mt-1">
-                        80% Recall
-                      </div>
-                    </div>
-                    <div className="text-center mt-4">
-                      <p className="text-napptix-light-grey text-xs md:text-sm">Recall</p>
-                      <p className="text-white text-xs md:text-sm">Napptix</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Legend */}
-            <div className="flex justify-center mt-8 space-x-8">
-              <div className="flex items-center">
-                <div className="w-4 h-4 bg-gray-500 rounded-sm mr-2"></div>
-                <span className="text-white text-sm">Traditional</span>
-              </div>
-              <div className="flex items-center">
-                <div className="w-4 h-4 bg-[#29dd3b] rounded-sm mr-2"></div>
-                <span className="text-white text-sm">Napptix</span>
+              ))}
+              
+              {/* Y-axis labels */}
+              <div className="absolute left-0 top-0 h-full flex flex-col justify-between pointer-events-none">
+                <span className="text-xs text-napptix-light-grey">100%</span>
+                <span className="text-xs text-napptix-light-grey">75%</span>
+                <span className="text-xs text-napptix-light-grey">50%</span>
+                <span className="text-xs text-napptix-light-grey">25%</span>
+                <span className="text-xs text-napptix-light-grey">0%</span>
               </div>
             </div>
           </div>
