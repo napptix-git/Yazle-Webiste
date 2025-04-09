@@ -187,16 +187,16 @@ const About: React.FC = () => {
             meaningful connections between brands and gamers through innovative advertising solutions.
           </p>
           
-          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg w-full">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Our People</h2>
-            <p className="text-2xl text-white/80 mb-12 text-center">
+          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg w-full max-w-[95vw] mx-auto">
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 text-center">Our People</h2>
+            <p className="text-2xl text-white/80 mb-16 text-center">
               Ideas shape the world,<br />
               our people shape <span className="text-[#29dd3b] font-bold">ideas</span>
             </p>
             
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 mb-16">
+            <div className="grid grid-cols-1 2xl:grid-cols-2 gap-16 mb-20 max-w-[2000px] mx-auto">
               {allTeamMembers.map((member, index) => (
-                <div key={index} className="team-member-card h-[70vh] xl:h-[80vh]">
+                <div key={index} className="team-member-card h-[80vh] 2xl:h-[90vh]">
                   <TeamMember 
                     name={member.name}
                     position={member.position}
