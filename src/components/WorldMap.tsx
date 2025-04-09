@@ -72,8 +72,8 @@ const WorldMap: React.FC = () => {
       <div className="mt-16 space-y-8 w-full">
         {offices.map((office) => (
           <div key={office.city} className="border-b border-white/20 pb-8">
-            <div className="flex flex-row justify-between items-center w-full">
-              <h3 className="text-4xl md:text-6xl font-syne font-extrabold">{office.city}</h3>
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full">
+              <h3 className="text-4xl md:text-6xl font-syne font-extrabold mb-3 md:mb-0">{office.city}</h3>
               <p className="text-xl">{office.address}</p>
             </div>
           </div>

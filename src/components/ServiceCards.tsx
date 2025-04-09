@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -8,9 +9,8 @@ import {
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 const serviceData = [
   {
@@ -43,88 +43,100 @@ interface ServiceProps {
 }
 
 const ServiceCard: React.FC<ServiceProps & { 
-  isFlipped: boolean;
-  flipProgress: number;
-  onFlipComplete: () => void;
+  progress: number;
+  stacked: boolean;
 }> = ({ 
   title, 
   description, 
   icon,
   index,
-  isFlipped,
-  flipProgress,
-  onFlipComplete
+  progress,
+  stacked
 }) => {
+  const flipThreshold = 0.5;
+  const isFlipped = progress > flipThreshold;
+  
+  const stackOffset = stacked ? (3 - index) * 10 : 0;
+  
+  const cardVariants = {
+    stacked: {
+      x: stackOffset,
+      y: stackOffset,
+      scale: 1,
+      rotateY: 0,
+      transition: { duration: 0.5 }
+    },
+    flipping: {
+      x: 0,
+      y: 0,
+      scale: 1,
+      rotateY: progress * 180,
+      transition: { duration: 0, ease: "linear" }
+    }
+  };
   
   return (
-    <div
-      className="service-card relative"
-      style={{
-        zIndex: 4 - index,
+    <motion.div
+      className="service-card absolute top-0 left-0 w-[280px] h-[400px]"
+      style={{ 
+        zIndex: stacked ? 4 - index : (isFlipped ? 10 : 4 - index),
+        transformStyle: "preserve-3d",
+        transformOrigin: "center center"
       }}
+      variants={cardVariants}
+      animate={stacked ? "stacked" : "flipping"}
     >
       <div 
-        className="relative w-[280px] h-[400px] card-container"
+        className={`absolute w-full h-full rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden 
+          bg-white ${progress > flipThreshold ? 'invisible' : 'visible'}`}
         style={{
-          transformStyle: 'preserve-3d',
-          transform: `rotateY(${flipProgress * 180}deg)`,
-          transition: 'none',
+          backfaceVisibility: 'hidden',
         }}
-        onAnimationEnd={onFlipComplete}
       >
-        <div 
-          className={`absolute w-full h-full rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden 
-            ${flipProgress > 0.5 ? 'z-10 shadow-[0_0_15px_rgba(41,221,59,0.3)]' : 'z-20'}`}
-          style={{
-            backfaceVisibility: 'hidden',
-            background: 'white',
-          }}
-        >
-          <div className="flex flex-col justify-center items-center h-full">
-            <div className="text-black text-xl font-bold tracking-tight">
-              {title}
-            </div>
-          </div>
-        </div>
-        
-        <div 
-          className={`absolute w-full h-full bg-white text-black rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden
-            ${flipProgress > 0.5 ? 'z-20' : 'z-10'}`}
-          style={{
-            backfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
-          }}
-        >
-          <div className="p-6 flex flex-col h-full justify-between">
-            <div className="flex flex-col items-center">
-              <div className="bg-black w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                {icon}
-              </div>
-              
-              <h3 className="text-xl font-bold text-black mb-3">{title}</h3>
-              
-              <p className="text-gray-600 text-center font-roboto-mono">{description}</p>
-            </div>
-            
-            <button 
-              className="mt-4 px-4 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors font-roboto-mono"
-            >
-              Learn more
-            </button>
+        <div className="flex flex-col justify-center items-center h-full">
+          <div className="text-black text-xl font-bold tracking-tight">
+            {title}
           </div>
         </div>
       </div>
-    </div>
+      
+      <div 
+        className={`absolute w-full h-full bg-white text-black rounded-xl overflow-hidden shadow-xl border border-white/10 backface-visibility-hidden
+          ${progress > flipThreshold ? 'visible' : 'invisible'}`}
+        style={{
+          backfaceVisibility: 'hidden',
+          transform: 'rotateY(180deg)',
+        }}
+      >
+        <div className="p-6 flex flex-col h-full justify-between">
+          <div className="flex flex-col items-center">
+            <div className="bg-black w-16 h-16 rounded-full flex items-center justify-center mb-4">
+              {icon}
+            </div>
+            
+            <h3 className="text-xl font-bold text-black mb-3">{title}</h3>
+            
+            <p className="text-gray-600 text-center font-roboto-mono">{description}</p>
+          </div>
+          
+          <button 
+            className="mt-4 px-4 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors font-roboto-mono"
+          >
+            Learn more
+          </button>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
 const ServiceCards: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [flippedCards, setFlippedCards] = useState<boolean[]>([false, false, false, false]);
-  const [flipProgress, setFlipProgress] = useState<number[]>([0, 0, 0, 0]);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
-
+  const [isMobile, setIsMobile] = useState(false);
+  const [cardProgress, setCardProgress] = useState<number[]>([0, 0, 0, 0]);
+  const [isStacked, setIsStacked] = useState(true);
+  
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -141,6 +153,7 @@ const ServiceCards: React.FC = () => {
   useEffect(() => {
     if (!sectionRef.current) return;
     
+    // Clean up existing ScrollTrigger instances
     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     
     const sectionTrigger = ScrollTrigger.create({
@@ -152,57 +165,46 @@ const ServiceCards: React.FC = () => {
       anticipatePin: 1,
     });
 
-    const triggers = serviceData.map((_, index) => {
-      const progressStart = index / serviceData.length;
-      const progressEnd = (index + 1) / serviceData.length;
-      
-      return ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const overallProgress = self.progress;
-          
-          const normalizedCardProgress = gsap.utils.mapRange(
-            progressStart, 
-            progressEnd, 
-            0, 
-            1, 
-            overallProgress
+    // Create overall scroll progress tracker
+    const mainTrigger = ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.5,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        // Unstack cards when scroll reaches 15%
+        setIsStacked(progress < 0.15);
+        
+        // Calculate individual card progress
+        const newProgress = [...cardProgress];
+        serviceData.forEach((_, i) => {
+          // Normalize progress for each card - staggered flipping
+          const cardStartPoint = 0.15 + (i * 0.15); // Start at 15%, then 30%, 45%, 60%
+          const cardEndPoint = cardStartPoint + 0.15;
+          const normalizedProgress = gsap.utils.clamp(0, 1, 
+            gsap.utils.mapRange(cardStartPoint, cardEndPoint, 0, 1, progress)
           );
-          
-          const clampedProgress = gsap.utils.clamp(0, 1, normalizedCardProgress);
-          
-          const newProgress = [...flipProgress];
-          newProgress[index] = clampedProgress;
-          setFlipProgress(newProgress);
-          
-          const newFlipped = [...flippedCards];
-          newFlipped[index] = clampedProgress > 0.5;
-          setFlippedCards(newFlipped);
-        }
-      });
+          newProgress[i] = normalizedProgress;
+        });
+        
+        setCardProgress(newProgress);
+      }
     });
 
     return () => {
       sectionTrigger.kill();
-      triggers.forEach(trigger => trigger.kill());
+      mainTrigger.kill();
     };
-  }, [flippedCards, flipProgress]);
-
-  const handleFlipComplete = (index: number) => {
-    console.log(`Card ${index} flip completed`);
-  };
+  }, [cardProgress]);
 
   return (
-    <motion.section 
+    <section 
       id="solutions" 
-      className="py-32 bg-black relative min-h-screen flex flex-col items-center justify-center"
+      className="py-32 bg-black relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
       ref={sectionRef}
-      style={{ position: 'relative' }} 
     >
-      <div className="container mx-auto text-center mb-16">
+      <div className="container mx-auto text-center mb-16 z-10">
         <motion.h2 
           className="text-3xl md:text-4xl font-bold mb-4 text-white"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -223,30 +225,26 @@ const ServiceCards: React.FC = () => {
         </motion.p>
       </div>
       
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 flex-1 flex items-center justify-center z-10">
         <div 
           ref={cardsContainerRef}
-          className={`flex ${isMobile ? 'flex-col items-center' : 'flex-row justify-center items-center'} gap-6`}
+          className="relative w-[280px] h-[400px]"
+          style={{
+            perspective: "1200px"
+          }}
         >
           {serviceData.map((service, index) => (
-            <motion.div
+            <ServiceCard 
               key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <ServiceCard 
-                {...service}
-                index={index}
-                isFlipped={flippedCards[index]}
-                flipProgress={flipProgress[index]}
-                onFlipComplete={() => handleFlipComplete(index)}
-              />
-            </motion.div>
+              {...service}
+              index={index}
+              progress={cardProgress[index]}
+              stacked={isStacked}
+            />
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
