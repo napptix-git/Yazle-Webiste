@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
@@ -120,7 +119,7 @@ const WorldMap: React.FC = () => {
   }, [offices]);
   
   return (
-    <div className="relative w-full max-w-5xl mx-auto mb-20">
+    <div className="relative w-full max-w-4xl mx-auto mb-20">
       <h2 className="text-4xl md:text-5xl font-syne font-extrabold mb-10 text-center">Global Presence</h2>
       
       <div className="relative w-full">
@@ -130,9 +129,9 @@ const WorldMap: React.FC = () => {
             className="absolute top-0 left-0 w-full h-full z-10"
           ></canvas>
           <img 
-            src="/lovable-uploads/e57f966b-97bb-453b-a4e5-cad7ec4e7cfc.png" 
+            src="/lovable-uploads/51e8b6c1-9de8-457c-883f-ab3a9d4bb28e.png" 
             alt="World Map" 
-            className="w-full h-full object-cover brightness-50 opacity-70"
+            className="w-full h-full object-cover brightness-[0.8] opacity-90"
           />
           
           {offices.map((office, index) => (
