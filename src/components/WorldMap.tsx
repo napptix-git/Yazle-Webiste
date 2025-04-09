@@ -130,7 +130,7 @@ const WorldMap: React.FC = () => {
             className="absolute top-0 left-0 w-full h-full z-10"
           ></canvas>
           <img 
-            src="/lovable-uploads/7b7b7eeb-646a-4c60-b6ef-6b383bd8385f.png" 
+            src="/lovable-uploads/c44c513c-827e-4b0f-a98a-2f1fba1c6e8c.png" 
             alt="World Map" 
             className="w-full h-full object-cover brightness-[0.9] opacity-95"
           />
