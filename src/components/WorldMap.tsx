@@ -15,29 +15,29 @@ const WorldMap: React.FC = () => {
     { 
       city: "Mumbai", 
       address: "102, Firdos Apartments, Waroda Road Bandra West, Mumbai, Maharashtra 400050",
-      x: 76, 
+      x: 60, 
       y: 58,
       color: "#ff9f7f"
     },
     { 
       city: "Dubai", 
       address: "302, Building 08, Media City, Dubai",
-      x: 65, 
-      y: 48,
+      x: 54, 
+      y: 54,
       color: "#8bffb0"
     },
     { 
-      city: "New York", 
-      address: "350 5th Ave, New York, NY 10118, United States",
-      x: 20, 
-      y: 38,
+      city: "Delhi", 
+      address: "42-B, Connaught Place, New Delhi, 110001",
+      x: 65, 
+      y: 48,
       color: "#8e99ff"
     },
     { 
-      city: "Amsterdam", 
-      address: "Herengracht 595, 1017 CE Amsterdam, Netherlands",
-      x: 47, 
-      y: 28,
+      city: "Singapore", 
+      address: "8 Marina Gardens Drive, Singapore 018953",
+      x: 75, 
+      y: 72,
       color: "#ff7aef"
     }
   ];
@@ -141,9 +141,9 @@ const WorldMap: React.FC = () => {
             className="absolute top-0 left-0 w-full h-full z-10"
           ></canvas>
           <img 
-            src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a.png" 
+            src="/lovable-uploads/9d37880a-6199-4554-aaa7-8ec093ad6bb8.png" 
             alt="World Map" 
-            className="w-full object-contain brightness-[0.8] opacity-60"
+            className="w-full object-contain brightness-100 opacity-100"
           />
           
           {/* Location Labels */}
