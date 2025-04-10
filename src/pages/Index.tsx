@@ -7,7 +7,6 @@ import HeroSection from '@/components/HeroSection';
 import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
 import ServiceCards from '@/components/ServiceCards';
-import Card3DAnimation from '@/components/Card3DAnimation';
 import Footer from '@/components/Footer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -59,11 +58,6 @@ const Index = () => {
       {/* Advertisers and Publishers Section */}
       <section id="audience" className="mt-36 bg-black">
         <AudienceCards />
-      </section>
-      
-      {/* 3D Card Animation */}
-      <section id="card-animation" className="bg-black">
-        <Card3DAnimation />
       </section>
       
       {/* Services Cards */}
