@@ -11,9 +11,10 @@ import Card3DAnimation from '@/components/Card3DAnimation';
 import Footer from '@/components/Footer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 // Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const Index = () => {
   // Initialize GSAP smooth scrolling

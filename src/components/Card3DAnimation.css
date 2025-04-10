@@ -2,10 +2,11 @@
 /* Enable 3D transformations */
 .card-item {
   transform-style: preserve-3d;
-  transition: transform 0.1s ease;
+  transition: transform 0.3s ease;
   will-change: transform;
   backface-visibility: hidden;
   transform-origin: center center;
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
 }
 
 .card-container {
@@ -13,39 +14,38 @@
   perspective: 1500px;
 }
 
-/* Enhance shadow effects for depth */
-.shadow-3d {
-  box-shadow: 0 20px 50px -25px rgba(0, 0, 0, 0.9);
+/* Clean white card styles */
+.card-item {
+  background-color: white;
 }
 
-/* Add a subtle glow effect to cards when they're in focus */
-.card-item.active .shadow-3d {
-  box-shadow: 0 25px 60px -20px rgba(41, 221, 59, 0.5);
+/* Add subtle border radius and shadow for depth */
+.card-item {
+  border-radius: 24px;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.2),
+    0 30px 60px -10px rgba(0, 0, 0, 0.3);
 }
 
 /* Ensure smooth performance during animations */
-.card-item img {
+.card-item * {
   will-change: transform;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
-/* Enhanced depth perception through subtle gradient overlays */
+/* Add subtle highlight to the top edge of cards */
 .card-item::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  z-index: 1;
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: 0.5;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.8) 50%, 
+    rgba(255, 255, 255, 0) 100%);
+  z-index: 10;
 }

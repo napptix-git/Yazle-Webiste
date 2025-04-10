@@ -12,25 +12,21 @@ const cards = [
     title: 'In-Game',
     content: 'Native ad placements within the gaming environment that feel like a natural part of the experience.',
     icon: '🎮',
-    image: '/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png',
   },
   {
     title: 'On-Game',
     content: 'Strategic ad placements around the game interface, loading screens, and menus.',
     icon: '🖥️',
-    image: '/lovable-uploads/6e100c42-279f-4ff0-8321-04d4fcd5505d.png',
   },
   {
     title: 'Off-Game',
     content: 'Advertising strategies outside the gameplay such as on companion apps, forums, and esports platforms.',
     icon: '📱',
-    image: '/lovable-uploads/7e606c44-61cb-46c1-9563-29b2a6d7b82e.png',
   },
   {
     title: 'Pro Game',
     content: 'Specialized solutions for esports events, tournaments, and professional gaming streams.',
     icon: '🏆',
-    image: '/lovable-uploads/9d37880a-6199-4554-aaa7-8ec093ad6bb8.png',
   },
 ];
 
@@ -49,25 +45,24 @@ export const Card3DAnimation = () => {
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
-        end: "+=400%", // Make it longer for more scroll distance
+        end: "+=300%", // Make it long enough for the scrolling effect
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
         scrub: true,
-        // When the animation completes, it will seamlessly restart
-        onLeaveBack: (self) => self.scroll(self.end - 0.01),
-        onLeave: (self) => self.scroll(self.start + 0.01)
       });
       
-      // Set initial position of cards
+      // Set initial position of cards - stacked with slight offset
       cardRefs.current.forEach((card, i) => {
         if (!card) return;
         
         gsap.set(card, {
-          rotateY: -30,
-          z: -100 * (cards.length - i),
-          opacity: i === 0 ? 0.5 : 0.3 - (i * 0.1),
-          scale: 0.8 - (i * 0.05),
+          y: i * -10, // Slight vertical offset for stacked appearance
+          rotateX: 5, // Slight tilt for 3D effect
+          scale: 1 - (i * 0.05), // Slightly decreasing size for depth
+          opacity: 1 - (i * 0.15), // Decreasing opacity for cards in back
+          transformOrigin: "center bottom",
+          zIndex: cards.length - i,
         });
       });
       
@@ -75,78 +70,54 @@ export const Card3DAnimation = () => {
       cardRefs.current.forEach((card, i) => {
         if (!card) return;
         
-        // Card comes into view
+        // Card enters view and comes forward
         gsap.to(card, {
           scrollTrigger: {
             trigger: containerRef.current,
-            start: `top top+=${i * 150}`,
-            end: `+=${window.innerHeight * 0.7}`,
+            start: `top+=${i * 100} top`,
+            end: `+=${window.innerHeight * 0.4}`,
             scrub: 0.5,
           },
-          z: 0,
-          rotateY: 0,
-          opacity: 1,
+          y: 0, // Move to center position
+          rotateX: 0, // Remove tilt
           scale: 1,
+          opacity: 1,
           ease: "power2.out",
-          onComplete: () => {
-            card.classList.add('active');
-          }
         });
         
-        // If not the last card, animate it out when next card comes in
+        // Card exits (if not the last one)
         if (i < cards.length - 1) {
           gsap.to(card, {
             scrollTrigger: {
               trigger: containerRef.current,
-              start: `top top+=${(i + 1) * 150}`,
-              end: `+=${window.innerHeight * 0.7}`,
+              start: `top+=${(i + 1) * 100} top`,
+              end: `+=${window.innerHeight * 0.4}`,
               scrub: 0.5,
             },
-            z: 100,
+            y: -200, // Move up and out
             opacity: 0,
-            rotateY: 30,
-            x: i % 2 === 0 ? -300 : 300, // Alternate exit directions
-            scale: 0.8,
-            ease: "power2.in",
-          });
-        }
-        
-        // If it's the last card, create a transition back to the first card
-        if (i === cards.length - 1) {
-          gsap.to(card, {
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: `top top+=${(i + 2) * 150}`,
-              end: `+=${window.innerHeight * 0.7}`,
-              scrub: 0.5,
-            },
-            z: 100,
-            opacity: 0,
-            rotateY: 30,
-            x: i % 2 === 0 ? -300 : 300,
-            scale: 0.8,
             ease: "power2.in",
           });
         }
       });
       
-      // Reset animation for infinite loop
-      gsap.set(cardRefs.current[0], {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: `top top+=${(cards.length + 2) * 150}`,
-          scrub: 0.5,
+      // Loop back to beginning when reaching the end
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: `top+=${cards.length * 100} top`,
+        onEnter: () => {
+          ScrollTrigger.getAll().forEach(trigger => {
+            if (trigger.vars.trigger === containerRef.current) {
+              gsap.to(window, {
+                scrollTo: { y: trigger.start, autoKill: false },
+                duration: 0.5,
+              });
+            }
+          });
         },
-        z: -100 * cards.length,
-        rotateY: -30,
-        opacity: 0.5,
-        scale: 0.8,
-        x: 0,
-        immediateRender: false,
       });
     }, containerRef);
     
-    // Clean up function
     return () => {
       ctx.revert();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -166,41 +137,20 @@ export const Card3DAnimation = () => {
       
       <div
         ref={containerRef}
-        className="card-container relative h-[110vh] w-full flex items-center justify-center"
+        className="card-container relative h-[60vh] w-full flex items-center justify-center"
       >
         {cards.map((card, index) => (
           <div
             key={index}
             ref={(el) => (cardRefs.current[index] = el)}
-            className="card-item absolute w-80 h-96 shadow-3d rounded-2xl overflow-hidden"
+            className="card-item absolute max-w-lg w-full aspect-[2/3] rounded-3xl overflow-hidden"
           >
-            <div className="relative w-full h-full bg-white text-black flex flex-col">
-              {card.image ? (
-                <div className="w-full h-full relative">
-                  <img 
-                    src={card.image} 
-                    alt={card.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6">
-                    <div className="text-4xl mb-4">{card.icon}</div>
-                    <h3 className="text-xl font-semibold mb-2 text-center text-white">{card.title}</h3>
-                    <p className="text-sm text-center text-gray-300">{card.content}</p>
-                    <button className="mt-6 bg-[#29dd3b] text-black px-4 py-2 rounded-full hover:bg-[#29dd3b]/80 transition-colors">
-                      Learn more
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center justify-center p-6 h-full">
-                  <div className="text-4xl mb-4">{card.icon}</div>
-                  <h3 className="text-xl font-semibold mb-2 text-center">{card.title}</h3>
-                  <p className="text-sm text-center text-gray-600">{card.content}</p>
-                  <button className="mt-6 bg-black text-white px-4 py-2 rounded-full hover:bg-black/80 transition-colors">
-                    Learn more
-                  </button>
-                </div>
-              )}
+            <div className="relative w-full h-full bg-white text-black flex flex-col items-center justify-center p-8">
+              <h3 className="text-3xl font-bold mb-6 text-center">{card.title}</h3>
+              <p className="text-lg text-center text-gray-700 mb-8">{card.content}</p>
+              <button className="mt-6 bg-black text-white px-6 py-3 rounded-full hover:bg-black/80 transition-colors">
+                Learn more
+              </button>
             </div>
           </div>
         ))}
