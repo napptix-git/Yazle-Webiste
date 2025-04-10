@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -194,8 +193,8 @@ const About: React.FC = () => {
       <Navbar />
       
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">About Us</h1>
-        <div className="text-napptix-light-grey font-roboto-mono space-y-6 max-w-3xl mx-auto text-center">
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">About Us</h1>
+        <div className="text-napptix-light-grey font-roboto-mono space-y-6">
           <p>
             Napptix is a pioneering force in the gaming advertising industry, dedicated to creating
             meaningful connections between brands and gamers through innovative advertising solutions.
