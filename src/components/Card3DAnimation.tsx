@@ -9,26 +9,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 const cards = [
   {
-    title: 'Gaming Monetization',
-    content: 'Unlock new revenue streams with our specialized gaming ad products.',
+    title: 'In-Game',
+    content: 'Native ad placements within the gaming environment that feel like a natural part of the experience.',
     icon: '🎮',
     image: '/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png',
   },
   {
-    title: 'Audience Targeting',
-    content: 'Reach your ideal gaming demographics with precision targeting.',
+    title: 'On-Game',
+    content: 'Strategic ad placements around the game interface, loading screens, and menus.',
     icon: '🖥️',
     image: '/lovable-uploads/6e100c42-279f-4ff0-8321-04d4fcd5505d.png',
   },
   {
-    title: 'Performance Analytics',
-    content: 'Track campaign performance with our advanced analytics suite.',
-    icon: '📊',
+    title: 'Off-Game',
+    content: 'Advertising strategies outside the gameplay such as on companion apps, forums, and esports platforms.',
+    icon: '📱',
     image: '/lovable-uploads/7e606c44-61cb-46c1-9563-29b2a6d7b82e.png',
   },
   {
-    title: 'Creative Solutions',
-    content: 'Stand out with innovative ad formats designed specifically for gamers.',
+    title: 'Pro Game',
+    content: 'Specialized solutions for esports events, tournaments, and professional gaming streams.',
     icon: '🏆',
     image: '/lovable-uploads/9d37880a-6199-4554-aaa7-8ec093ad6bb8.png',
   },
@@ -49,10 +49,14 @@ export const Card3DAnimation = () => {
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
-        end: "+=300%",
+        end: "+=400%", // Make it longer for more scroll distance
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
+        scrub: true,
+        // When the animation completes, it will seamlessly restart
+        onLeaveBack: (self) => self.scroll(self.end - 0.01),
+        onLeave: (self) => self.scroll(self.start + 0.01)
       });
       
       // Set initial position of cards
@@ -62,8 +66,8 @@ export const Card3DAnimation = () => {
         gsap.set(card, {
           rotateY: -30,
           z: -100 * (cards.length - i),
-          opacity: i === 0 ? 0.7 : 0.5 - (i * 0.1),
-          scale: 0.9 - (i * 0.05),
+          opacity: i === 0 ? 0.5 : 0.3 - (i * 0.1),
+          scale: 0.8 - (i * 0.05),
         });
       });
       
@@ -76,7 +80,7 @@ export const Card3DAnimation = () => {
           scrollTrigger: {
             trigger: containerRef.current,
             start: `top top+=${i * 150}`,
-            end: `+=${window.innerHeight * 0.5}`,
+            end: `+=${window.innerHeight * 0.7}`,
             scrub: 0.5,
           },
           z: 0,
@@ -95,7 +99,7 @@ export const Card3DAnimation = () => {
             scrollTrigger: {
               trigger: containerRef.current,
               start: `top top+=${(i + 1) * 150}`,
-              end: `+=${window.innerHeight * 0.5}`,
+              end: `+=${window.innerHeight * 0.7}`,
               scrub: 0.5,
             },
             z: 100,
@@ -106,6 +110,39 @@ export const Card3DAnimation = () => {
             ease: "power2.in",
           });
         }
+        
+        // If it's the last card, create a transition back to the first card
+        if (i === cards.length - 1) {
+          gsap.to(card, {
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: `top top+=${(i + 2) * 150}`,
+              end: `+=${window.innerHeight * 0.7}`,
+              scrub: 0.5,
+            },
+            z: 100,
+            opacity: 0,
+            rotateY: 30,
+            x: i % 2 === 0 ? -300 : 300,
+            scale: 0.8,
+            ease: "power2.in",
+          });
+        }
+      });
+      
+      // Reset animation for infinite loop
+      gsap.set(cardRefs.current[0], {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: `top top+=${(cards.length + 2) * 150}`,
+          scrub: 0.5,
+        },
+        z: -100 * cards.length,
+        rotateY: -30,
+        opacity: 0.5,
+        scale: 0.8,
+        x: 0,
+        immediateRender: false,
       });
     }, containerRef);
     
