@@ -37,88 +37,85 @@ const cards = [
 export const Card3DAnimation = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
+  
   useEffect(() => {
     if (!containerRef.current) return;
-
+    
     // Clear any existing ScrollTrigger instances to avoid conflicts
     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     
     const ctx = gsap.context(() => {
+      // First, create the pin for the container
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top top",
+        end: "+=300%",
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+      });
+      
       // Set initial position of cards
       cardRefs.current.forEach((card, i) => {
         if (!card) return;
         
         gsap.set(card, {
+          rotateY: -30,
           z: -100 * (cards.length - i),
           opacity: i === 0 ? 0.7 : 0.5 - (i * 0.1),
-          rotateY: -30,
           scale: 0.9 - (i * 0.05),
-          transformPerspective: 1000,
-          transformOrigin: "center center"
         });
-      });
-      
-      // Create ScrollTrigger for the container to pin it during animation
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=300%", 
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
       });
       
       // Create animations for each card
       cardRefs.current.forEach((card, i) => {
         if (!card) return;
         
+        // Card comes into view
         gsap.to(card, {
           scrollTrigger: {
             trigger: containerRef.current,
             start: `top top+=${i * 150}`,
             end: `+=${window.innerHeight * 0.5}`,
-            scrub: true,
+            scrub: 0.5,
           },
           z: 0,
-          opacity: 1,
           rotateY: 0,
+          opacity: 1,
           scale: 1,
-          duration: 1.2,
-          ease: "power3.out",
+          ease: "power2.out",
           onComplete: () => {
-            // Optional: Add a class to indicate the card is active
-            card?.classList.add('active');
+            card.classList.add('active');
           }
         });
         
-        // If not the last card, animate it out when the next card comes in
+        // If not the last card, animate it out when next card comes in
         if (i < cards.length - 1) {
           gsap.to(card, {
             scrollTrigger: {
               trigger: containerRef.current,
               start: `top top+=${(i + 1) * 150}`,
               end: `+=${window.innerHeight * 0.5}`,
-              scrub: true,
+              scrub: 0.5,
             },
             z: 100,
             opacity: 0,
             rotateY: 30,
-            x: i % 2 === 0 ? -300 : 300, // Alternate left and right exit
+            x: i % 2 === 0 ? -300 : 300, // Alternate exit directions
             scale: 0.8,
-            duration: 1.2,
-            ease: "power3.in",
+            ease: "power2.in",
           });
         }
       });
     }, containerRef);
-
+    
+    // Clean up function
     return () => {
-      ctx.revert(); // Clean up GSAP animations
+      ctx.revert();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
-
+  
   return (
     <section 
       className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 overflow-hidden"
@@ -129,18 +126,16 @@ export const Card3DAnimation = () => {
           Comprehensive advertising solutions across the gaming ecosystem
         </p>
       </div>
-
+      
       <div
         ref={containerRef}
         className="card-container relative h-[110vh] w-full flex items-center justify-center"
-        style={{ perspective: "1000px" }}
       >
         {cards.map((card, index) => (
           <div
             key={index}
             ref={(el) => (cardRefs.current[index] = el)}
             className="card-item absolute w-80 h-96 shadow-3d rounded-2xl overflow-hidden"
-            style={{ transformStyle: "preserve-3d" }}
           >
             <div className="relative w-full h-full bg-white text-black flex flex-col">
               {card.image ? (

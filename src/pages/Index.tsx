@@ -55,7 +55,7 @@ const Index = () => {
         <PartnersCarousel />
       </section>
       
-      {/* Advertisers and Publishers Section - Added larger gap */}
+      {/* Advertisers and Publishers Section */}
       <section id="audience" className="mt-36 bg-black">
         <AudienceCards />
       </section>
@@ -70,7 +70,7 @@ const Index = () => {
         <ServiceCards />
       </section>
       
-      {/* Footer - removed the h-screen class to fix spacing */}
+      {/* Footer */}
       <section>
         <Footer />
       </section>

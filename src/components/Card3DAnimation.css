@@ -5,6 +5,7 @@
   transition: transform 0.1s ease;
   will-change: transform;
   backface-visibility: hidden;
+  transform-origin: center center;
 }
 
 .card-container {
