@@ -6,7 +6,6 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
-import ServiceCards from '@/components/ServiceCards';
 import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
 import gsap from 'gsap';
@@ -62,7 +61,7 @@ const Index = () => {
       </section>
       
       {/* Advertisers and Publishers Section */}
-      <section id="audience" className="mt-36 bg-black">
+      <section id="audience" className="mt-36 md:mt-48 bg-black">
         <AudienceCards />
       </section>
       

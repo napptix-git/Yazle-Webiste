@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -33,7 +34,7 @@ const AnimatedCardSection: React.FC = () => {
     // Pin the cards section during scroll
     const pinTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: "top top",
+      start: "top+=80px top", // Adjust start position to account for navbar
       end: `+=${totalScrollHeight}px`,
       pin: true,
       pinSpacing: true,
@@ -49,7 +50,7 @@ const AnimatedCardSection: React.FC = () => {
           ease: "power1.inOut",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top top",
+            start: "top+=80px top", // Adjust start position to account for navbar
             end: `+=${window.innerHeight * 0.8}px`,
             scrub: 0.5,
             id: `spread-${index}`,
@@ -72,7 +73,7 @@ const AnimatedCardSection: React.FC = () => {
 
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: "top top",
+        start: "top+=80px top", // Adjust start position to account for navbar
         end: `+=${totalScrollHeight}px`,
         scrub: 1,
         id: `flip-${index}`,
@@ -106,12 +107,9 @@ const AnimatedCardSection: React.FC = () => {
   return (
     <div className="relative h-[300vh]" ref={containerRef}>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black" ref={sectionRef}>
-        <div className="absolute top-8 left-0 w-full text-center z-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">Our Services</h2>
-          <p className="text-gray-400 text-lg">Scroll to reveal our gaming solutions</p>
-        </div>
+        <h2 className="absolute top-24 left-0 w-full text-center text-3xl md:text-4xl font-bold text-white">Our Services</h2>
         
-        <div className="cards-container relative w-full h-[80%]">
+        <div className="cards-container relative w-full h-[80%] flex items-center justify-center">
           {serviceData.map((service, index) => (
             <FlipCard
               key={service.id}
@@ -125,12 +123,12 @@ const AnimatedCardSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="absolute bottom-8 left-0 w-full z-10">
-          <div className="flex justify-center space-x-2">
+        <div className="absolute bottom-12 left-0 w-full z-10">
+          <div className="progress-indicator">
             {serviceData.map((_, index) => (
               <div 
                 key={index} 
-                className={`w-2 h-2 rounded-full ${index === 0 ? 'bg-[#29dd3b]' : 'bg-gray-500'}`}
+                className={`progress-dot ${index === 0 ? 'active' : ''}`}
               ></div>
             ))}
           </div>
