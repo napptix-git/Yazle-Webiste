@@ -73,7 +73,7 @@ const AnimatedCardSection: React.FC = () => {
 
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: "top+=80px top", // Adjust start position to account for navbar
+        start: "top+=120px top", // Adjust start position to account for navbar
         end: `+=${totalScrollHeight}px`,
         scrub: 1,
         id: `flip-${index}`,
