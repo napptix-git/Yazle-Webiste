@@ -25,16 +25,16 @@ const AnimatedCardSection: React.FC = () => {
     if (!containerRef.current || !sectionRef.current || cardsRef.current.length < 4) return;
     
     // Clear any existing ScrollTrigger instances
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 
     const totalScrollHeight = window.innerHeight * 2.5;
-    const positions = [15, 38, 62, 85]; // Horizontal positions in percentage
+    const positions = [14, 38, 62, 86]; // Horizontal positions in percentage
     const rotations = [-15, -7.5, 7.5, 15]; // Rotation angles
     
     // Pin the cards section during scroll
     const pinTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: "top+=120px top", // Adjust start position to account for navbar
+      start: "top+=500px top", // Adjust start position to account for navbar
       end: `+=${totalScrollHeight}px`,
       pin: true,
       pinSpacing: true,
@@ -73,7 +73,7 @@ const AnimatedCardSection: React.FC = () => {
 
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: "top+=120px top", // Adjust start position to account for navbar
+        start: "top+=500px top", // Adjust start position to account for navbar
         end: `+=${totalScrollHeight}px`,
         scrub: 1,
         id: `flip-${index}`,
