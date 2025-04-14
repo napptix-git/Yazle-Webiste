@@ -25,7 +25,7 @@ const Index = () => {
     const smoother = gsap.from(document.documentElement, {
       scrollTrigger: {
         trigger: document.body,
-        start: "top top",
+        start: "top=+120px top",
         end: "bottom bottom",
         scrub: 0.2,
       },
