@@ -8,6 +8,7 @@ import PartnersCarousel from '@/components/PartnersCarousel';
 import AudienceCards from '@/components/AudienceCards';
 import ServiceCards from '@/components/ServiceCards';
 import Footer from '@/components/Footer';
+import AnimatedCardSection from '@/components/AnimatedCardSection';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -55,14 +56,14 @@ const Index = () => {
         <PartnersCarousel />
       </section>
       
+      {/* Animated Card Section */}
+      <section id="services" className="bg-black">
+        <AnimatedCardSection />
+      </section>
+      
       {/* Advertisers and Publishers Section */}
       <section id="audience" className="mt-36 bg-black">
         <AudienceCards />
-      </section>
-      
-      {/* Services Cards */}
-      <section id="solutions" className="mt-24 bg-black">
-        <ServiceCards />
       </section>
       
       {/* Footer */}
