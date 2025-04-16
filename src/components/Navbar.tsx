@@ -4,15 +4,17 @@ import { motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+} from "@/components/ui/navigation-menu";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
   
   useEffect(() => {
@@ -39,6 +41,14 @@ const Navbar: React.FC = () => {
     return location.pathname === path;
   };
   
+  const handleDropdownMouseEnter = (dropdownName: string) => {
+    setActiveDropdown(dropdownName);
+  };
+
+  const handleDropdownMouseLeave = () => {
+    setActiveDropdown(null);
+  };
+  
   return (
     <>
       <header 
@@ -60,49 +70,84 @@ const Navbar: React.FC = () => {
             
             <nav className="hidden md:flex space-x-8 ml-auto">
               {/* Advertisers Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-white pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transition-transform after:duration-300 hover:after:scale-x-100 after:origin-left after:scale-x-0 focus:outline-none">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownMouseEnter('advertisers')}
+                onMouseLeave={handleDropdownMouseLeave}
+              >
+                <button className={`flex items-center text-white py-2 px-1 focus:outline-none ${
+                  activeDropdown === 'advertisers' || location.pathname.includes('/advertisers') 
+                    ? 'border-b-2 border-[#29dd3b]' 
+                    : ''
+                }`}>
                   Advertisers <ChevronDown className="ml-1 h-4 w-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-napptix-dark border border-napptix-grey/20 text-white">
-                  <DropdownMenuItem className="focus:bg-[#29dd3b]/20 focus:text-white hover:bg-[#29dd3b]/20">
-                    <Link to="/advertisers" onClick={scrollToTop} className="w-full">Overview</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="focus:bg-[#29dd3b]/20 focus:text-white hover:bg-[#29dd3b]/20">
-                    <Link to="/advertisers/case-studies" onClick={scrollToTop} className="w-full">Case Studies</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="font-bold focus:bg-[#29dd3b]/20 focus:text-white hover:bg-[#29dd3b]/20">
-                    Products
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="pl-6 focus:bg-[#29dd3b]/20 focus:text-white hover:bg-[#29dd3b]/20">
-                    <Link to="/advertisers/products/wizora" onClick={scrollToTop} className="w-full">Wizora</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="pl-6 focus:bg-[#29dd3b]/20 focus:text-white hover:bg-[#29dd3b]/20">
-                    <Link to="/advertisers/products/questmap" onClick={scrollToTop} className="w-full">QuestMap</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="pl-6 focus:bg-[#29dd3b]/20 focus:text-white hover:bg-[#29dd3b]/20">
-                    <Link to="/advertisers/products/perfnxt" onClick={scrollToTop} className="w-full">PerfNXT</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                </button>
+                
+                {activeDropdown === 'advertisers' && (
+                  <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
+                    <div className="p-4 bg-[#1A1F2C]">
+                      <h3 className="text-white text-lg font-semibold uppercase tracking-wide">Advertiser Solution</h3>
+                    </div>
+                    <div className="p-6">
+                      <Link to="/advertisers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4">
+                        Overview
+                      </Link>
+                      <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4">
+                        Case Studies
+                      </Link>
+                      
+                      <div className="pt-2 border-t border-napptix-grey/20">
+                        <h4 className="text-white text-lg font-semibold mb-3">Products</h4>
+                        <div className="space-y-3 pl-2">
+                          <Link to="/advertisers/products/wizora" onClick={scrollToTop} className="block text-gray-300 hover:text-white">
+                            Wizora
+                          </Link>
+                          <Link to="/advertisers/products/questmap" onClick={scrollToTop} className="block text-gray-300 hover:text-white">
+                            QuestMap
+                          </Link>
+                          <Link to="/advertisers/products/perfnxt" onClick={scrollToTop} className="block text-gray-300 hover:text-white">
+                            PerfNXT
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Publishers Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-white pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-white after:transition-transform after:duration-300 hover:after:scale-x-100 after:origin-left after:scale-x-0 focus:outline-none">
+              <div 
+                className="relative group"
+                onMouseEnter={() => handleDropdownMouseEnter('publishers')}
+                onMouseLeave={handleDropdownMouseLeave}
+              >
+                <button className={`flex items-center text-white py-2 px-1 focus:outline-none ${
+                  activeDropdown === 'publishers' || location.pathname.includes('/publishers') 
+                    ? 'border-b-2 border-[#29dd3b]' 
+                    : ''
+                }`}>
                   Publishers <ChevronDown className="ml-1 h-4 w-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-napptix-dark border border-napptix-grey/20 text-white">
-                  <DropdownMenuItem className="focus:bg-[#29dd3b]/20 focus:text-white hover:bg-[#29dd3b]/20">
-                    <Link to="/publishers" onClick={scrollToTop} className="w-full">Overview</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="focus:bg-[#29dd3b]/20 focus:text-white hover:bg-[#29dd3b]/20">
-                    <Link to="/publishers/monetization" onClick={scrollToTop} className="w-full">Monetization</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="focus:bg-[#29dd3b]/20 focus:text-white hover:bg-[#29dd3b]/20">
-                    <Link to="/publishers/analytics" onClick={scrollToTop} className="w-full">Analytics</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                </button>
+                
+                {activeDropdown === 'publishers' && (
+                  <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
+                    <div className="p-4 bg-[#1A1F2C]">
+                      <h3 className="text-white text-lg font-semibold uppercase tracking-wide">Publisher Solution</h3>
+                    </div>
+                    <div className="p-6">
+                      <Link to="/publishers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4">
+                        Overview
+                      </Link>
+                      <Link to="/publishers/monetization" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4">
+                        Monetization
+                      </Link>
+                      <Link to="/publishers/analytics" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5]">
+                        Analytics
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <Link 
                 to="/about"
