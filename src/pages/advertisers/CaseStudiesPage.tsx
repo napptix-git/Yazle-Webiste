@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -21,7 +20,8 @@ const CaseStudiesPage: React.FC = () => {
         "50% increase in brand recall among 18-24 demographic",
         "2.3M unique impressions in first month",
         "37% sales lift in target markets"
-      ]
+      ],
+      slug: "gamerush-energy"
     },
     {
       title: "TechGiant Mobile",
@@ -33,7 +33,8 @@ const CaseStudiesPage: React.FC = () => {
         "200% higher click-through rate vs. traditional digital ads",
         "85% of engaged users visited product landing page",
         "42% increase in pre-orders attributed to campaign"
-      ]
+      ],
+      slug: "techgiant-mobile"
     },
     {
       title: "StreamFlix",
@@ -151,7 +152,10 @@ const CaseStudiesPage: React.FC = () => {
                     </ul>
                   </div>
                   
-                  <Button className="mt-6 bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
+                  <Button 
+                    className="mt-6 bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90"
+                    onClick={() => navigate(`/advertisers/case-studies/${study.slug}`)}
+                  >
                     Read Full Case Study
                   </Button>
                 </div>

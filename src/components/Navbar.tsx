@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -94,10 +93,6 @@ const Navbar: React.FC = () => {
                 
                 {activeDropdown === 'advertisers' && (
                   <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
-                    <div className="p-4 bg-[#1A1F2C]">
-                      <h3 className="text-white text-lg font-semibold uppercase tracking-wide">Advertiser Solution</h3>
-                      <p className="text-gray-400 mt-1 text-sm">Maximize your advertising reach with our comprehensive solutions</p>
-                    </div>
                     <div className="p-6">
                       <Link to="/advertisers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Overview
@@ -151,10 +146,6 @@ const Navbar: React.FC = () => {
                 
                 {activeDropdown === 'publishers' && (
                   <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
-                    <div className="p-4 bg-[#1A1F2C]">
-                      <h3 className="text-white text-lg font-semibold uppercase tracking-wide">Publisher Solution</h3>
-                      <p className="text-gray-400 mt-1 text-sm">Optimize your content monetization and analytics</p>
-                    </div>
                     <div className="p-6">
                       <Link to="/publishers" onClick={scrollToTop} className="block text-xl font-semibold text-[#9b87f5] mb-4 hover:text-[#29dd3b] transition-colors">
                         Overview
@@ -170,55 +161,27 @@ const Navbar: React.FC = () => {
                 )}
               </div>
 
-              {/* About Link with new hover effect */}
-              <div 
-                className="relative group"
-                onMouseEnter={() => handleDropdownMouseEnter('about')}
-                onMouseLeave={handleDropdownMouseLeave}
+              {/* About Link with line hover effect */}
+              <Link 
+                to="/about"
+                onClick={scrollToTop}
+                className={`text-white py-2 px-1 hover:text-[#29dd3b] transition-colors border-b-2 border-transparent hover:border-[#29dd3b] ${
+                  isActive('/about') ? 'border-[#29dd3b]' : ''
+                }`}
               >
-                <Link 
-                  to="/about"
-                  onClick={scrollToTop}
-                  className={`flex items-center text-white py-2 px-1 hover:text-[#29dd3b] transition-colors ${
-                    isActive('/about') ? 'border-b-2 border-[#29dd3b]' : ''
-                  }`}
-                >
-                  About
-                </Link>
-                {activeDropdown === 'about' && (
-                  <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
-                    <div className="p-4 bg-[#1A1F2C]">
-                      <h3 className="text-white text-lg font-semibold uppercase tracking-wide">About Us</h3>
-                      <p className="text-gray-400 mt-1 text-sm">Learn more about our mission and vision</p>
-                    </div>
-                  </div>
-                )}
-              </div>
+                About
+              </Link>
 
-              {/* Contact Link with new hover effect */}
-              <div 
-                className="relative group"
-                onMouseEnter={() => handleDropdownMouseEnter('contact')}
-                onMouseLeave={handleDropdownMouseLeave}
+              {/* Contact Link with line hover effect */}
+              <Link 
+                to="/contact"
+                onClick={scrollToTop}
+                className={`text-white py-2 px-1 hover:text-[#29dd3b] transition-colors border-b-2 border-transparent hover:border-[#29dd3b] ${
+                  isActive('/contact') ? 'border-[#29dd3b]' : ''
+                }`}
               >
-                <Link 
-                  to="/contact"
-                  onClick={scrollToTop}
-                  className={`flex items-center text-white py-2 px-1 hover:text-[#29dd3b] transition-colors ${
-                    isActive('/contact') ? 'border-b-2 border-[#29dd3b]' : ''
-                  }`}
-                >
-                  Contact
-                </Link>
-                {activeDropdown === 'contact' && (
-                  <div className="absolute top-full left-0 w-80 mt-2 bg-napptix-dark border border-napptix-grey/20 rounded-md shadow-lg overflow-hidden z-50">
-                    <div className="p-4 bg-[#1A1F2C]">
-                      <h3 className="text-white text-lg font-semibold uppercase tracking-wide">Contact Us</h3>
-                      <p className="text-gray-400 mt-1 text-sm">Get in touch with our team</p>
-                    </div>
-                  </div>
-                )}
-              </div>
+                Contact
+              </Link>
             </nav>
             
             <button 

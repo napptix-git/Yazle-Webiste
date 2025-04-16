@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +17,7 @@ import WizoraPage from "./pages/advertisers/WizoraPage";
 import QuestMapPage from "./pages/advertisers/QuestMapPage";
 import PerfNXTPage from "./pages/advertisers/PerfNXTPage";
 import CaseStudiesPage from "./pages/advertisers/CaseStudiesPage";
+import CaseStudyDetailPage from "./pages/advertisers/CaseStudyDetailPage";
 
 // Publisher pages
 import MonetizationPage from "./pages/publishers/MonetizationPage";
@@ -48,6 +48,7 @@ const App = () => {
               {/* Advertiser routes */}
               <Route path="/advertisers" element={<Advertisers />} />
               <Route path="/advertisers/case-studies" element={<CaseStudiesPage />} />
+              <Route path="/advertisers/case-studies/:slug" element={<CaseStudyDetailPage />} />
               <Route path="/advertisers/products/wizora" element={<WizoraPage />} />
               <Route path="/advertisers/products/questmap" element={<QuestMapPage />} />
               <Route path="/advertisers/products/perfnxt" element={<PerfNXTPage />} />
