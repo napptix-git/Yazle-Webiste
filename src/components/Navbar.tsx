@@ -3,8 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 
-// Update the HoveredItemType to include all possible values or use a string type
-type HoveredItemType = string | null;
+// Define a more specific type for the hovered item
+type HoveredItemType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | 'advertisers' | 'developers' | null;
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
               </button>
               
               {hoveredItem === 'advertisers' && (
-                <div className="absolute top-full left-0 w-96 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50">
+                <div className="absolute top-full left-0 w-[400px] mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50">
                   <div className="p-4">
                     <p className="text-gray-400 text-sm font-semibold mb-2">Our Advertisers</p>
                     <div className="space-y-3">
@@ -141,7 +141,7 @@ const Navbar: React.FC = () => {
               </button>
               
               {hoveredItem === 'developers' && (
-                <div className="absolute top-full left-0 w-96 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50">
+                <div className="absolute top-full left-0 w-[400px] mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50">
                   <div className="p-4">
                     <p className="text-gray-400 text-sm font-semibold mb-2">For Game Developers</p>
                     <div className="space-y-3">
@@ -220,7 +220,7 @@ const Navbar: React.FC = () => {
             <div>
               <button 
                 onClick={() => {
-                  // Fix the type comparison issue by correctly checking string values
+                  // Now the types are correctly defined and there will be no type comparison error
                   setHoveredItem(hoveredItem === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers');
                 }}
                 className="flex justify-between items-center w-full py-2 text-white font-medium"
@@ -241,7 +241,7 @@ const Navbar: React.FC = () => {
             <div>
               <button 
                 onClick={() => {
-                  // Fix the type comparison issue by correctly checking string values
+                  // Now the types are correctly defined and there will be no type comparison error
                   setHoveredItem(hoveredItem === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers');
                 }}
                 className="flex justify-between items-center w-full py-2 text-white font-medium"
