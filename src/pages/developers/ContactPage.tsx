@@ -4,14 +4,13 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { Code, Gamepad, Mail, Phone, Building } from 'lucide-react';
 
-const ContactPage: React.FC = () => {
+const DeveloperContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    company: '',
-    gameType: '',
+    appName: '',
+    platform: '',
     message: ''
   });
   const [submitting, setSubmitting] = useState(false);
@@ -27,12 +26,12 @@ const ContactPage: React.FC = () => {
     
     // Simulate form submission
     setTimeout(() => {
-      toast.success('Your message has been sent! A developer relations specialist will contact you shortly.');
+      toast.success('Message sent successfully! Our developer relations team will get back to you soon.');
       setFormData({
         name: '',
         email: '',
-        company: '',
-        gameType: '',
+        appName: '',
+        platform: '',
         message: ''
       });
       setSubmitting(false);
@@ -43,134 +42,142 @@ const ContactPage: React.FC = () => {
     <div className="min-h-screen bg-black font-manrope">
       <Navbar />
       
-      <div className="container mx-auto pt-32 pb-20 px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
+      <div className="container mx-auto pt-24 pb-20 px-4">
+        <div className="mb-16">
+          <div className="mx-auto max-w-5xl text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Developer Support</h1>
-            <p className="text-napptix-light-grey text-xl mb-8">
-              Need help integrating our SDK? Have questions about monetization? Our team is ready to assist.
+            <p className="text-napptix-light-grey text-lg max-w-3xl mx-auto">
+              Let our team help you implement the right Napptix solutions for your game
             </p>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">How We Help Game Developers</h2>
+              <ul className="space-y-4 text-napptix-light-grey">
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1.5 flex-shrink-0">
+                    <div className="w-2 h-2"></div>
+                  </div>
+                  <p>Technical integration support for all game engines</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1.5 flex-shrink-0">
+                    <div className="w-2 h-2"></div>
+                  </div>
+                  <p>Optimization strategies to balance revenue and player experience</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="bg-[#29dd3b] rounded-full p-1 mt-1.5 flex-shrink-0">
+                    <div className="w-2 h-2"></div>
+                  </div>
+                  <p>Custom monetization solutions for your unique game requirements</p>
+                </li>
+              </ul>
+            </div>
             
-            <div className="space-y-6 mt-12">
-              <div className="flex items-start space-x-4">
-                <div className="bg-napptix-dark rounded-full p-3">
-                  <Mail className="h-6 w-6 text-[#29dd3b]" />
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">Developer Resources</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+                  <h3 className="text-white font-bold mb-2">Documentation</h3>
+                  <p className="text-napptix-light-grey text-sm mb-4">Implementation guides for easy integration</p>
+                  <Button variant="outline" className="w-full border-[#29dd3b] text-[#29dd3b] hover:bg-[#29dd3b]/10">
+                    View Docs
+                  </Button>
                 </div>
-                <div>
-                  <h3 className="text-white font-bold text-lg">Email Us</h3>
-                  <p className="text-napptix-light-grey">developers@napptix.com</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="bg-napptix-dark rounded-full p-3">
-                  <Phone className="h-6 w-6 text-[#29dd3b]" />
-                </div>
-                <div>
-                  <h3 className="text-white font-bold text-lg">Developer Hotline</h3>
-                  <p className="text-napptix-light-grey">+1 (555) 987-6543</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="bg-napptix-dark rounded-full p-3">
-                  <Code className="h-6 w-6 text-[#29dd3b]" />
-                </div>
-                <div>
-                  <h3 className="text-white font-bold text-lg">Documentation</h3>
-                  <p className="text-napptix-light-grey">
-                    <a href="#" className="underline hover:text-[#29dd3b]">docs.napptix.com</a>
-                  </p>
+                
+                <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+                  <h3 className="text-white font-bold mb-2">SDK Download</h3>
+                  <p className="text-napptix-light-grey text-sm mb-4">Latest SDKs for all platforms</p>
+                  <Button variant="outline" className="w-full border-[#29dd3b] text-[#29dd3b] hover:bg-[#29dd3b]/10">
+                    Get SDK
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
           
-          <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
-            <h2 className="text-2xl font-bold text-white mb-6">Get Technical Support</h2>
-            
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="text-white mb-2">Name</label>
+          <div className="bg-napptix-dark rounded-xl p-6 sm:p-8 border border-napptix-grey/30">
+            <h2 className="text-2xl font-bold text-white mb-6">Contact Our Developer Team</h2>
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label htmlFor="name" className="block text-white mb-2">Your Name</label>
                   <input
                     type="text"
                     id="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
-                    placeholder="Your name"
+                    className="w-full bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
                     required
                   />
                 </div>
                 
-                <div className="flex flex-col">
-                  <label htmlFor="email" className="text-white mb-2">Email</label>
+                <div>
+                  <label htmlFor="email" className="block text-white mb-2">Email</label>
                   <input
                     type="email"
                     id="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
-                    placeholder="Your email"
+                    className="w-full bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
                     required
                   />
                 </div>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col">
-                  <label htmlFor="company" className="text-white mb-2">Studio/Company</label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label htmlFor="appName" className="block text-white mb-2">Game/App Name</label>
                   <input
                     type="text"
-                    id="company"
-                    value={formData.company}
+                    id="appName"
+                    value={formData.appName}
                     onChange={handleChange}
-                    className="bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
-                    placeholder="Your company"
-                    required
+                    className="w-full bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
                   />
                 </div>
                 
-                <div className="flex flex-col">
-                  <label htmlFor="gameType" className="text-white mb-2">Game Platform</label>
+                <div>
+                  <label htmlFor="platform" className="block text-white mb-2">Platform</label>
                   <select
-                    id="gameType"
-                    value={formData.gameType}
+                    id="platform"
+                    value={formData.platform}
                     onChange={handleChange}
-                    className="bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
-                    required
+                    className="w-full bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
                   >
-                    <option value="" disabled>Select platform</option>
-                    <option value="mobile">Mobile</option>
-                    <option value="web">Web/HTML5</option>
-                    <option value="pc">PC/Mac</option>
-                    <option value="console">Console</option>
-                    <option value="vr">VR/AR</option>
+                    <option value="">Select a platform</option>
+                    <option value="ios">iOS</option>
+                    <option value="android">Android</option>
+                    <option value="both">iOS & Android</option>
+                    <option value="web">Web</option>
+                    <option value="other">Other</option>
                   </select>
                 </div>
               </div>
               
-              <div className="flex flex-col">
-                <label htmlFor="message" className="text-white mb-2">How can we help?</label>
+              <div>
+                <label htmlFor="message" className="block text-white mb-2">How can we help?</label>
                 <textarea
                   id="message"
-                  rows={4}
+                  rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className="bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
-                  placeholder="Describe your technical question or integration issue"
+                  className="w-full bg-black border border-napptix-grey/30 rounded-lg p-3 text-white focus:outline-none focus:border-[#29dd3b]"
                   required
                 ></textarea>
               </div>
               
-              <div className="flex justify-center">
-                <Button
+              <div className="flex justify-end">
+                <Button 
                   type="submit"
                   disabled={submitting}
-                  className="bg-[#29dd3b] hover:bg-[#29dd3b]/80 text-black font-bold py-3 px-8 rounded-full transition-all disabled:opacity-70 disabled:cursor-not-allowed text-lg"
+                  className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90 px-6"
                 >
-                  {submitting ? 'Sending...' : 'Get Support'}
+                  {submitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </div>
             </form>
@@ -183,4 +190,4 @@ const ContactPage: React.FC = () => {
   );
 };
 
-export default ContactPage;
+export default DeveloperContactPage;
