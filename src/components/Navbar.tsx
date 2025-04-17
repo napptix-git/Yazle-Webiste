@@ -3,9 +3,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 
+// Define a type for the hoveredItem to avoid type comparison errors
+type HoveredItemType = 'advertisers' | 'developers' | 'about' | 'contact' | 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
+
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [hoveredItem, setHoveredItem] = useState<HoveredItemType>(null);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
   const location = useLocation();
   
@@ -25,7 +28,7 @@ const Navbar: React.FC = () => {
     };
   }, []);
   
-  const handleMouseEnter = (item: string) => {
+  const handleMouseEnter = (item: HoveredItemType) => {
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
