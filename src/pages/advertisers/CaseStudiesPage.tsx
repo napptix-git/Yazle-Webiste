@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 
 const CaseStudiesPage: React.FC = () => {
+  const navigate = useNavigate();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -152,12 +155,14 @@ const CaseStudiesPage: React.FC = () => {
                     </ul>
                   </div>
                   
-                  <Button 
-                    className="mt-6 bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90"
-                    onClick={() => navigate(`/advertisers/case-studies/${study.slug}`)}
-                  >
-                    Read Full Case Study
-                  </Button>
+                  {study.slug && (
+                    <Button 
+                      className="mt-6 bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90"
+                      onClick={() => navigate(`/advertisers/case-studies/${study.slug}`)}
+                    >
+                      Read Full Case Study
+                    </Button>
+                  )}
                 </div>
               </motion.div>
             ))}
