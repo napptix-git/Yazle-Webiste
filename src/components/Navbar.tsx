@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
@@ -49,12 +48,12 @@ const Navbar: React.FC = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-md' : 'bg-white'
+        scrolled ? 'bg-black/90 shadow-md' : 'bg-black'
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-2">
-          <Link to="/" onClick={scrollToTop} className="text-black font-bold text-2xl mr-4">
+          <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl mr-4">
             <div className="h-20 md:h-24 lg:h-24">
               <img 
                 src="/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png" 
@@ -71,14 +70,14 @@ const Navbar: React.FC = () => {
               onMouseEnter={() => handleMouseEnter('advertisers')}
               onMouseLeave={handleMouseLeave}
             >
-              <button className={`flex items-center text-gray-800 font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors`}>
+              <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors`}>
                 ADVERTISERS <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               
               {hoveredItem === 'advertisers' && (
-                <div className="absolute top-full left-0 w-64 mt-2 bg-white rounded-lg shadow-lg overflow-hidden z-50">
+                <div className="absolute top-full left-0 w-64 mt-2 bg-black/90 rounded-lg shadow-lg overflow-hidden z-50">
                   <div className="p-4">
-                    <p className="text-gray-500 text-sm font-semibold mb-2">Our Advertisers</p>
+                    <p className="text-gray-400 text-sm font-semibold mb-2">Our Advertisers</p>
                     <div className="space-y-3">
                       <Link to="/advertisers/wizora" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-100">
                         <div className="bg-blue-100 p-2 rounded-full">
@@ -136,14 +135,14 @@ const Navbar: React.FC = () => {
               onMouseEnter={() => handleMouseEnter('developers')}
               onMouseLeave={handleMouseLeave}
             >
-              <button className={`flex items-center text-gray-800 font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors`}>
+              <button className={`flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors`}>
                 DEVELOPERS <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               
               {hoveredItem === 'developers' && (
-                <div className="absolute top-full left-0 w-64 mt-2 bg-white rounded-lg shadow-lg overflow-hidden z-50">
+                <div className="absolute top-full left-0 w-64 mt-2 bg-black/90 rounded-lg shadow-lg overflow-hidden z-50">
                   <div className="p-4">
-                    <p className="text-gray-500 text-sm font-semibold mb-2">For Game Developers</p>
+                    <p className="text-gray-400 text-sm font-semibold mb-2">For Game Developers</p>
                     <div className="space-y-3">
                       <Link to="/developers" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-100">
                         <div className="bg-blue-100 p-2 rounded-full">
@@ -173,31 +172,26 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            {/* About Link */}
+            {/* About and Contact Links */}
             <div
               className="relative group"
-              onMouseEnter={() => handleMouseEnter('about')}
-              onMouseLeave={handleMouseLeave}
             >
               <Link 
                 to="/about"
                 onClick={scrollToTop}
-                className="text-gray-800 font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors"
+                className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors"
               >
                 ABOUT US
               </Link>
             </div>
 
-            {/* Contact Link */}
             <div
               className="relative group"
-              onMouseEnter={() => handleMouseEnter('contact')}
-              onMouseLeave={handleMouseLeave}
             >
               <Link 
                 to="/contact"
                 onClick={scrollToTop}
-                className="text-gray-800 font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors"
+                className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors"
               >
                 CONTACT
               </Link>
@@ -207,7 +201,7 @@ const Navbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button 
-              className="text-gray-800"
+              className="text-white"
               onClick={() => setHoveredItem(hoveredItem === 'mobile-menu' ? null : 'mobile-menu')}
             >
               {hoveredItem === 'mobile-menu' ? (
@@ -226,22 +220,22 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {hoveredItem === 'mobile-menu' && (
-        <div className="md:hidden bg-white shadow-lg">
+        <div className="md:hidden bg-black/95 shadow-lg">
           <div className="container mx-auto px-4 py-4 space-y-4">
             <div>
               <button 
                 onClick={() => setHoveredItem(hoveredItem === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers')}
-                className="flex justify-between items-center w-full py-2 text-gray-800 font-medium"
+                className="flex justify-between items-center w-full py-2 text-white font-medium"
               >
                 ADVERTISERS
                 <ChevronDown className={`transition-transform ${hoveredItem === 'mobile-advertisers' ? 'rotate-180' : ''}`} />
               </button>
               {hoveredItem === 'mobile-advertisers' && (
                 <div className="mt-2 pl-4 space-y-2">
-                  <Link to="/advertisers/wizora" className="block py-2 text-gray-700">Wizora</Link>
-                  <Link to="/advertisers/case-studies" className="block py-2 text-gray-700">Case Studies</Link>
-                  <Link to="/advertisers/ad-gallery" className="block py-2 text-gray-700">Ad Gallery</Link>
-                  <Link to="/advertisers/contact" className="block py-2 text-gray-700">Contact</Link>
+                  <Link to="/advertisers/wizora" className="block py-2 text-gray-300">Wizora</Link>
+                  <Link to="/advertisers/case-studies" className="block py-2 text-gray-300">Case Studies</Link>
+                  <Link to="/advertisers/ad-gallery" className="block py-2 text-gray-300">Ad Gallery</Link>
+                  <Link to="/advertisers/contact" className="block py-2 text-gray-300">Contact</Link>
                 </div>
               )}
             </div>
@@ -249,24 +243,24 @@ const Navbar: React.FC = () => {
             <div>
               <button 
                 onClick={() => setHoveredItem(hoveredItem === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers')}
-                className="flex justify-between items-center w-full py-2 text-gray-800 font-medium"
+                className="flex justify-between items-center w-full py-2 text-white font-medium"
               >
                 DEVELOPERS
                 <ChevronDown className={`transition-transform ${hoveredItem === 'mobile-developers' ? 'rotate-180' : ''}`} />
               </button>
               {hoveredItem === 'mobile-developers' && (
                 <div className="mt-2 pl-4 space-y-2">
-                  <Link to="/developers" className="block py-2 text-gray-700">Overview</Link>
-                  <Link to="/developers/contact" className="block py-2 text-gray-700">Contact</Link>
+                  <Link to="/developers" className="block py-2 text-gray-300">Overview</Link>
+                  <Link to="/developers/contact" className="block py-2 text-gray-300">Contact</Link>
                 </div>
               )}
             </div>
             
-            <Link to="/about" className="block py-2 text-gray-800 font-medium">
+            <Link to="/about" className="block py-2 text-white font-medium">
               ABOUT US
             </Link>
             
-            <Link to="/contact" className="block py-2 text-gray-800 font-medium">
+            <Link to="/contact" className="block py-2 text-white font-medium">
               CONTACT
             </Link>
           </div>
