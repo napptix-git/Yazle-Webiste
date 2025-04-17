@@ -208,7 +208,7 @@ const Navbar: React.FC = () => {
           <div className="md:hidden">
             <button 
               className="text-gray-800"
-              onClick={() => setHoveredItem(hoveredItem ? null : 'mobile-menu')}
+              onClick={() => setHoveredItem(hoveredItem === 'mobile-menu' ? null : 'mobile-menu')}
             >
               {hoveredItem === 'mobile-menu' ? (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -230,7 +230,7 @@ const Navbar: React.FC = () => {
           <div className="container mx-auto px-4 py-4 space-y-4">
             <div>
               <button 
-                onClick={() => setHoveredItem(hoveredItem === 'mobile-advertisers' ? null : 'mobile-advertisers')}
+                onClick={() => setHoveredItem(hoveredItem === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers')}
                 className="flex justify-between items-center w-full py-2 text-gray-800 font-medium"
               >
                 ADVERTISERS
@@ -248,7 +248,7 @@ const Navbar: React.FC = () => {
             
             <div>
               <button 
-                onClick={() => setHoveredItem(hoveredItem === 'mobile-developers' ? null : 'mobile-developers')}
+                onClick={() => setHoveredItem(hoveredItem === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers')}
                 className="flex justify-between items-center w-full py-2 text-gray-800 font-medium"
               >
                 DEVELOPERS
