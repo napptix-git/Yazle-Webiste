@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import WorldMap from '@/components/WorldMap';
 
 type ContactType = 'general' | 'advertiser' | 'developer';
 
@@ -122,6 +123,10 @@ const Contact: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
+          
+          <div className="mt-16">
+            <WorldMap />
           </div>
         </div>
         

@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
             </div>
           </Link>
           
-          <nav className="hidden md:flex space-x-8 items-center justify-center flex-1">
+          <nav className="hidden md:flex items-center space-x-8 justify-center">
             <div 
               className="relative group"
               onMouseEnter={() => handleMouseEnter('advertisers')}
@@ -149,24 +149,22 @@ const Navbar: React.FC = () => {
               </AnimatePresence>
             </div>
 
-            <div className="space-x-8 flex items-center">
-              <Link 
-                to="/about"
-                onClick={scrollToTop}
-                className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors uppercase"
-              >
-                ABOUT US
-              </Link>
-
-              <Link 
-                to="/contact"
-                className="relative overflow-hidden text-white font-medium py-2 px-6 border-2 border-[#29dd3b] rounded-full group hover:bg-[#29dd3b] hover:text-black transition-all duration-300"
-              >
-                <span className="relative z-10">LET'S TALK</span>
-                <div className="absolute inset-0 bg-[#29dd3b] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-              </Link>
-            </div>
+            <Link 
+              to="/about"
+              onClick={scrollToTop}
+              className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors uppercase"
+            >
+              ABOUT US
+            </Link>
           </nav>
+
+          <Link 
+            to="/contact"
+            className="hidden md:inline-flex relative overflow-hidden text-white font-medium py-2 px-6 border-2 border-[#29dd3b] rounded-full group hover:bg-[#29dd3b] hover:text-black transition-all duration-300"
+          >
+            <span className="relative z-10">LET'S TALK</span>
+            <div className="absolute inset-0 bg-[#29dd3b] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+          </Link>
           
           <div className="md:hidden">
             <button 
