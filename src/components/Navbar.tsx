@@ -1,10 +1,12 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// Define a more specific type for the hovered item
-type HoveredItemType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | 'advertisers' | 'developers' | null;
+// Update type to include both main menu and submenu states
+type HoveredItemType = 'mobile-menu' | { 
+  type: 'mobile-advertisers' | 'mobile-developers' | 'advertisers' | 'developers' | null 
+};
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -49,7 +51,7 @@ const Navbar: React.FC = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/90 shadow-md' : 'bg-black'
+        scrolled ? 'bg-black/50 backdrop-blur-lg' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -68,112 +70,106 @@ const Navbar: React.FC = () => {
             {/* Advertisers Dropdown */}
             <div 
               className="relative group"
-              onMouseEnter={() => handleMouseEnter('advertisers')}
+              onMouseEnter={() => handleMouseEnter({ type: 'advertisers' })}
               onMouseLeave={handleMouseLeave}
             >
-              <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors">
+              <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
                 ADVERTISERS <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               
-              {hoveredItem === 'advertisers' && (
-                <div className="absolute top-full left-0 w-[400px] mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50">
-                  <div className="p-4">
-                    <p className="text-gray-400 text-sm font-semibold mb-2">Our Advertisers</p>
-                    <div className="space-y-3">
-                      <Link to="/advertisers/wizora" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                        <div className="bg-gray-800 p-2 rounded-full">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h9M3 8l7 4 7-4m-7 4v12" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-200">Wizora</p>
-                          <p className="text-xs text-gray-400">Interactive ad platform for gaming audiences</p>
-                        </div>
-                      </Link>
-                      <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                        <div className="bg-gray-800 p-2 rounded-full">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16l-4-4 4-4m8 8l4-4-4-4M4 12h16" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-200">Case Studies</p>
-                          <p className="text-xs text-gray-400">Success stories from our advertisers</p>
-                        </div>
-                      </Link>
-                      <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                        <div className="bg-gray-800 p-2 rounded-full">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16l-4-4 4-4m8 8l4-4-4-4M4 12h16" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-200">Ad Gallery</p>
-                          <p className="text-xs text-gray-400">Explore our interactive ad formats</p>
-                        </div>
-                      </Link>
-                      <Link to="/advertisers/contact" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                        <div className="bg-gray-800 p-2 rounded-full">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-200">Contact</p>
-                          <p className="text-xs text-gray-400">Get in touch with our ad team</p>
-                        </div>
-                      </Link>
+              <AnimatePresence>
+                {hoveredItem?.type === 'advertisers' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 w-[300px] mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
+                  >
+                    <div className="p-4">
+                      <p className="text-gray-400 text-sm font-semibold mb-2 uppercase">Our Solutions</p>
+                      <div className="space-y-3">
+                        <Link to="/advertisers/wizora" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                          <div className="bg-gray-800 p-2 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h9M3 8l7 4 7-4m-7 4v12" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-200 uppercase">Wizora</p>
+                            <p className="text-xs text-gray-400">Interactive ad platform</p>
+                          </div>
+                        </Link>
+                        <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                          <div className="bg-gray-800 p-2 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16l-4-4 4-4m8 8l4-4-4-4M4 12h16" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-200 uppercase">Case Studies</p>
+                            <p className="text-xs text-gray-400">Success stories</p>
+                          </div>
+                        </Link>
+                        <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                          <div className="bg-gray-800 p-2 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16l-4-4 4-4m8 8l4-4-4-4M4 12h16" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-200 uppercase">Ad Gallery</p>
+                            <p className="text-xs text-gray-400">Explore ad formats</p>
+                          </div>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Developers Dropdown */}
             <div 
               className="relative group"
-              onMouseEnter={() => handleMouseEnter('developers')}
+              onMouseEnter={() => handleMouseEnter({ type: 'developers' })}
               onMouseLeave={handleMouseLeave}
             >
-              <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors">
+              <button className="flex items-center text-white font-medium py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
                 DEVELOPERS <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               
-              {hoveredItem === 'developers' && (
-                <div className="absolute top-full left-0 w-[400px] mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50">
-                  <div className="p-4">
-                    <p className="text-gray-400 text-sm font-semibold mb-2">For Game Developers</p>
-                    <div className="space-y-3">
-                      <Link to="/developers" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                        <div className="bg-gray-800 p-2 rounded-full">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h9M3 8l7 4 7-4m-7 4v12" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-200">Overview</p>
-                          <p className="text-xs text-gray-400">Discover developer solutions</p>
-                        </div>
-                      </Link>
-                      <Link to="/developers/contact" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
-                        <div className="bg-gray-800 p-2 rounded-full">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-200">Contact</p>
-                          <p className="text-xs text-gray-400">Reach our developer support team</p>
-                        </div>
-                      </Link>
+              <AnimatePresence>
+                {hoveredItem?.type === 'developers' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 w-[300px] mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
+                  >
+                    <div className="p-4">
+                      <p className="text-gray-400 text-sm font-semibold mb-2 uppercase">For Game Developers</p>
+                      <div className="space-y-3">
+                        <Link to="/developers" onClick={scrollToTop} className="flex items-center space-x-4 px-3 py-2 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                          <div className="bg-gray-800 p-2 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h9M3 8l7 4 7-4m-7 4v12" />
+                            </svg>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-200 uppercase">Overview</p>
+                            <p className="text-xs text-gray-400">Discover solutions</p>
+                          </div>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
-            {/* About and Contact Links - Fixed alignment by adding them to the same flex container */}
+            {/* About and Contact Links */}
             <div className="space-x-8 flex items-center">
               <Link 
                 to="/about"
@@ -185,10 +181,9 @@ const Navbar: React.FC = () => {
 
               <Link 
                 to="/contact"
-                onClick={scrollToTop}
-                className="text-white font-medium py-2 px-1 hover:text-[#29dd3b] transition-colors"
+                className="text-[#29dd3b] font-medium py-2 px-6 border-2 border-[#29dd3b] rounded-full hover:bg-[#29dd3b] hover:text-black transition-all duration-300"
               >
-                CONTACT
+                LET'S TALK
               </Link>
             </div>
           </nav>
@@ -234,10 +229,9 @@ const Navbar: React.FC = () => {
               </button>
               {hoveredItem === 'mobile-advertisers' && (
                 <div className="mt-2 pl-4 space-y-2">
-                  <Link to="/advertisers/wizora" className="block py-2 text-gray-300">Wizora</Link>
-                  <Link to="/advertisers/case-studies" className="block py-2 text-gray-300">Case Studies</Link>
-                  <Link to="/advertisers/ad-gallery" className="block py-2 text-gray-300">Ad Gallery</Link>
-                  <Link to="/advertisers/contact" className="block py-2 text-gray-300">Contact</Link>
+                  <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300">Wizora</Link>
+                  <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
+                  <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link>
                 </div>
               )}
             </div>
@@ -259,17 +253,16 @@ const Navbar: React.FC = () => {
               </button>
               {hoveredItem === 'mobile-developers' && (
                 <div className="mt-2 pl-4 space-y-2">
-                  <Link to="/developers" className="block py-2 text-gray-300">Overview</Link>
-                  <Link to="/developers/contact" className="block py-2 text-gray-300">Contact</Link>
+                  <Link to="/developers" onClick={scrollToTop} className="block py-2 text-gray-300">Overview</Link>
                 </div>
               )}
             </div>
             
-            <Link to="/about" className="block py-2 text-white font-medium">
+            <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-medium">
               ABOUT US
             </Link>
             
-            <Link to="/contact" className="block py-2 text-white font-medium">
+            <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-medium">
               CONTACT
             </Link>
           </div>

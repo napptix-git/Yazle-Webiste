@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
@@ -48,7 +47,7 @@ const Index = () => {
       
       {/* Hero Section */}
       <section id="hero">
-        <HeroSection />
+        <HeroSection redirectToWizora={true} />
       </section>
       
       {/* Partners Carousel */}
@@ -63,7 +62,7 @@ const Index = () => {
       
       {/* Advertisers and Publishers Section */}
       <section id="audience" className="mt-36 md:mt-48 bg-black">
-        <AudienceCards />
+        <AudienceCards showDevelopers={true} />
       </section>
 
       {/* Game Intelligence Platform Section */}
