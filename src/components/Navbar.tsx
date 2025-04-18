@@ -1,12 +1,16 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Gamepad, BookOpen, Image, BookCheck, BookOpenCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Defining a union type for all possible menu states
-type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
+// Updated type definition to ensure type safety
+type MobileMenuType = 
+  | 'mobile-menu' 
+  | 'mobile-advertisers' 
+  | 'mobile-developers' 
+  | null;
+
 type DesktopMenuType = 'advertisers' | 'developers' | null;
 type HoveredItemType = {
   mobile: MobileMenuType;
@@ -54,7 +58,7 @@ const Navbar: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  const toggleMobileMenu = (menuType: MobileMenuType | null) => {
+  const toggleMobileMenu = (menuType: MobileMenuType) => {
     setHoveredItem(prev => {
       if (prev.mobile === menuType) {
         return { ...prev, mobile: null };
