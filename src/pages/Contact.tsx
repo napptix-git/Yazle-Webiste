@@ -114,6 +114,15 @@ const Contact: React.FC = () => {
       <div className="container mx-auto pt-28 pb-20 px-4">
         <div className="mb-20">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-16 text-center">Global Presence</h2>
+          
+          <div className="relative w-full max-w-6xl mx-auto mb-16">
+            <img 
+              src="/lovable-uploads/de1f01a3-c2a1-49bf-89d7-0f5535044663.png"
+              alt="Global Presence Map"
+              className="w-full object-contain"
+            />
+          </div>
+
           <div className="space-y-8">
             {offices.map((office) => (
               <div key={office.city} className="border-b border-white/20 pb-8">
@@ -123,10 +132,6 @@ const Contact: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
-          
-          <div className="mt-16">
-            <WorldMap />
           </div>
         </div>
         
