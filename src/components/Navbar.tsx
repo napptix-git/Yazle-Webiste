@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from 'lucide-react';
+import { ChevronDown, Gamepad, BookOpen, Image, BookCheck, BookOpenCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 
+// Defining a union type for all possible menu states
 type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 type DesktopMenuType = 'advertisers' | 'developers' | null;
 type HoveredItemType = {
@@ -114,7 +115,7 @@ const Navbar: React.FC = () => {
                         
                         <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
                           <div className="p-2 bg-gray-800 rounded-lg">
-                            <BookOpen className="h-5 w-5 text-[#29dd3b]" />
+                            <BookOpenCheck className="h-5 w-5 text-[#29dd3b]" />
                           </div>
                           <div>
                             <p className="text-sm font-medium text-gray-200 uppercase">Case Studies</p>
@@ -238,9 +239,9 @@ const Navbar: React.FC = () => {
                       transition={{ duration: 0.2 }}
                       className="mt-2 pl-4 space-y-2"
                     >
-                      <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300">Wizora</Link>
-                      <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
-                      <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link>
+                      <Link to="/advertisers/wizora" onClick={() => { scrollToTop(); toggleMobileMenu(null); }} className="block py-2 text-gray-300">Wizora</Link>
+                      <Link to="/advertisers/case-studies" onClick={() => { scrollToTop(); toggleMobileMenu(null); }} className="block py-2 text-gray-300">Case Studies</Link>
+                      <Link to="/advertisers/ad-gallery" onClick={() => { scrollToTop(); toggleMobileMenu(null); }} className="block py-2 text-gray-300">Ad Gallery</Link>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -263,17 +264,25 @@ const Navbar: React.FC = () => {
                       transition={{ duration: 0.2 }}
                       className="mt-2 pl-4 space-y-2"
                     >
-                      <Link to="/developers" onClick={scrollToTop} className="block py-2 text-gray-300">Overview</Link>
+                      <Link to="/developers" onClick={() => { scrollToTop(); toggleMobileMenu(null); }} className="block py-2 text-gray-300">Overview</Link>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
               
-              <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
+              <Link 
+                to="/about" 
+                onClick={() => { scrollToTop(); toggleMobileMenu(null); }} 
+                className="block py-2 text-white font-medium uppercase"
+              >
                 About Us
               </Link>
               
-              <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
+              <Link 
+                to="/contact" 
+                onClick={() => { scrollToTop(); toggleMobileMenu(null); }} 
+                className="block py-2 text-white font-medium uppercase"
+              >
                 Let's Talk
               </Link>
             </div>
