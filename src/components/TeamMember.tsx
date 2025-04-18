@@ -48,7 +48,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
         </div>
       </div>
       
-      <div className="md:w-1/2 lg:w-3/5 h-[280px]">
+      <div className="md:w-1/2 lg:w-3/5">
         <img 
           src={imageSrc} 
           alt={name} 

@@ -1,11 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Gamepad, BookOpen, Image, BookCheck, BookOpenCheck } from 'lucide-react';
+import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useIsMobile } from '@/hooks/use-mobile';
 
-// Define the mobile menu types as a union type for better TypeScript support
 type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 type DesktopMenuType = 'advertisers' | 'developers' | null;
 type HoveredItemType = {
@@ -18,7 +16,6 @@ const Navbar: React.FC = () => {
   const [hoveredItem, setHoveredItem] = useState<HoveredItemType>({ mobile: null, desktop: null });
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
   const location = useLocation();
-  const isMobile = useIsMobile();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -53,15 +50,6 @@ const Navbar: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
-
-  const toggleMobileMenu = (menuType: MobileMenuType) => {
-    setHoveredItem(prev => {
-      if (prev.mobile === menuType) {
-        return { ...prev, mobile: null };
-      }
-      return { ...prev, mobile: menuType };
-    });
-  };
   
   return (
     <header 
@@ -72,7 +60,7 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-2">
           <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl">
-            <div className="h-16 md:h-20 lg:h-24">
+            <div className="h-20 md:h-24 lg:h-24">
               <img 
                 src="/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png" 
                 alt="Napptix" 
@@ -115,7 +103,7 @@ const Navbar: React.FC = () => {
                         
                         <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
                           <div className="p-2 bg-gray-800 rounded-lg">
-                            <BookOpenCheck className="h-5 w-5 text-[#29dd3b]" />
+                            <BookOpen className="h-5 w-5 text-[#29dd3b]" />
                           </div>
                           <div>
                             <p className="text-sm font-medium text-gray-200 uppercase">Case Studies</p>
@@ -196,7 +184,10 @@ const Navbar: React.FC = () => {
           <div className="md:hidden">
             <button 
               className="text-white"
-              onClick={() => toggleMobileMenu('mobile-menu')}
+              onClick={() => setHoveredItem(prev => ({
+                ...prev,
+                mobile: prev.mobile === 'mobile-menu' ? null : 'mobile-menu'
+              }))}
             >
               {hoveredItem.mobile === 'mobile-menu' ? (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -224,7 +215,10 @@ const Navbar: React.FC = () => {
             <div className="container mx-auto px-4 py-4 space-y-4">
               <div>
                 <button 
-                  onClick={() => toggleMobileMenu('mobile-advertisers')}
+                  onClick={() => setHoveredItem(prev => ({
+                    ...prev,
+                    mobile: prev.mobile === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers'
+                  }))}
                   className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
                 >
                   Advertisers
@@ -239,9 +233,9 @@ const Navbar: React.FC = () => {
                       transition={{ duration: 0.2 }}
                       className="mt-2 pl-4 space-y-2"
                     >
-                      <Link to="/advertisers/wizora" onClick={() => { scrollToTop(); toggleMobileMenu(null); }} className="block py-2 text-gray-300">Wizora</Link>
-                      <Link to="/advertisers/case-studies" onClick={() => { scrollToTop(); toggleMobileMenu(null); }} className="block py-2 text-gray-300">Case Studies</Link>
-                      <Link to="/advertisers/ad-gallery" onClick={() => { scrollToTop(); toggleMobileMenu(null); }} className="block py-2 text-gray-300">Ad Gallery</Link>
+                      <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300">Wizora</Link>
+                      <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
+                      <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -249,7 +243,10 @@ const Navbar: React.FC = () => {
               
               <div>
                 <button 
-                  onClick={() => toggleMobileMenu('mobile-developers')}
+                  onClick={() => setHoveredItem(prev => ({
+                    ...prev,
+                    mobile: prev.mobile === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers'
+                  }))}
                   className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
                 >
                   Developers
@@ -264,25 +261,17 @@ const Navbar: React.FC = () => {
                       transition={{ duration: 0.2 }}
                       className="mt-2 pl-4 space-y-2"
                     >
-                      <Link to="/developers" onClick={() => { scrollToTop(); toggleMobileMenu(null); }} className="block py-2 text-gray-300">Overview</Link>
+                      <Link to="/developers" onClick={scrollToTop} className="block py-2 text-gray-300">Overview</Link>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
               
-              <Link 
-                to="/about" 
-                onClick={() => { scrollToTop(); toggleMobileMenu(null); }} 
-                className="block py-2 text-white font-medium uppercase"
-              >
+              <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
                 About Us
               </Link>
               
-              <Link 
-                to="/contact" 
-                onClick={() => { scrollToTop(); toggleMobileMenu(null); }} 
-                className="block py-2 text-white font-medium uppercase"
-              >
+              <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-medium uppercase">
                 Let's Talk
               </Link>
             </div>
