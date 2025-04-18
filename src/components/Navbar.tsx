@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Gamepad, BarChart, BookOpenCheck } from 'lucide-react';
+import { ChevronDown, Gamepad, BookOpen, Image } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
             </div>
           </Link>
           
-          <nav className="hidden md:flex items-center space-x-8 justify-center">
+          <nav className="hidden md:flex items-center space-x-8 flex-grow justify-center">
             <div 
               className="relative group"
               onMouseEnter={() => handleMouseEnter('advertisers')}
@@ -85,7 +85,7 @@ const Navbar: React.FC = () => {
                     animate={{ opacity: 1, y: 0, height: 'auto' }}
                     exit={{ opacity: 0, y: -10, height: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 w-72 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-96 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
                   >
                     <div className="py-8 px-6">
                       <p className="text-gray-400 text-sm font-semibold mb-6 uppercase">Our Solutions</p>
@@ -99,13 +99,21 @@ const Navbar: React.FC = () => {
                             <p className="text-xs text-gray-400">Interactive ad platform</p>
                           </div>
                         </Link>
+                        
                         <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                          <div className="p-2 bg-gray-800 rounded-lg">
+                            <BookOpen className="h-5 w-5 text-[#29dd3b]" />
+                          </div>
                           <div>
                             <p className="text-sm font-medium text-gray-200 uppercase">Case Studies</p>
                             <p className="text-xs text-gray-400">Success stories</p>
                           </div>
                         </Link>
+                        
                         <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                          <div className="p-2 bg-gray-800 rounded-lg">
+                            <Image className="h-5 w-5 text-[#29dd3b]" />
+                          </div>
                           <div>
                             <p className="text-sm font-medium text-gray-200 uppercase">Ad Gallery</p>
                             <p className="text-xs text-gray-400">Explore ad formats</p>
@@ -166,7 +174,7 @@ const Navbar: React.FC = () => {
 
           <Link 
             to="/contact"
-            className="hidden md:inline-flex relative overflow-hidden text-white font-medium py-2 px-6 border-2 border-[#29dd3b] rounded-full group hover:bg-[#29dd3b] hover:text-black transition-all duration-300"
+            className="hidden md:inline-flex ml-auto relative overflow-hidden text-white font-medium py-2 px-6 border-2 border-[#29dd3b] rounded-full group hover:bg-[#29dd3b] hover:text-black transition-all duration-300"
           >
             <span className="relative z-10">LET'S TALK</span>
             <div className="absolute inset-0 bg-[#29dd3b] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
@@ -209,7 +217,7 @@ const Navbar: React.FC = () => {
                   onClick={() => setHoveredItem(prev => ({
                     ...prev,
                     mobile: prev.mobile === 'mobile-advertisers' ? 'mobile-menu' : 'mobile-advertisers'
-                  } as HoveredItemType))}
+                  }))}
                   className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
                 >
                   Advertisers
@@ -237,7 +245,7 @@ const Navbar: React.FC = () => {
                   onClick={() => setHoveredItem(prev => ({
                     ...prev,
                     mobile: prev.mobile === 'mobile-developers' ? 'mobile-menu' : 'mobile-developers'
-                  } as HoveredItemType))}
+                  }))}
                   className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
                 >
                   Developers

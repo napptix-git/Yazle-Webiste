@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import PartnersCarousel from '@/components/PartnersCarousel';
@@ -47,7 +46,7 @@ const Index = () => {
       
       {/* Hero Section */}
       <section id="hero">
-        <HeroSection redirectToWizora={true} />
+        <HeroSection />
       </section>
       
       {/* Partners Carousel */}
@@ -62,7 +61,7 @@ const Index = () => {
       
       {/* Advertisers and Publishers Section */}
       <section id="audience" className="mt-36 md:mt-48 bg-black">
-        <AudienceCards showDevelopers={true} />
+        <AudienceCards />
       </section>
 
       {/* Game Intelligence Platform Section */}
