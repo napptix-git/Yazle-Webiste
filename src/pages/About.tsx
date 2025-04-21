@@ -193,8 +193,17 @@ const About: React.FC = () => {
       <Navbar />
       <div className="container mx-auto pt-32 pb-20 px-4">
         <div className="mb-12">
+          {/* Global Presence Heading */}
+          <div className="w-full flex flex-col items-center mb-10">
+            <span
+              className="block text-[3rem] md:text-[4rem] font-syne font-extrabold text-white leading-none text-center"
+              style={{ textShadow: "0 0 10px #222" }}
+            >
+              Global Presence
+            </span>
+          </div>
+          {/* Map image */}
           <div className="relative w-full max-w-5xl mx-auto mb-12 flex flex-col items-center">
-            {/* Use the provided bright map image */}
             <img
               src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a.png"
               alt="Global Presence Map"
@@ -202,16 +211,16 @@ const About: React.FC = () => {
               style={{ maxWidth: 1000, background: '#000' }}
             />
           </div>
-          {/* Global Presence cities and countries listing */}
+          {/* Office cities and countries */}
           <div className="max-w-4xl mx-auto mb-16">
             {offices.map((office, idx) => (
               <div key={office.city} className="w-full">
                 <div className="flex justify-between items-center py-6 border-b border-[#242424]">
-                  {/* City styled as large bold with green shade */}
-                  <span className="text-[4rem] font-syne font-extrabold leading-none text-green-400">
+                  {/* City: white, Syne extrabold, large */}
+                  <span className="text-[4rem] font-syne font-extrabold leading-none text-white">
                     {office.city}
                   </span>
-                  {/* Country styled as smaller, uppercase, muted */}
+                  {/* Country: uppercase, muted */}
                   <span className="text-[1.35rem] uppercase font-manrope font-semibold text-gray-300 tracking-wide">
                     {office.country}
                   </span>
@@ -220,7 +229,6 @@ const About: React.FC = () => {
             ))}
           </div>
         </div>
-
         {/* Our People Section with centered text */}
         <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-14 rounded-lg">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Our People</h2>
@@ -265,3 +273,4 @@ const About: React.FC = () => {
 };
 
 export default About;
+

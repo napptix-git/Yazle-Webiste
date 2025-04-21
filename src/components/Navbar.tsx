@@ -90,14 +90,12 @@ const Navbar: React.FC = () => {
 
           <Link 
             to="/contact"
-            className="hidden md:inline-flex ml-auto relative group font-bold py-2 px-6 rounded-full transition-all duration-300
-            bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn
-            "
+            className="hidden md:inline-flex ml-auto relative group font-bold py-2 px-6 rounded-full transition-all duration-300 bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn"
             style={{ fontWeight: 800, letterSpacing: 1.2 }}
           >
             <span className="relative z-10">LET'S TALK</span>
             <span className="absolute inset-0 rounded-full border-2 border-[#29dd3b] pointer-events-none"></span>
-            <span className="absolute inset-0 shimmer-effect pointer-events-none"></span>
+            <span className="absolute shimmer-effect inset-0 pointer-events-none"></span>
           </Link>
           
           <div className="md:hidden">
@@ -130,13 +128,15 @@ const Navbar: React.FC = () => {
       <style>{`
         .shimmer-glow-btn {
           box-shadow: 0 0 16px 2px #29dd3b, 0 0 8px 2px #29dd3b55 inset;
+          position: relative;
+          background: #29dd3b;
         }
         .shimmer-effect {
           display: block;
           position: absolute;
           top: 0; left: 0; right: 0; bottom: 0;
           background: linear-gradient(120deg, transparent 30%, #fff 45%, #29dd3b 55%, transparent 70%);
-          opacity: 0.25;
+          opacity: 0.30;
           background-size: 200% 200%;
           animation: shimmer-move 2s infinite linear;
           pointer-events: none;
