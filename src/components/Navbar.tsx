@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from 'lucide-react';
@@ -51,10 +52,12 @@ const Navbar: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
+  // Fixed function: Using type assertions to resolve TypeScript errors
   const toggleMobileMenu = (menuType: MobileMenuType) => {
     setHoveredItem(prev => {
+      // Since we know the types, we can safely compare as strings
       if (prev.mobile === menuType) {
-        return { ...prev, mobile: 'mobile-menu' };
+        return { ...prev, mobile: 'mobile-menu' as MobileMenuType };
       } 
       return { ...prev, mobile: menuType };
     });
