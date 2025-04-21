@@ -90,10 +90,14 @@ const Navbar: React.FC = () => {
 
           <Link 
             to="/contact"
-            className="hidden md:inline-flex ml-auto relative overflow-hidden text-white font-medium py-2 px-6 border-2 border-[#29dd3b] rounded-full group hover:bg-[#29dd3b] hover:text-black transition-all duration-300"
+            className="hidden md:inline-flex ml-auto relative group font-bold py-2 px-6 rounded-full transition-all duration-300
+            bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn
+            "
+            style={{ fontWeight: 800, letterSpacing: 1.2 }}
           >
             <span className="relative z-10">LET'S TALK</span>
-            <div className="absolute inset-0 bg-[#29dd3b] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+            <span className="absolute inset-0 rounded-full border-2 border-[#29dd3b] pointer-events-none"></span>
+            <span className="absolute inset-0 shimmer-effect pointer-events-none"></span>
           </Link>
           
           <div className="md:hidden">
@@ -123,6 +127,26 @@ const Navbar: React.FC = () => {
         toggleMobileMenu={toggleMobileMenu}
         scrollToTop={scrollToTop}
       />
+      <style>{`
+        .shimmer-glow-btn {
+          box-shadow: 0 0 16px 2px #29dd3b, 0 0 8px 2px #29dd3b55 inset;
+        }
+        .shimmer-effect {
+          display: block;
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: linear-gradient(120deg, transparent 30%, #fff 45%, #29dd3b 55%, transparent 70%);
+          opacity: 0.25;
+          background-size: 200% 200%;
+          animation: shimmer-move 2s infinite linear;
+          pointer-events: none;
+          border-radius: 9999px;
+        }
+        @keyframes shimmer-move {
+          0% { background-position: 200% 0 }
+          100% { background-position: -200% 0 }
+        }
+      `}</style>
     </header>
   );
 };

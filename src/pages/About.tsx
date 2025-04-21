@@ -5,11 +5,10 @@ import TeamMember from '@/components/TeamMember';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 const About: React.FC = () => {
-  // Team member data with consistent image formats
+  // Team members data with consistent image formats
   const teamMembers = [
     {
       name: "Alex Mercer",
@@ -188,61 +187,82 @@ const About: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Offices for global presence
+  const offices = [
+    { city: "Mumbai", country: "India" },
+    { city: "Dubai", country: "United Arab Emirates" },
+    { city: "Delhi", country: "India" },
+    { city: "Singapore", country: "Singapore" }
+  ];
+
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
-      
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">About Us</h1>
-        <div className="text-napptix-light-grey font-roboto-mono space-y-6 text-center ">
-          <p className='max-w-3xl mx-auto'> 
-            Napptix is a pioneering force in the gaming advertising industry, dedicated to creating
-            meaningful connections between brands and gamers through innovative advertising solutions.
-          </p>
-          
-          <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-16 rounded-lg">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
-            <p className="text-2xl text-white/80 mb-12">
-              Creativity opens doors,<br />
-              our people walk through them.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-              {allTeamMembers.map((member, index) => (
-                <div key={index} className="team-member-card">
-                  <TeamMember 
-                    name={member.name}
-                    position={member.position}
-                    imageSrc={member.imageSrc}
-                    linkedinUrl={member.linkedinUrl}
-                    bgColor={member.bgColor}
-                  />
+        {/* --- Global presence section with world map & cities --- */}
+        <div className="mb-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-10 text-center">Global Presence</h2>
+          <div className="relative w-full max-w-5xl mx-auto mb-8 flex flex-col items-center">
+            <img 
+              src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a"
+              alt="Bright World Map"
+              className="w-full h-[420px] object-cover rounded-lg shadow-xl brightness-110 contrast-125 saturate-125"
+              style={{maxWidth: 1000}}
+            />
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {offices.map((office) => (
+                <div key={office.city} className="border-b border-white/20 pb-4">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full">
+                    <h3 className="text-3xl md:text-4xl font-syne font-extrabold mb-2 md:mb-0">{office.city}</h3>
+                    <p className="text-lg text-napptix-light-grey">{office.country}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-          
-          <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Values</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-              <h3 className="text-xl font-bold text-white mb-4">Innovation</h3>
-              <p>We constantly push the boundaries of what's possible in gaming advertising.</p>
-            </div>
-            
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-              <h3 className="text-xl font-bold text-white mb-4">Integrity</h3>
-              <p>We prioritize transparency and ethical practices in all our operations.</p>
-            </div>
-            
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
-              <h3 className="text-xl font-bold text-white mb-4">Player-First</h3>
-              <p>We believe that advertising should enhance, not detract from, the gaming experience.</p>
-            </div>
+        </div>
+
+        {/* --- Our People section --- */}
+        <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-14 rounded-lg">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our People</h2>
+          <p className="text-2xl text-white/80 mb-12">
+            Creativity opens doors,<br />
+            our people walk through them.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            {allTeamMembers.map((member, index) => (
+              <div key={index} className="team-member-card">
+                <TeamMember 
+                  name={member.name}
+                  position={member.position}
+                  imageSrc={member.imageSrc}
+                  linkedinUrl={member.linkedinUrl}
+                  bgColor={member.bgColor}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Our Values section */}
+        <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Values</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-xl font-bold text-white mb-4">Innovation</h3>
+            <p>We constantly push the boundaries of what's possible in gaming advertising.</p>
+          </div>
+          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-xl font-bold text-white mb-4">Integrity</h3>
+            <p>We prioritize transparency and ethical practices in all our operations.</p>
+          </div>
+          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-xl font-bold text-white mb-4">Player-First</h3>
+            <p>We believe that advertising should enhance, not detract from, the gaming experience.</p>
           </div>
         </div>
       </div>
-      
       <Footer />
     </div>
   );
