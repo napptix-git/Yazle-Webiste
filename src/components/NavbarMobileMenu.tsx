@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-// Define the union type for mobile menu
+// Union of all possible mobile menu values
 type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 
 type HoveredItemType = {
@@ -39,7 +39,9 @@ const NavbarMobileMenu: React.FC<Props> = ({
               className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
             >
               Advertisers
-              <ChevronDown className={`transition-transform ${hoveredItem.mobile === 'mobile-advertisers' ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`transition-transform ${hoveredItem.mobile === 'mobile-advertisers' ? 'rotate-180' : ''}`}
+              />
             </button>
             <AnimatePresence>
               {hoveredItem.mobile === 'mobile-advertisers' && (
@@ -64,7 +66,9 @@ const NavbarMobileMenu: React.FC<Props> = ({
               className="flex justify-between items-center w-full py-2 text-white font-medium uppercase"
             >
               Developers
-              <ChevronDown className={`transition-transform ${hoveredItem.mobile === 'mobile-developers' ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`transition-transform ${hoveredItem.mobile === 'mobile-developers' ? 'rotate-180' : ''}`}
+              />
             </button>
             <AnimatePresence>
               {hoveredItem.mobile === 'mobile-developers' && (
