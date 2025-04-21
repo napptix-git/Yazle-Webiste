@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion, useAnimation, useInView, AnimatePresence } from 'framer-motion';
 import { 
   Gamepad, 
   MonitorPlay, 
@@ -36,12 +36,9 @@ const serviceData = [
   },
 ];
 
-// NEW: Card component for mobile
 const MobileFlipCard = ({ card, index }: { card: typeof serviceData[0], index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
-  // useInView returns true when the card is in the viewport
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  // Animate as soon as it enters view
   const controls = useAnimation();
 
   useEffect(() => {
@@ -54,7 +51,6 @@ const MobileFlipCard = ({ card, index }: { card: typeof serviceData[0], index: n
     }
   }, [inView, controls, index]);
 
-  // Start flipped and hidden
   return (
     <motion.div
       ref={ref}
@@ -114,7 +110,6 @@ const CardStack = () => {
     }
   }, [controls, isMobile]);
 
-  // --- MOBILE: FLIP CARDS ON SCROLL ---
   if (isMobile) {
     return (
       <div
@@ -128,7 +123,6 @@ const CardStack = () => {
     );
   }
 
-  // --- DESKTOP: Original stack/slide animation ---
   const currentCard = serviceData[activeCard];
 
   return (

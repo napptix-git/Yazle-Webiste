@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Gamepad, BookOpen, Image, BookCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Define a single type for all mobile menu states
 type DesktopMenuType = 'advertisers' | 'developers' | null;
 type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
 
@@ -52,12 +53,11 @@ const Navbar: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  // Fixed function: Using type assertions to resolve TypeScript errors
+  // Fix the toggle mobile menu function to handle string comparison properly
   const toggleMobileMenu = (menuType: MobileMenuType) => {
     setHoveredItem(prev => {
-      // Since we know the types, we can safely compare as strings
       if (prev.mobile === menuType) {
-        return { ...prev, mobile: 'mobile-menu' as MobileMenuType };
+        return { ...prev, mobile: 'mobile-menu' };
       } 
       return { ...prev, mobile: menuType };
     });
