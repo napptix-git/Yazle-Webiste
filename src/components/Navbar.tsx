@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -57,7 +56,6 @@ const Navbar: React.FC = () => {
 
   const toggleMobileMenu = (menuType: MobileMenuType) => {
     setHoveredItem(prev => {
-      // Toggle between mobile-menu and submenu
       if (prev.mobile === menuType) {
         return { ...prev, mobile: 'mobile-menu' };
       }
