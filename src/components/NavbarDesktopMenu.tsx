@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -27,7 +28,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('advertisers')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="flex items-center text-white font-syne font-extrabold py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
+      <button className="flex items-center text-white font-granivor-display font-extrabold py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
         Advertisers <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>
@@ -80,7 +81,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
       onMouseEnter={() => handleMouseEnter('developers')}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="flex items-center text-white font-syne font-extrabold py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
+      <button className="flex items-center text-white font-granivor-display font-extrabold py-2 px-1 focus:outline-none hover:text-[#29dd3b] transition-colors uppercase">
         Developers <ChevronDown className="ml-1 h-4 w-4" />
       </button>
       <AnimatePresence>
@@ -113,7 +114,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
     <Link 
       to="/about"
       onClick={scrollToTop}
-      className="text-white font-syne font-extrabold py-2 px-1 hover:text-[#29dd3b] transition-colors uppercase"
+      className="text-white font-granivor-display font-extrabold py-2 px-1 hover:text-[#29dd3b] transition-colors uppercase"
     >
       About Us
     </Link>

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -90,7 +91,7 @@ const Navbar: React.FC = () => {
 
           <Link 
             to="/contact"
-            className="hidden md:inline-flex ml-auto relative group font-syne font-extrabold py-2 px-6 rounded-full transition-all duration-300 bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn"
+            className="hidden md:inline-flex ml-auto relative group font-syne font-bold py-2 px-6 rounded-full transition-all duration-300 bg-[#29dd3b] text-black border-2 border-[#29dd3b] overflow-hidden shimmer-glow-btn"
             style={{ letterSpacing: 1.2 }}
           >
             <span className="relative z-10">LET'S TALK</span>

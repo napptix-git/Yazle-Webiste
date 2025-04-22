@@ -1,9 +1,11 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-type MobileMenuType = 'mobile-menu' | 'mobile-advertisers' | 'mobile-developers' | null;
+const mobileMenuTypes = ['mobile-menu', 'mobile-advertisers', 'mobile-developers', null] as const;
+type MobileMenuType = typeof mobileMenuTypes[number];
 
 interface Props {
   hoveredItem: { mobile: MobileMenuType; desktop: unknown };
@@ -29,7 +31,7 @@ const NavbarMobileMenu: React.FC<Props> = ({
           <div>
             <button
               onClick={() => toggleMobileMenu('mobile-advertisers')}
-              className="flex justify-between items-center w-full py-2 text-white font-syne font-extrabold uppercase"
+              className="flex justify-between items-center w-full py-2 text-white font-granivor-display font-extrabold uppercase"
             >
               Advertisers
               <ChevronDown className="transition-transform" />
@@ -43,9 +45,9 @@ const NavbarMobileMenu: React.FC<Props> = ({
                   transition={{ duration: 0.2 }}
                   className="mt-2 pl-4 space-y-2"
                 >
-                  <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300">Wizora</Link>
-                  <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
-                  <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link>
+                  <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300 font-granivor-display">Wizora</Link>
+                  <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300 font-granivor-display">Case Studies</Link>
+                  <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300 font-granivor-display">Ad Gallery</Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -54,7 +56,7 @@ const NavbarMobileMenu: React.FC<Props> = ({
           <div>
             <button
               onClick={() => toggleMobileMenu('mobile-developers')}
-              className="flex justify-between items-center w-full py-2 text-white font-syne font-extrabold uppercase"
+              className="flex justify-between items-center w-full py-2 text-white font-granivor-display font-extrabold uppercase"
             >
               Developers
               <ChevronDown className="transition-transform" />
@@ -68,17 +70,17 @@ const NavbarMobileMenu: React.FC<Props> = ({
                   transition={{ duration: 0.2 }}
                   className="mt-2 pl-4 space-y-2"
                 >
-                  <Link to="/developers" onClick={scrollToTop} className="block py-2 text-gray-300">Overview</Link>
+                  <Link to="/developers" onClick={scrollToTop} className="block py-2 text-gray-300 font-granivor-display">Overview</Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-syne font-extrabold uppercase">
+          <Link to="/about" onClick={scrollToTop} className="block py-2 text-white font-granivor-display font-extrabold uppercase">
             About Us
           </Link>
 
-          <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-syne font-extrabold uppercase">
+          <Link to="/contact" onClick={scrollToTop} className="block py-2 text-white font-granivor-display font-extrabold uppercase">
             Let's Talk
           </Link>
         </div>
