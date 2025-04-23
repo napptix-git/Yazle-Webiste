@@ -129,7 +129,7 @@ const HeroSection: React.FC = () => {
         className="absolute inset-0 z-0 pointer-events-none"
       />
       {/* Main Content */}
-      <div className="relative z-10 flex w-full h-full items-center justify-center">
+      <div className="relative z-10 flex w-full h-full items-center justify-center top-20">
         <div className="flex flex-col items-center justify-center w-full">
           <motion.h1 
             className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 text-center"

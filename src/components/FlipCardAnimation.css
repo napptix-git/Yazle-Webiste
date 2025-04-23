@@ -1,4 +1,3 @@
-
 /* Flip card animations and styles */
 .flip-card {
   position: absolute;
@@ -23,24 +22,24 @@
   animation-delay: 0s;
 }
 
-#card-2 .flip-card-wrapper {    
-  animation-delay: 0.2s;    
+#card-2 .flip-card-wrapper {
+  animation-delay: 0.2s;
 }
 
-#card-3 .flip-card-wrapper {                
-  animation-delay: 0.4s;    
-}    
+#card-3 .flip-card-wrapper {
+  animation-delay: 0.4s;
+}
 
-#card-4 .flip-card-wrapper {                
-  animation-delay: 0.6s;    
+#card-4 .flip-card-wrapper {
+  animation-delay: 0.6s;
 }
 
 .flip-card-inner {
-  position: relative;    
+  position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.8s;
+  transition: transform 0.8s ease-out;
 }
 
 .flip-card-front,
@@ -52,13 +51,14 @@
   backface-visibility: hidden;
   border-radius: 0.8em;
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 10px 20px rgba(0, 0, 0, 0.19),
     0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .flip-card-front {
   background-color: #000;
+  z-index: 2;
 }
 
 .flip-card-back {
@@ -67,6 +67,7 @@
   border: 2px solid #29dd3b;
   color: white;
   transform: rotateY(180deg);
+  z-index: 1;
 }
 
 @keyframes floating {
@@ -99,4 +100,54 @@
 .progress-dot.active {
   background-color: #29dd3b;
   transform: scale(1.5);
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+@media (max-width: 767px) {
+  .mobile-card {
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .flip-card-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    animation: none;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding: 20px 0;
+  }
 }

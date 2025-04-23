@@ -211,7 +211,7 @@ const About: React.FC = () => {
             />
           </div>
           {/* Office cities and countries */}
-          <div className="max-w-4xl mx-auto mb-16">
+          <div className="max-w-7xl mx-auto mb-16">
             {offices.map((office, idx) => (
               <div key={office.city} className="w-full">
                 <div className="flex justify-between items-center py-6 border-b border-[#242424]">
