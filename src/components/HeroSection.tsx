@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from "react-router-dom";
@@ -69,7 +68,7 @@ const HeroSection: React.FC = () => {
   useEffect(() => {
     if (!canvasRef.current || !mounted) return;
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext(' '2d');
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const animate = () => {
@@ -176,4 +175,3 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
-
