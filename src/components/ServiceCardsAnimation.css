@@ -1,93 +1,72 @@
 
-/* Card stack animation styles */
-.card-stack-container {
-  perspective: 2000px;
-  transform-style: preserve-3d;
+/* ... keep existing code (top part of file) the same ... */
+
+/* --- Add mobile/medium vertical flip styles --- */
+.vertical-flip-card {
+  perspective: 1200px;
+  min-height: 220px;
+  position: relative;
 }
 
-.card-viewport {
-  transform-style: preserve-3d;
-}
-
-.card-item {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  will-change: transform;
-  height: 450px;
-  box-shadow: 
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
-  transform-origin: center center;
-  transition: transform 0.3s ease;
-}
-
-/* Card content styles */
-.card-item::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0) 0%, 
-    rgba(255, 255, 255, 0.8) 50%, 
-    rgba(255, 255, 255, 0) 100%);
-  z-index: 10;
-}
-
-/* Dynamic shine effect */
-.card-item::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
+.vertical-flip-card__inner {
+  position: relative;
   width: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.05) 40%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.05) 60%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transition: all 0.5s ease;
+  height: 100%;
+  min-height: 220px;
+  transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
-.card-item:hover::after {
-  background-position: 200% 200%;
+.vertical-flip-card.flipped .vertical-flip-card__inner {
+  transform: rotateX(180deg);
 }
 
-/* Custom animations for card entrances and exits */
-@keyframes card-slide-in {
-  0% {
-    transform: translateX(100%) scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
+.vertical-flip-card__front,
+.vertical-flip-card__back {
+  position: absolute;
+  width: 100%;
+  min-height: 220px;
+  backface-visibility: hidden;
+  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical-flip-card__front {
+  background: #fff;
+  color: #000;
+  z-index: 2;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.vertical-flip-card__back {
+  background: #0EA5E9;
+  color: #fff;
+  transform: rotateX(180deg);
+  z-index: 1;
+  box-shadow:
+    0 12px 24px -6px rgba(14, 165, 233, 0.2);
+}
+
+/* Responsive: only show flip on small/medium screens */
+@media (min-width: 1024px) {
+  .vertical-flip-card,
+  .vertical-flip-card__inner,
+  .vertical-flip-card__front,
+  .vertical-flip-card__back {
+    display: none !important;
   }
 }
 
-@keyframes card-slide-out {
-  0% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(-100%) scale(0.8);
-    opacity: 0;
+@media (max-width: 1023px) {
+  .card-stack-container {
+    display: none !important;
   }
 }
 
-/* Make sure navigation buttons are visible and accessible */
-@media (max-width: 768px) {
-  .card-item {
-    width: 90%;
-    max-width: 320px;
-  }
-}
+/* ... keep existing code (rest of file) the same ... */

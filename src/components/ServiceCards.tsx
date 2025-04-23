@@ -36,47 +36,62 @@ const serviceData = [
   },
 ];
 
-const MobileFlipCard = ({ card, index }: { card: typeof serviceData[0], index: number }) => {
+const ResponsiveFlipCard = ({ card, index }: { card: typeof serviceData[0], index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const controls = useAnimation();
+  const [flipped, setFlipped] = useState(false);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   useEffect(() => {
-    if (inView) {
-      controls.start({ 
-        rotateY: 0,
-        opacity: 1,
-        transition: { duration: 0.8, delay: index * 0.1, ease: [0.23,1,0.32,1] }
-      });
+    if (isInView) {
+      setTimeout(() => setFlipped(true), 150 + index * 100); // Stagger flip
     }
-  }, [inView, controls, index]);
+  }, [isInView, index]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ rotateY: 75, opacity: 0 }}
-      animate={controls}
-      className="bg-white text-black rounded-2xl p-8 flex flex-col w-full max-w-md mx-auto shadow-2xl relative mb-12"
-      style={{ perspective: '1200px', backfaceVisibility: 'hidden' }}
+      className={`vertical-flip-card w-full max-w-md mx-auto mb-12 ${flipped ? 'flipped' : ''}`}
+      style={{
+        minHeight: 240,
+      }}
     >
-      <div className="flex flex-col items-center justify-between h-full">
-        <div className="flex flex-col items-center">
-          <div className="bg-black w-20 h-20 rounded-full flex items-center justify-center mb-6">
-            {card.icon}
+      <div className="vertical-flip-card__inner">
+        {/* FRONT */}
+        <div className="vertical-flip-card__front p-8">
+          <div className="flex flex-col items-center">
+            <div className="bg-black w-20 h-20 rounded-full flex items-center justify-center mb-6">
+              {card.icon}
+            </div>
+            <h3 className="text-2xl font-bold text-black mb-4">{card.title}</h3>
           </div>
-          <h3 className="text-2xl font-bold text-black mb-4">{card.title}</h3>
-          <p className="text-gray-600 text-center font-roboto-mono mb-8">
-            {card.description}
-          </p>
         </div>
-        <button 
-          className="mt-auto px-6 py-2 rounded-full bg-black text-white hover:bg-black/90 transition-colors font-roboto-mono"
-        >
-          Learn more
-        </button>
+        {/* BACK */}
+        <div className="vertical-flip-card__back p-8">
+          <div className="flex flex-col items-center">
+            <h3 className="text-2xl font-bold text-white mb-4">{card.title}</h3>
+            <p className="text-white/90 text-center font-roboto-mono mb-8">
+              {card.description}
+            </p>
+            <button 
+              className="mt-auto px-6 py-2 rounded-full bg-black text-white hover:bg-black/70 transition-colors font-roboto-mono"
+            >
+              Learn more
+            </button>
+          </div>
+        </div>
       </div>
-    </motion.div>
-  )
+    </div>
+  );
+};
+
+const MobileFlipCards = () => {
+  return (
+    <div className="w-full flex flex-col items-center justify-center">
+      {serviceData.map((card, idx) => (
+        <ResponsiveFlipCard card={card} key={card.id} index={idx} />
+      ))}
+    </div>
+  );
 };
 
 const CardStack = () => {
@@ -110,18 +125,7 @@ const CardStack = () => {
     }
   }, [controls, isMobile]);
 
-  if (isMobile) {
-    return (
-      <div
-        ref={containerRef}
-        className="w-full flex flex-col items-center justify-center"
-      >
-        {serviceData.map((card, idx) => (
-          <MobileFlipCard card={card} key={card.id} index={idx} />
-        ))}
-      </div>
-    );
-  }
+  if (isMobile) return null;
 
   const currentCard = serviceData[activeCard];
 
@@ -284,6 +288,7 @@ const ServiceCards: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 flex-1 flex items-center justify-center z-10">
+        <MobileFlipCards />
         <CardStack />
       </div>
     </section>
