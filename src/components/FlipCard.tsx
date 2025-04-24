@@ -11,7 +11,7 @@ interface FlipCardProps {
 const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
   ({ id, frontImage, backText, isActive = false }, ref) => {
     return (
-      <div className="flip-card" id={id} ref={ref}>
+      <div className="flip-card" id={id} ref={ref as React.RefObject<HTMLDivElement>}>
         <div className={`flip-card-wrapper ${isActive ? 'active' : ''}`}>
           <div className="flip-card-inner">
             <div className="flip-card-front">

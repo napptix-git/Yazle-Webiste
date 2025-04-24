@@ -11,7 +11,7 @@ const AnimatedCardSection: React.FC = () => {
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(false); // New state for large screens
 
   const serviceData = [
     { id: "in-game", title: "In-Game" },
@@ -22,10 +22,12 @@ const AnimatedCardSection: React.FC = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      const width = window.innerWidth;
+      setIsMobile(width < 768);
+      setIsLargeScreen(width >= 1024); // Large screens (e.g., desktops)
     };
 
-    handleResize(); // Initial check
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -34,73 +36,37 @@ const AnimatedCardSection: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!containerRef.current || !sectionRef.current || cardsRef.current.length < 4) return;
+    if (!containerRef.current || cardsRef.current.length === 0) return;
 
-    // Cleanup any previous triggers
     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 
     const totalScrollHeight = window.innerHeight * 2.5;
 
     if (isMobile) {
-      // 📱 Mobile Animation
-      const yOffsets = [0, 300, 500, 700];
-
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: () => `+=${totalScrollHeight}px`,
-        pin: true,
-        pinSpacing: true,
-      });
-
       cardsRef.current.forEach((card, index) => {
-        gsap.fromTo(card,
-          { y: 0, rotate: 0 },
-          {
-            y: yOffsets[index],
-            rotate: 0,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: `+=${window.innerHeight}`,
-              scrub: 0.5,
-              id: `mobile-expand-${index}`,
-            },
-          }
-        );
-
         const frontEl = card.querySelector(".flip-card-front");
         const backEl = card.querySelector(".flip-card-back");
 
         if (!frontEl || !backEl) return;
 
-        const staggerOffset = index * 0.05;
-        const startOffset = 0.4 + staggerOffset;
-        const endOffset = 0.7 + staggerOffset;
-
         ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: "top top",
-          end: `+=${totalScrollHeight}px`,
+          trigger: card,
+          start: "top +=200px",
+          end: () => `top center`,
           scrub: 1,
-          id: `flip-mobile-${index}`,
+          pin: true,
+          pinSpacing: false,
           onUpdate: (self) => {
             const progress = self.progress;
-            if (progress >= startOffset && progress <= endOffset) {
-              const flipProgress = (progress - startOffset) / (endOffset - startOffset);
-              const frontRotation = -180 * flipProgress;
-              const backRotation = 180 - 180 * flipProgress;
+            const frontRotation = -180 * progress;
+            const backRotation = 180 - 180 * progress;
 
-              gsap.to(frontEl, { rotateY: frontRotation, ease: "power1.out" });
-              gsap.to(backEl, { rotateY: backRotation, ease: "power1.out" });
-            }
+            gsap.to(frontEl, { rotateY: frontRotation, ease: "none", overwrite: "auto" });
+            gsap.to(backEl, { rotateY: backRotation, ease: "none", overwrite: "auto" });
           }
         });
       });
-
     } else {
-      // 🖥️ Desktop Animation
       const positions = [14, 38, 62, 86];
       const rotations = [-15, -7.5, 7.5, 15];
 
@@ -162,46 +128,61 @@ const AnimatedCardSection: React.FC = () => {
         });
       });
     }
-
-    setIsInitialized(true);
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
   }, [isMobile, cardsRef.current.length]);
 
   return (
-    <div className="relative h-[350vh]" ref={containerRef}>
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black" ref={sectionRef}>
-        <div className="absolute top-[130px] w-full text-center z-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
+    <div
+      className={`relative ${isMobile ? 'h-[340vh]' : 'h-[350vh]'}`}
+      ref={containerRef}
+    >
+      {/* Render heading and description only if not on large screens */}
+      {!isLargeScreen && (
+        <div className="bg-black px-4 text-center ">
+          <h2 className="text-3xl md:text-4xl font-bold text-white ">
             Our Services
           </h2>
           <p className="text-gray-400 pt-3 max-w-2xl mx-auto">
             Seamless brand integration across every layer of the gaming journey.
           </p>
         </div>
+      )}
+
+      <div
+        className={`relative ${isMobile ? '' : 'sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black lg:pb-[500px]'}`}
+        ref={sectionRef}
+      >
+        {/* Render heading and description for large screens */}
+        {isLargeScreen && (
+          <div className="absolute top-[130px] w-full text-center z-20 pointer-events-none">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              Our Services
+            </h2>
+            <p className="text-gray-400 pt-3 max-w-2xl mx-auto ">
+              Seamless brand integration across every layer of the gaming journey.
+            </p>
+          </div>
+        )}
 
         {isMobile ? (
-          <div className="w-full flex flex-col items-center gap-10 px-4 py-10">
+          <div className="w-full">
             {serviceData.map((service, index) => (
-              <div
+              <section
                 key={service.id}
-                ref={(el) => {
-                  if (el) cardsRef.current[index] = el;
-                }}
-                className="w-full max-w-xs relative"
+                className="h-[80vh] flex items-center justify-center px-4 py-5"
               >
                 <FlipCard
                   id={`card-${index + 1}`}
-                  frontImage="/lovable-uploads/7463cd87-d84d-4f7a-b845-8389ab62e8fb.png"
+                  frontImage="/lovable-uploads/card.jpg"
                   backText={service.title}
+                  ref={(el) => {
+                    if (el instanceof HTMLDivElement) cardsRef.current[index] = el;
+                  }}
                 />
-              </div>
+              </section>
             ))}
           </div>
         ) : (
-          <div className="cards-container relative w-full h-[80%] flex items-center justify-center">
+          <div className="cards-container relative w-full h-[80%] flex items-center justify-center top-[200px]">
             {serviceData.map((service, index) => (
               <FlipCard
                 key={service.id}
@@ -209,7 +190,7 @@ const AnimatedCardSection: React.FC = () => {
                 frontImage="/lovable-uploads/card.jpg"
                 backText={service.title}
                 ref={(el) => {
-                  if (el) cardsRef.current[index] = el;
+                  if (el instanceof HTMLDivElement) cardsRef.current[index] = el;
                 }}
               />
             ))}

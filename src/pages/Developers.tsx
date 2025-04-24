@@ -28,7 +28,8 @@ const Developers: React.FC = () => {
                 For Game Developers
               </h1>
               <p className="text-napptix-light-grey font-roboto-mono text-xl mb-8">
-                Specialized solutions to help you grow your games and maximize revenue.
+                Add branded fun without breaking your game loop.
+                Wizora makes monetization feel like part of the experience.
               </p>
               <Button
                 size="lg"
@@ -69,7 +70,7 @@ const Developers: React.FC = () => {
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Why Game Developers Choose Us</h2>
             <p className="text-napptix-light-grey font-roboto-mono max-w-2xl mx-auto">
-              Join thousands of successful game developers in our global network
+              Build smarter. Monetize faster. Join a global network of devs redefining ad play.
             </p>
           </motion.div>
           
@@ -84,9 +85,10 @@ const Developers: React.FC = () => {
               <div className="bg-[#29dd3b]/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                 <Code className="text-[#29dd3b] h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Easy Integration</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Fast & Flexible Integration
+              </h3>
               <p className="text-napptix-light-grey font-roboto-mono">
-                Simple SDKs for all major game engines with minimal code requirements.
+                Drop-in SDKs for major engines with minimal coding required—so you can go live without slowing down.
               </p>
             </motion.div>
             
@@ -100,9 +102,9 @@ const Developers: React.FC = () => {
               <div className="bg-[#29dd3b]/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                 <Users className="text-[#29dd3b] h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">User Experience</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Player-First Ad Design </h3>
               <p className="text-napptix-light-grey font-roboto-mono">
-                Non-intrusive ad formats designed to maintain player engagement.
+                Playable formats that blend with your gameplay—not interrupt it—so you keep players happy and immersed.
               </p>
             </motion.div>
             
@@ -116,10 +118,10 @@ const Developers: React.FC = () => {
               <div className="bg-[#29dd3b]/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                 <Globe className="text-[#29dd3b] h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Global Reach</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Monetize at Global Scale</h3>
               <p className="text-napptix-light-grey font-roboto-mono">
-                Access to premium advertisers and campaigns from around the world.
-              </p>
+                Tap into worldwide campaigns and premium brands seeking next-gen ad experiences inside games like yours.
+               </p>
             </motion.div>
           </div>
         </div>
@@ -140,12 +142,12 @@ const Developers: React.FC = () => {
               Join our developer community and start monetizing your games today
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
+              {/* <Button
                 size="lg"
                 className="bg-[#29dd3b] hover:bg-[#29dd3b]/90 text-black"
               >
                 Sign Up Now
-              </Button>
+              </Button> */}
               <Button
                 size="lg"
                 variant="outline"

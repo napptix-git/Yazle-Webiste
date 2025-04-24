@@ -69,10 +69,10 @@ const Navbar: React.FC = () => {
         scrolled ? 'backdrop-blur-lg' : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-2">
-          <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl">
-            <div className="h-20 md:h-24 lg:h-24">
+      <div className="container mx-auto px-4 lg:mt-[20px] pl-[-100px]">
+        <div className="flex justify-between items-center">
+          <Link to="/" onClick={scrollToTop} className="text-white font-bold text-2xl ">
+            <div className="h-20 md:h-24 lg:h-30 lg:w-[200px] ">
               <img 
                 src="/lovable-uploads/8354ca7f-1dcf-4c35-bc7d-7fb04f9c9254.png" 
                 alt="Napptix" 

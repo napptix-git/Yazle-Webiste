@@ -66,9 +66,9 @@ const Index = () => {
       </section>
 
       {/* Game Intelligence Platform Section */}
-      <section id="game-intelligence" className="bg-black">
+      {/* <section id="game-intelligence" className="bg-black">
         <GameIntelligence />
-      </section>
+      </section> */}
       
       {/* Footer */}
       <section>

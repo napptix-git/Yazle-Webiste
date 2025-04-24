@@ -13,24 +13,24 @@ const WizoraPage: React.FC = () => {
 
   const features = [
     {
-      title: "AI-Powered Targeting",
+      title: "AI-Powered Game Creation",
       icon: <Bot className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Intelligent audience segmentation based on play style and preferences"
+      description: "From concept to playable in record time."
     },
     {
-      title: "Real-Time Metrics",
+      title: "Effortless Integration",
       icon: <BarChart3 className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Live performance tracking with actionable insights"
+      description: "Plug into play—no heavy lifting needed."
     },
     {
-      title: "Seamless Integration",
+      title: "Cross-Platform Reach",
       icon: <Code className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Quick implementation across major game engines and platforms"
+      description: "Built for mobile, desktop, and console alike."
     },
     {
-      title: "Cross-Platform Support",
+      title: "Managed Delivery & Optimization",
       icon: <Monitor className="h-8 w-8 text-[#29dd3b]" />,
-      description: "Reach gamers across mobile, desktop, and console environments"
+      description: "We run the game behind your game."
     }
   ];
 
@@ -51,12 +51,13 @@ const WizoraPage: React.FC = () => {
                 Wizora
               </h1>
               <p className="text-xl text-napptix-light-grey mb-8">
-                The intelligent ad placement engine for immersive gaming experiences.
+                Turn ads into mini-games. Turn players into fans.
+                Wizora makes every brand moment playable.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
+                {/* <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
                   Schedule Demo
-                </Button>
+                </Button> */}
                 <Button size="lg" variant="outline" className="border-[#29dd3b]/50 text-[#29dd3b] hover:bg-[#29dd3b]/10">
                   Learn More
                 </Button>
@@ -116,27 +117,27 @@ const WizoraPage: React.FC = () => {
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">1</div>
-              <h3 className="text-xl font-bold text-white mb-3">Analysis</h3>
-              <p className="text-napptix-light-grey font-roboto-mono">Our AI analyzes gameplay patterns to identify optimal placement opportunities.</p>
+              <h3 className="text-xl font-bold text-white mb-3">Creative Brief</h3>
+              <p className="text-napptix-light-grey font-roboto-mono">You bring the vision. We translate it into gameplay.</p>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">2</div>
-              <h3 className="text-xl font-bold text-white mb-3">Placement</h3>
-              <p className="text-napptix-light-grey font-roboto-mono">Intelligent ad placement that integrates naturally with the gaming experience.</p>
+              <h3 className="text-xl font-bold text-white mb-3">Game Generation</h3>
+              <p className="text-napptix-light-grey font-roboto-mono">AI turns concepts into customized, playable micro-games.</p>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">3</div>
-              <h3 className="text-xl font-bold text-white mb-3">Optimization</h3>
-              <p className="text-napptix-light-grey font-roboto-mono">Continuous performance optimization based on engagement metrics.</p>
+              <h3 className="text-xl font-bold text-white mb-3">Launch & Optimize</h3>
+              <p className="text-napptix-light-grey font-roboto-mono">We deploy, test, and evolve for engagement at scale.</p>
             </div>
           </div>
         </div>
       </section>
       
       {/* Testimonial Section */}
-      <section className="py-20 bg-napptix-dark">
+      {/* <section className="py-20 bg-napptix-dark">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-black p-10 rounded-xl border border-napptix-grey/20 text-center">
             <div className="mb-8">
@@ -154,36 +155,38 @@ const WizoraPage: React.FC = () => {
           </div>
         </div>
       </section>
-      
+       */}
       {/* Benefits Section */}
-      <section className="py-20">
+      <section className="py-20  bg-napptix-dark">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Why Choose Wizora</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+          <div className="flex justify-center items-center ">
+            <div className=" p-6 rounded-xl border  bg-black">
               <h3 className="text-xl font-bold text-white mb-4">For Advertisers</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Precision targeting based on player behavior and preferences</span>
+                  <span className="text-napptix-light-grey">Branded mini-games that boost awareness through play, not push.</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Higher engagement rates compared to traditional digital ads</span>
+                  <span className="text-napptix-light-grey">
+                       Engagement rates that outperform banners, videos, and static ads.
+                  </span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Brand-safe environments with content controls</span>
+                  <span className="text-napptix-light-grey">Tailored gameplay experiences built around your brand narrative.</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-[#29dd3b] mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-napptix-light-grey">Detailed analytics on campaign performance</span>
+                  <span className="text-napptix-light-grey"> Hands-off delivery with strategic support from concept to campaign.</span>
                 </li>
               </ul>
             </div>
             
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            {/* <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
               <h3 className="text-xl font-bold text-white mb-4">For Game Developers</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
@@ -203,23 +206,23 @@ const WizoraPage: React.FC = () => {
                   <span className="text-napptix-light-grey">Customizable ad formats that match your game's style</span>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
       
       {/* CTA Section */}
-      <section className="py-20 bg-napptix-dark">
+      <section className="py-20  bg-black">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to transform your gaming ad strategy?</h2>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button size="lg" className="bg-napptix-dark text-white hover:bg-[#29dd3b]/90">
               <Zap className="mr-2 h-5 w-5" /> Get Started
             </Button>
-            <Button size="lg" variant="outline" className="border-[#29dd3b]/50 text-[#29dd3b] hover:bg-[#29dd3b]/10">
+            {/* <Button size="lg" variant="outline" className="border-[#29dd3b]/50 text-[#29dd3b] hover:bg-[#29dd3b]/10">
               Request Demo
-            </Button>
+            </Button> */}
           </div>
         </div>
       </section>

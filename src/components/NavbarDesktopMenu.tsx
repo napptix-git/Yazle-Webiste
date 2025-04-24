@@ -41,23 +41,23 @@ const NavbarDesktopMenu: React.FC<Props> = ({
             className="absolute top-full left-0 w-96 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"  // SHIFTED left
           >
             <div className="py-8 px-6">
-              <p className="text-gray-400 text-sm font-bold mb-6 uppercase font-bold">Our Solutions</p>
+              <p className="text-gray-400 text-sm font-bold mb-6 uppercase ">Our Solutions</p>
               <div className="space-y-6">
                 <Link to="/advertisers/wizora" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
                   <div className="p-2 bg-gray-800 rounded-lg">
                     <Gamepad className="h-5 w-5 text-[#29dd3b]" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-gray-200 uppercase font-bold">Wizora</p>
+                    <p className="text-sm font-bold text-gray-200 uppercase ">Wizora</p>
                     <p className="text-xs text-gray-400">Interactive ad platform</p>
                   </div>
                 </Link>
-                <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
+                {/* <Link to="/advertisers/case-studies" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
                   <div className="p-2 bg-gray-800 rounded-lg">
                     <BookOpen className="h-5 w-5 text-[#29dd3b]" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-gray-200 uppercase font-bold">Case Studies</p>
+                    <p className="text-sm font-bold text-gray-200 uppercase ">Case Studies</p>
                     <p className="text-xs text-gray-400">Success stories</p>
                   </div>
                 </Link>
@@ -66,10 +66,10 @@ const NavbarDesktopMenu: React.FC<Props> = ({
                     <Image className="h-5 w-5 text-[#29dd3b]" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-gray-200 uppercase font-bold">Ad Gallery</p>
+                    <p className="text-sm font-bold text-gray-200 uppercase ">Ad Gallery</p>
                     <p className="text-xs text-gray-400">Explore ad formats</p>
                   </div>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </motion.div>
@@ -94,14 +94,14 @@ const NavbarDesktopMenu: React.FC<Props> = ({
             className="absolute top-full left-0 w-72 mt-2 bg-black/95 border border-gray-800 rounded-lg shadow-lg overflow-hidden z-50"
           >
             <div className="py-8 px-6">
-              <p className="text-gray-400 text-sm font-bold mb-6 uppercase font-bold">For Game Developers</p>
+              <p className="text-gray-400 text-sm font-bold mb-6 uppercase ">For Game Developers</p>
               <div className="space-y-6">
                 <Link to="/developers" onClick={scrollToTop} className="flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md hover:bg-gray-800">
                   <div className="p-2 bg-gray-800 rounded-lg">
                     <BookCheck className="h-5 w-5 text-[#29dd3b]" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-gray-200 uppercase font-bold">Overview</p>
+                    <p className="text-sm font-bold text-gray-200 uppercase ">Overview</p>
                     <p className="text-xs text-gray-400">Discover solutions</p>
                   </div>
                 </Link>

@@ -229,7 +229,7 @@ const About: React.FC = () => {
           </div>
         </div>
         {/* Our People Section with centered text */}
-        <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-14 rounded-lg">
+        {/* <div className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-red-500/10 p-8 my-14 rounded-lg">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">Our People</h2>
           <p className="text-2xl text-white/80 mb-12 text-center">
             Creativity opens doors,<br />
@@ -248,9 +248,9 @@ const About: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
         
-        <h2 className="text-3xl font-bold text-white mt-12 mb-6">Our Values</h2>
+        <h2 className="text-3xl font-bold text-white mt-20 mb-6 text-center">Our Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
             <h3 className="text-xl font-bold text-white mb-4">Innovation</h3>
