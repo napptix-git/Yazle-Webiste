@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Robot, Puzzle, Globe, Check, Zap } from 'lucide-react';
+import { Bot, Puzzle, Globe, Check, Zap } from 'lucide-react';
 
 const features = [
   {
     title: "AI-Powered Game Creation",
-    icon: <Robot className="h-8 w-8 text-[#29dd3b]" />,
+    icon: <Bot className="h-8 w-8 text-[#29dd3b]" />,
     description: "From concept to playable in record time. Wizora uses AI to rapidly generate branded mini-games, adapting mechanics and visuals to match your campaign goals—so you get custom engagement without the custom dev time."
   },
   {
@@ -65,11 +65,11 @@ const WizoraPage: React.FC = () => {
               transition={{ duration: 0.5 }}
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                Turn ads into mini-games. Turn players into fans.
+                Wizora Turn ads into mini-games. Turn players into fans.
               </h1>
               <p className="text-xl text-napptix-light-grey mb-8">
                 Turn ads into mini-games. Turn players into fans.
-                Wizora makes every brand moment playable.
+                
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 {/* <Button size="lg" className="bg-[#29dd3b] text-black hover:bg-[#29dd3b]/90">
