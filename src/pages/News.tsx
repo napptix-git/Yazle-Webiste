@@ -59,13 +59,13 @@ const News: React.FC = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className={`flex ${!isHovered ? 'animate-carousel-left' : ''} transition-all duration-10`}>
+            <div className={`flex ${!isHovered ? 'animate-carousel-left' : ''} transition-all duration-25`}>
               {duplicatedNews.map((item, index) => (
                 <div 
                   key={index}
                   className="min-w-[600px] mx-4 flex-shrink-0"
                 >
-                  <div className="bg-napptix-dark p-12 rounded-xl border border-napptix-grey/20 min-h-[300px]">
+                  <div className="bg-napptix-dark p-12 rounded-xl border border-napptix-grey/20 min-h-[500px] min-w-[200px]">
                     <div className="mb-4">
                       <span className="text-[#29dd3b] text-sm">{item.date}</span>
                     </div>
