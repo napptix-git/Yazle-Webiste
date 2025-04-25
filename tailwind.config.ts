@@ -22,6 +22,15 @@ export default {
       }
     },
     extend: {
+      animation: {
+        'carousel-left': 'carousel-left 25s linear infinite',
+      },
+      keyframes: {
+        'carousel-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],

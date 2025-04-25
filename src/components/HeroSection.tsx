@@ -141,7 +141,7 @@ const HeroSection: React.FC = () => {
             Reach Every <span className="text-[#29dd3b]">Gamer</span>
           </motion.h1>
           <motion.p 
-            className="text-lg md:text-2xl text-napptix-light-grey max-w-2xl md:max-w-3xl mx-auto mb-10 font-roboto-mono font-normal text-center"
+            className="text-lg md:text-2xl text-napptix-light-grey max-w-2xl md:max-w-3xl mx-auto mb-10 font-grandview-display font-normal text-center"
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.13 }}
@@ -156,7 +156,7 @@ const HeroSection: React.FC = () => {
           >
             <Link to="/advertisers/wizora">
               <button
-                className="px-8 py-3 rounded-full font-bold text-white text-lg"
+                className="px-8 py-3 rounded-full font-bold text-white text-lg "
                 style={{
                   background: "#8B5CF6",
                   fontFamily: 'Roboto Mono, monospace',

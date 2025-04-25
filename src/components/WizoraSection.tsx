@@ -33,7 +33,7 @@ const WizoraSection = () => {
         className="text-center mb-16"
       >
         <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Wizora Ad Platform</h2>
-        <p className="text-napptix-light-grey font-roboto-mono text-xl max-w-2xl mx-auto">
+        <p className="text-napptix-light-grey font-grandvuew-display text-xl max-w-2xl mx-auto">
           Our powerful rich media ad technology for delivering captivating, interactive experiences to gaming audiences.
         </p>
       </motion.div>
@@ -55,7 +55,7 @@ const WizoraSection = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
-                  <p className="text-napptix-light-grey font-roboto-mono">{feature.description}</p>
+                  <p className="text-napptix-light-grey font-granview-display">{feature.description}</p>
                 </div>
               </motion.div>
             ))}
