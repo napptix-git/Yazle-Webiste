@@ -23,23 +23,26 @@ const Index = () => {
     // Scroll to top when page loads
     window.scrollTo(0, 0);
     
-    // Create a context to scope GSAP animations
+    // Create a context to scope GSAP animations after the component is mounted and DOM is available
     const ctx = gsap.context(() => {
-      // Simple scroll animation instead of smoother
-      gsap.fromTo(
-        ".gsap-animate",
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: ".gsap-animate",
-            start: "top bottom",
-            toggleActions: "play none none none"
+      // Simple animation for sections
+      gsap.utils.toArray<HTMLElement>('.gsap-animate').forEach((section) => {
+        gsap.fromTo(
+          section,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom-=100px",
+              toggleActions: "play none none none",
+              once: true
+            }
           }
-        }
-      );
+        );
+      });
     }, pageRef);
     
     // Clean up all GSAP animations on unmount
@@ -60,19 +63,25 @@ const Index = () => {
       </section>
       
       {/* Partners Carousel */}
-      <section id="partners" className="bg-black py-12 mt-32 md:mt-56 gsap-animate">
-        <PartnersCarousel />
-      </section>
+      <div className="gsap-animate">
+        <section id="partners" className="bg-black py-12 mt-32 md:mt-56">
+          <PartnersCarousel />
+        </section>
+      </div>
 
       {/* Animated Card Section */}
-      <section id="services" className="bg-black gsap-animate">
-        <AnimatedCardSection />
-      </section>
+      <div className="gsap-animate">
+        <section id="services" className="bg-black">
+          <AnimatedCardSection />
+        </section>
+      </div>
       
       {/* Advertisers and Publishers Section */}
-      <section id="audience" className="mt-36 md:mt-48 bg-black gsap-animate">
-        <AudienceCards />
-      </section>
+      <div className="gsap-animate">
+        <section id="audience" className="mt-36 md:mt-48 bg-black">
+          <AudienceCards />
+        </section>
+      </div>
       
       {/* Footer */}
       <section>
