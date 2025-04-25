@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -57,21 +58,10 @@ const NavbarMobileMenu: React.FC<Props> = ({
                     className="mt-2 pl-4 space-y-2"
                   >
                     <Link to="/advertisers/wizora" onClick={scrollToTop} className="block py-2 text-gray-300">Wizora</Link>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    {/* <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
-                    <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link> */}
-=======
-=======
->>>>>>> manual-dev
                     {/* Temporarily removed:
                     <Link to="/advertisers/case-studies" onClick={scrollToTop} className="block py-2 text-gray-300">Case Studies</Link>
                     <Link to="/advertisers/ad-gallery" onClick={scrollToTop} className="block py-2 text-gray-300">Ad Gallery</Link>
                     */}
-<<<<<<< HEAD
->>>>>>> 25186691c9db21cdbf795583723fb076fb10ba42
-=======
->>>>>>> manual-dev
                   </motion.div>
                 )}
               </AnimatePresence>
