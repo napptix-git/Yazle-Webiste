@@ -204,9 +204,9 @@ const About: React.FC = () => {
           {/* Map image */}
           <div className="relative w-full max-w-5xl mx-auto mb-12 flex flex-col items-center">
             <img
-              src="/lovable-uploads/ec64442e-79ca-4a7d-a240-05f0cd63084a.png"
+              src="/lovable-uploads/globe.png"
               alt="Global Presence Map"
-              className="w-full h-[340px] object-cover rounded-lg shadow-xl brightness-125 contrast-125 saturate-125"
+              className="w-full h-[500px] object-cover rounded-lg shadow-xl brightness-500 contrast-1000 saturate-125"
               style={{ maxWidth: 1000, background: '#000' }}
             />
           </div>

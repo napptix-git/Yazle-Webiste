@@ -92,7 +92,7 @@ const WizoraPage: React.FC = () => {
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                <p className="text-napptix-light-grey font-roboto-mono">{feature.description}</p>
+                <p className="text-napptix-light-grey font-grandview-display">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -110,19 +110,19 @@ const WizoraPage: React.FC = () => {
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">1</div>
               <h3 className="text-xl font-bold text-white mb-3">Creative Brief</h3>
-              <p className="text-napptix-light-grey font-roboto-mono">You bring the vision. We translate it into gameplay. Provide your brand goals, message, and style—our system uses that input to kickstart concept generation with AI.</p>
+              <p className="text-napptix-light-grey font-grandview-display">You bring the vision. We translate it into gameplay. Provide your brand goals, message, and style—our system uses that input to kickstart concept generation with AI.</p>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">2</div>
               <h3 className="text-xl font-bold text-white mb-3">Game Generation</h3>
-              <p className="text-napptix-light-grey font-roboto-mono">AI turns concepts into customized, playable micro-games. Wizora builds fun-first ad experiences, tailored to audience behavior and platform specs—no dev hours needed.</p>
+              <p className="text-napptix-light-grey font-grandview-display">AI turns concepts into customized, playable micro-games. Wizora builds fun-first ad experiences, tailored to audience behavior and platform specs—no dev hours needed.</p>
             </div>
             
             <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 relative z-10">
               <div className="bg-[#29dd3b] w-10 h-10 rounded-full flex items-center justify-center text-black font-bold text-xl mb-4">3</div>
               <h3 className="text-xl font-bold text-white mb-3">Launch & Optimize</h3>
-              <p className="text-napptix-light-grey font-roboto-mono">We deploy, test, and evolve for engagement at scale. Our managed service ensures games run smoothly, track interactions, and iterate to keep performance high.</p>
+              <p className="text-napptix-light-grey font-grandview-display">We deploy, test, and evolve for engagement at scale. Our managed service ensures games run smoothly, track interactions, and iterate to keep performance high.</p>
             </div>
           </div>
         </div>
