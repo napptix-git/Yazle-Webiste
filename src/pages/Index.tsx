@@ -25,20 +25,20 @@ const Index = () => {
     
     // Create a context to scope GSAP animations after the component is mounted and DOM is available
     const ctx = gsap.context(() => {
-      // Simple animation for sections
-      gsap.utils.toArray<HTMLElement>('.gsap-animate').forEach((section) => {
+      // Simple animation for sections - using a simpler approach
+      document.querySelectorAll('.gsap-animate').forEach((section) => {
         gsap.fromTo(
           section,
-          { y: 30, opacity: 0 },
+          { y: 20, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
+            duration: 0.5,
+            ease: "power1.out",
             scrollTrigger: {
               trigger: section,
-              start: "top bottom-=100px",
+              start: "top bottom",
               toggleActions: "play none none none",
-              once: true
             }
           }
         );
@@ -63,25 +63,19 @@ const Index = () => {
       </section>
       
       {/* Partners Carousel */}
-      <div className="gsap-animate">
-        <section id="partners" className="bg-black py-12 mt-32 md:mt-56">
-          <PartnersCarousel />
-        </section>
-      </div>
+      <section id="partners" className="gsap-animate bg-black py-12 mt-32 md:mt-56">
+        <PartnersCarousel />
+      </section>
 
       {/* Animated Card Section */}
-      <div className="gsap-animate">
-        <section id="services" className="bg-black">
-          <AnimatedCardSection />
-        </section>
-      </div>
+      <section id="services" className="gsap-animate bg-black">
+        <AnimatedCardSection />
+      </section>
       
       {/* Advertisers and Publishers Section */}
-      <div className="gsap-animate">
-        <section id="audience" className="mt-36 md:mt-48 bg-black">
-          <AudienceCards />
-        </section>
-      </div>
+      <section id="audience" className="gsap-animate mt-36 md:mt-48 bg-black">
+        <AudienceCards />
+      </section>
       
       {/* Footer */}
       <section>
