@@ -38,38 +38,18 @@ const AnnouncementBar = () => {
 
   return (
     <div className="bg-gradient-to-r from-[#29dd3b]/20 via-[#29dd3b]/40 to-[#29dd3b]/20 border-b border-[#29dd3b]/40 shadow-md">
-<<<<<<< HEAD
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row items-center justify-between py-3">
           <div className="flex items-center gap-2 text-sm md:text-base mb-2 sm:mb-0 pl-[300px]">
             <span className="text-xl animate-pulse">🎮</span>
             <p className="text-white font-syne font-semibold">
               Breaking News: Napptix Acquires Yezel to Revolutionize Gaming Advertising! 
-=======
-      <div className="container mx-auto px-3 sm:px-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between py-2 sm:py-3">
-          <div className="flex items-center gap-2 text-center sm:text-left w-full sm:w-auto mb-2 sm:mb-0">
-            <span className="text-xl animate-pulse hidden sm:inline-block">🎮</span>
-            <p className="text-white font-syne font-semibold text-sm sm:text-base">
-              {isMobile ? (
-                <>
-                  <span className="text-xl animate-pulse inline-block mr-1">🎮</span>
-                  Breaking News: Napptix Acquires Yezel!
-                </>
-              ) : (
-                'Breaking News: Napptix Acquires Yezel to Revolutionize Gaming Advertising!'
-              )}
->>>>>>> df8098e1f05dda692e21e8bbb116bb029e7ffa27
             </p>
           </div>
           <div className="flex items-center gap-3 sm:gap-4">
             <button
               onClick={handleReadMore}
-<<<<<<< HEAD
               className="flex items-center gap-1 bg-black hover:bg-[#29dd3b]/80 text-white px-3 py-1 rounded-full text-sm font-syne transition-colors font-bold"
-=======
-              className="flex items-center gap-1 bg-[#29dd3b] hover:bg-[#29dd3b]/80 text-black px-3 py-1 rounded-full text-xs sm:text-sm font-syne transition-colors font-bold"
->>>>>>> df8098e1f05dda692e21e8bbb116bb029e7ffa27
             >
               <Newspaper className="h-3 w-3 sm:h-4 sm:w-4" /> Read More
             </button>

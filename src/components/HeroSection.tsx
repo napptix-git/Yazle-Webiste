@@ -122,7 +122,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <div className="relative flex min-h-[85vh] w-full items-center justify-center">
+    <div className="relative flex min-h-[85vh] w-full items-center justify-center ">
       {/* Particle Canvas */}
       <canvas 
         ref={canvasRef} 
