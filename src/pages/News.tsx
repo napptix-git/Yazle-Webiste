@@ -1,7 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import AnnouncementBar from '@/components/AnnouncementBar';
 
 const newsItems = [
   {
@@ -12,23 +12,27 @@ const newsItems = [
   },
   {
     date: "April 20, 2025",
-    title: "Expanding Our Global Presence",
-    content: "We're excited to announce the opening of our new offices in Singapore and Dubai, strengthening our presence in key gaming markets across Asia and the Middle East."
+    title: "Expanding Our Global Presence 🌎",
+    content: "We're excited to announce the opening of our new offices in Singapore and Dubai, strengthening our presence in key gaming markets across Asia and the Middle East.",
+    image: "https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?q=80&w=1471&fit=crop"
   },
   {
     date: "April 15, 2025",
-    title: "Partnership with Major Game Studios",
-    content: "Napptix has secured partnerships with five major game studios, expanding our reach to over 100 million active players worldwide."
+    title: "Partnership with Major Game Studios 🎯",
+    content: "Napptix has secured partnerships with five major game studios, expanding our reach to over 100 million active players worldwide.",
+    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1470&fit=crop"
   },
   {
     date: "April 10, 2025",
-    title: "Revolutionary AI Technology Integration",
-    content: "Our new AI-powered targeting system has shown a 300% improvement in ad engagement rates across all gaming platforms."
+    title: "Revolutionary AI Technology Integration 🤖",
+    content: "Our new AI-powered targeting system has shown a 300% improvement in ad engagement rates across all gaming platforms.",
+    image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=1470&fit=crop"
   },
   {
     date: "April 5, 2025",
-    title: "Industry Award Recognition",
-    content: "Napptix has been recognized as the 'Most Innovative Ad Tech Company' at the Global Gaming Awards 2025."
+    title: "Industry Award Recognition 🏆",
+    content: "Napptix has been recognized as the 'Most Innovative Ad Tech Company' at the Global Gaming Awards 2025.",
+    image: "https://images.unsplash.com/photo-1643101452019-bc00c9bba76b?q=80&w=1498&fit=crop"
   }
 ];
 
@@ -43,7 +47,6 @@ const News: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black">
-      <AnnouncementBar />
       <Navbar />
       <div className="container mx-auto pt-32 pb-20 px-4">
         <h1 className="text-4xl md:text-6xl font-syne font-bold text-white mb-16 text-center">Latest News</h1>
