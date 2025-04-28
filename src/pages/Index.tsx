@@ -7,6 +7,7 @@ import AudienceCards from '@/components/AudienceCards';
 import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
 import WizoraSection from '@/components/WizoraSection';
+import AnnouncementBar from '@/components/AnnouncementBar';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -17,6 +18,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
+      <AnnouncementBar />
       <Navbar />
       
       <section id="hero">
