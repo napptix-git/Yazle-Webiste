@@ -19,7 +19,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
       <AnnouncementBar />
-      <div className="pt-1">
+      <div className="pt-2 sm:pt-1">
         <Navbar />
       </div>
       
