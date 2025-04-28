@@ -19,7 +19,11 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
       <AnnouncementBar />
+<<<<<<< HEAD
       <div className="">
+=======
+      <div className="pt-2 sm:pt-1">
+>>>>>>> df8098e1f05dda692e21e8bbb116bb029e7ffa27
         <Navbar />
       </div>
       
@@ -31,9 +35,9 @@ const Index = () => {
         <PartnersCarousel />
       </section>
 
-      <section id="services" className="bg-black">
+      <div id="services" className="bg-black">
         <AnimatedCardSection />
-      </section>
+      </div>
       
       <section id="audience" className="mt-36 md:mt-48 bg-black">
         <AudienceCards />
