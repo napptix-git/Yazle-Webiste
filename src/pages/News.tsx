@@ -1,13 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AnnouncementBar from '@/components/AnnouncementBar';
 
 const newsItems = [
   {
-    date: "April 24, 2025",
-    title: "Napptix Launches New Interactive Ad Platform",
-    content: "Today marks a significant milestone in gaming advertising as we launch our revolutionary interactive ad platform, designed to transform how brands connect with gamers."
+    date: "April 28, 2025",
+    title: "Napptix Acquires Yezel Technologies 🚀",
+    content: "In a groundbreaking move, Napptix has acquired Yezel Technologies, combining our innovative ad platform with Yezel's cutting-edge AI capabilities. This strategic merger promises to transform the gaming advertising landscape.",
+    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1470&fit=crop"
   },
   {
     date: "April 20, 2025",
@@ -42,6 +43,7 @@ const News: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black">
+      <AnnouncementBar />
       <Navbar />
       <div className="container mx-auto pt-32 pb-20 px-4">
         <h1 className="text-4xl md:text-6xl font-syne font-bold text-white mb-16 text-center">Latest News</h1>
@@ -58,7 +60,16 @@ const News: React.FC = () => {
                   key={index}
                   className="min-w-[400px] mx-4 flex-shrink-0"
                 >
-                  <div className="bg-[#121212] p-8 rounded-xl border border-napptix-grey/20 min-h-[320px] hover:border-[#29dd3b] transition-colors duration-300">
+                  <div className="bg-[#121212] p-8 rounded-xl border border-napptix-grey/20 min-h-[420px] hover:border-[#29dd3b] transition-colors duration-300">
+                    {item.image && (
+                      <div className="mb-6 overflow-hidden rounded-lg">
+                        <img 
+                          src={item.image} 
+                          alt={item.title} 
+                          className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
                     <div className="mb-4">
                       <span className="text-[#29dd3b] text-sm font-syne">{item.date}</span>
                     </div>
@@ -78,6 +89,15 @@ const News: React.FC = () => {
         <div className="grid grid-cols-1 gap-8">
           {newsItems.map((item, index) => (
             <article key={index} className="bg-[#121212] p-8 rounded-xl border border-napptix-grey/20 hover:border-[#29dd3b] transition-colors duration-300">
+              {item.image && (
+                <div className="mb-6 overflow-hidden rounded-lg">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              )}
               <div className="mb-4">
                 <span className="text-[#29dd3b] text-sm font-syne">{item.date}</span>
               </div>
