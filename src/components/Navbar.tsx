@@ -17,7 +17,7 @@ type HoveredItemType = {
 // Custom type definition for the window object
 declare global {
   interface Window {
-    announcementBarState?: {
+    announcementBarState: {
       isVisible: boolean;
     };
   }
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
 
     // Set up an interval to check the announcement bar visibility
     const checkAnnouncementInterval = setInterval(() => {
-      if (window.announcementBarState) {
+      if (typeof window !== 'undefined' && window.announcementBarState) {
         setAnnouncementVisible(window.announcementBarState.isVisible);
       }
     }, 100);

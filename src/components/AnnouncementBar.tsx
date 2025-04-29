@@ -6,6 +6,20 @@ import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Define the global interface for the window object
+declare global {
+  interface Window {
+    announcementBarState: {
+      isVisible: boolean;
+    };
+  }
+}
+
+// Initialize the global state object
+if (typeof window !== 'undefined') {
+  window.announcementBarState = window.announcementBarState || { isVisible: true };
+}
+
 const AnnouncementBar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
@@ -38,11 +52,10 @@ const AnnouncementBar = () => {
     localStorage.setItem('announcementDismissed', 'true');
   };
 
-  // Export visibility state for other components to use
-  if (window.announcementBarState === undefined) {
-    window.announcementBarState = {};
+  // Update the global state with current visibility
+  if (typeof window !== 'undefined') {
+    window.announcementBarState.isVisible = isVisible;
   }
-  window.announcementBarState.isVisible = isVisible;
 
   return (
     <AnimatePresence>
