@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import DesktopMenu from './NavbarDesktopMenu';
 import MobileMenu from './NavbarMobileMenu';
@@ -14,21 +14,10 @@ type HoveredItemType = {
   desktop: DesktopMenuType;
 };
 
-// Custom type definition for the window object
-declare global {
-  interface Window {
-    announcementBarState: {
-      isVisible: boolean;
-    };
-  }
-}
-
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<HoveredItemType>({ mobile: null, desktop: null });
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
-  const [announcementVisible, setAnnouncementVisible] = useState(true);
-
   const location = useLocation();
 
   useEffect(() => {
@@ -41,22 +30,10 @@ const Navbar: React.FC = () => {
       }
     };
 
-    // Check if announcement is dismissed in localStorage
-    const isAnnouncementDismissed = localStorage.getItem('announcementDismissed') === 'true';
-    setAnnouncementVisible(!isAnnouncementDismissed);
-
-    // Set up an interval to check the announcement bar visibility
-    const checkAnnouncementInterval = setInterval(() => {
-      if (typeof window !== 'undefined' && window.announcementBarState) {
-        setAnnouncementVisible(window.announcementBarState.isVisible);
-      }
-    }, 100);
-
     window.addEventListener('scroll', handleScroll);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearInterval(checkAnnouncementInterval);
     };
   }, []);
 
@@ -88,13 +65,10 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <motion.header 
+    <header 
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled ? 'backdrop-blur-lg' : 'bg-transparent'
       }`}
-      initial={{ marginTop: announcementVisible ? '48px' : '0px' }}
-      animate={{ marginTop: announcementVisible ? '48px' : '0px' }}
-      transition={{ duration: 0.3 }}
     >
       <div className="container mx-auto px-4 lg:mt-[20px] pl-[-100px]">
         <div className="flex justify-between items-center">
@@ -174,7 +148,7 @@ const Navbar: React.FC = () => {
           100% { background-position: -200% 0 }
         }
       `}</style>
-    </motion.header>
+    </header>
   );
 };
 
