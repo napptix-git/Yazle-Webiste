@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import PartnersCarousel from '@/components/PartnersCarousel';
@@ -16,9 +15,12 @@ const Index = () => {
     window.scrollTo(0, 0);
   }, []);
 
+
+
   return (
-    <div className="min-h-screen bg-black" ref={pageRef}>
-      <AnnouncementBar />
+    <div className="min-h-screen bg-black">
+     
+      {/* <AnnouncementBar /> */}
       <div className="">
         <Navbar />
       </div>
