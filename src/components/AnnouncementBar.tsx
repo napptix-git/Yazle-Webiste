@@ -38,11 +38,19 @@ const AnnouncementBar = () => {
     localStorage.setItem('announcementDismissed', 'true');
   };
 
+  // Export visibility state for other components to use
+  if (window.announcementBarState === undefined) {
+    window.announcementBarState = {};
+  }
+  window.announcementBarState.isVisible = isVisible;
+
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ height: 48, opacity: 1 }}
+          key="announcement-bar"
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 48, opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.3 }}
           className="bg-gradient-to-r from-[#29dd3b]/20 via-[#29dd3b]/40 to-[#29dd3b]/20 border-b border-[#29dd3b]/40 shadow-md fixed top-0 left-0 right-0 z-50"

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,6 +13,15 @@ type HoveredItemType = {
   mobile: MobileMenuType;
   desktop: DesktopMenuType;
 };
+
+// Custom type definition for the window object
+declare global {
+  interface Window {
+    announcementBarState?: {
+      isVisible: boolean;
+    };
+  }
+}
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -31,12 +41,22 @@ const Navbar: React.FC = () => {
       }
     };
 
+    // Check if announcement is dismissed in localStorage
     const isAnnouncementDismissed = localStorage.getItem('announcementDismissed') === 'true';
     setAnnouncementVisible(!isAnnouncementDismissed);
 
+    // Set up an interval to check the announcement bar visibility
+    const checkAnnouncementInterval = setInterval(() => {
+      if (window.announcementBarState) {
+        setAnnouncementVisible(window.announcementBarState.isVisible);
+      }
+    }, 100);
+
     window.addEventListener('scroll', handleScroll);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      clearInterval(checkAnnouncementInterval);
     };
   }, []);
 
@@ -69,13 +89,11 @@ const Navbar: React.FC = () => {
 
   return (
     <motion.header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled ? 'backdrop-blur-lg' : 'bg-transparent'
       }`}
-      initial={false}
-      animate={{ 
-        marginTop: announcementVisible ? '48px' : '0px'
-      }}
+      initial={{ marginTop: announcementVisible ? '48px' : '0px' }}
+      animate={{ marginTop: announcementVisible ? '48px' : '0px' }}
       transition={{ duration: 0.3 }}
     >
       <div className="container mx-auto px-4 lg:mt-[20px] pl-[-100px]">
