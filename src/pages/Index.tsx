@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -8,6 +7,7 @@ import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
 import WizoraSection from '@/components/WizoraSection';
 import NewsCarousel from '@/components/NewsCarousel';
+import AnnouncementBar from '@/components/AnnouncementBar';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -18,6 +18,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
+      <div>
+        <AnnouncementBar />
+      </div>
       <div className="">
         <Navbar />
       </div>
