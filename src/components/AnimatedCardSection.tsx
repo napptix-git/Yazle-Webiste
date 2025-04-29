@@ -20,6 +20,30 @@ const AnimatedCardSection: React.FC = () => {
     { id: "pro-game", title: "Pro-Game" }
   ];
 
+  const serviceCards = [
+    { 
+      id: "in-game", 
+      title: "In-Game",
+      frontImage: "/lovable-uploads/Card1.png" // 👈 specific image
+    },
+    { 
+      id: "on-game", 
+      title: "On-Game",
+      frontImage: "/lovable-uploads/Card2.png"
+    },
+    { 
+      id: "off-game", 
+      title: "Off-Game",
+      frontImage: "/lovable-uploads/Card3.png"
+    },
+    { 
+      id: "pro-game", 
+      title: "Pro-Game",
+      frontImage: "/lovable-uploads/Card4.png"
+    }
+  ];
+  
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -172,7 +196,7 @@ const AnimatedCardSection: React.FC = () => {
               >
                 <FlipCard
                   id={`card-${index + 1}`}
-                  frontImage="/lovable-uploads/card.jpg"
+                  frontImage={serviceCards[index].frontImage}
                   backText={service.title}
                   ref={(el) => {
                     if (el instanceof HTMLDivElement) cardsRef.current[index] = el;
@@ -187,7 +211,7 @@ const AnimatedCardSection: React.FC = () => {
               <FlipCard
                 key={service.id}
                 id={`card-${index + 1}`}
-                frontImage="/lovable-uploads/card.jpg"
+                frontImage={serviceCards[index].frontImage}
                 backText={service.title}
                 ref={(el) => {
                   if (el instanceof HTMLDivElement) cardsRef.current[index] = el;
