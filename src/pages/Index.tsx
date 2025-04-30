@@ -39,7 +39,7 @@ const Index = () => {
         <AnimatedCardSection />
       </div>
       
-      <section id="audience" className="mt-36 md:mt-48 bg-black">
+      <section id="audience" className="mt-32 md:mt-1 bg-black">
         <AudienceCards />
       </section>
       
