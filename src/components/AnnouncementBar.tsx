@@ -14,7 +14,7 @@ const AnnouncementBar: React.FC = () => {
   };
 
   const handleReadMore = () => {
-    navigate('/news');
+    navigate('/news/news-1');
     window.scrollTo(0, 0);
   };
 
@@ -41,8 +41,8 @@ const AnnouncementBar: React.FC = () => {
                 <span className="text-base animate-pulse">🎮</span> {/* Adjusted icon size */}
                 <p className="text-white font-syne font-semibold truncate">
                   {isMobile
-                    ? "Napptix Acquires Yezel!"
-                    : "Breaking News: Napptix Acquires Yezel to Revolutionize Gaming Advertising!"}
+                    ? "Napptix Acquires Yazle!"
+                    : "Breaking News: Napptix Acquires Yazle to Revolutionize Gaming Advertising!"}
                 </p>
               </div>
 

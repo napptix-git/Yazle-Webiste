@@ -24,7 +24,7 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
       <div className="flip-card" id={id} ref={ref as React.RefObject<HTMLDivElement>}>
         <div className={`flip-card-wrapper ${isActive ? 'active' : ''}`}>
           <div className="flip-card-inner">
-            <div className="flip-card-front border-4 border-[#29dd3b] rounded-2xl overflow-hidden">
+            <div className="flip-card-front border-2 border-[#29dd3b] rounded-2xl overflow-hidden">
               <div className="w-full h-full flex flex-col relative">
                 <img 
                   src={frontImage} 
