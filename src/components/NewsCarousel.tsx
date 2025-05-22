@@ -73,9 +73,10 @@ const NewsCarousel = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-4"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">LATEST NEWS</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">LATEST NEWS</h2>
+            <p className="text-white text-lg mb-8 opacity-90">Stay updated with the latest advancements and announcements from Napptix.</p>
           </motion.div>
 
           <div 
@@ -118,9 +119,10 @@ const NewsCarousel = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-4"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">LATEST NEWS</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">LATEST NEWS</h2>
+          <p className="text-white text-lg mb-8 opacity-90">Stay updated with the latest advancements and announcements from Napptix.</p>
         </motion.div>
 
         <Carousel 
