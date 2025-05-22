@@ -15,32 +15,27 @@ const newsItems = [
   {
     id: "news-1",
     date: "April 24, 2025",
-    title: "Napptix Launches New Interactive Ad Platform",
-    content: "Today marks a significant milestone in gaming advertising as we launch our revolutionary interactive ad platform."
+    title: "Napptix Launches New Interactive Ad Platform"
   },
   {
     id: "news-2",
     date: "April 20, 2025",
-    title: "Expanding Our Global Presence",
-    content: "We're excited to announce the opening of our new offices in Singapore and Dubai, strengthening our presence."
+    title: "Expanding Our Global Presence"
   },
   {
     id: "news-3",
     date: "April 15, 2025",
-    title: "Partnership with Major Game Studios",
-    content: "Napptix has secured partnerships with five major game studios, expanding our reach to over 100 million players."
+    title: "Partnership with Major Game Studios"
   },
   {
     id: "news-4",
     date: "April 10, 2025",
-    title: "Revolutionary AI Technology Integration",
-    content: "Our new AI-powered targeting system has shown a 300% improvement in ad engagement rates across platforms."
+    title: "Revolutionary AI Technology Integration"
   },
   {
     id: "news-5",
     date: "April 5, 2025",
-    title: "Industry Award Recognition",
-    content: "Napptix has been recognized as the 'Most Innovative Ad Tech Company' at the Global Gaming Awards 2025."
+    title: "Industry Award Recognition"
   }
 ];
 
@@ -54,11 +49,10 @@ const NewsCarousel = () => {
       className="bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-8 rounded-xl h-full"
     >
       <div className="mb-4">
-        <span className="text-[#29dd3b] text-sm">{item.date}</span>
+        <span className="text-[#4c3bff] text-sm">{item.date}</span>
       </div>
       <h3 className="text-2xl font-bold text-black mb-4">{item.title}</h3>
-      <p className="text-gray-700 mb-4">{item.content}</p>
-      <Link to={`/news/${item.id}`} className="text-[#29dd3b] hover:underline">
+      <Link to={`/news/${item.id}`} className="text-[#4c3bff] hover:underline">
         Read More →
       </Link>
     </div>
