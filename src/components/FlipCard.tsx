@@ -35,22 +35,19 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
                 {/* Semi-transparent overlay for better visibility */}
                 <div className="absolute inset-0 bg-black/50 z-10"></div>
                 
-                {/* Only showing the title */}
+                {/* Empty front card - no text as requested */}
                 <div className="relative z-20 flex flex-col h-full p-6 justify-center">
-                  <h3 className="text-3xl font-bold text-white text-center font-disket">{backText}</h3>
                 </div>
               </div>
             </div>
             <div className="flip-card-back">
               <div className="flex flex-col items-center justify-center h-full">
-                {/* <h3 className="text-3xl font-bold mb-4 z-20">{backText}</h3> */}
-                
                 {/* Larger rectangular GIF in the back */}
-                <div className=" overflow-hidden bg-black/30 p-1 mb-4 rounded-md">
+                <div className="w-full h-3/4 overflow-hidden bg-black/30 rounded-md relative">
                 {gifUrl.endsWith('.mov') ? (
                     <video
                       src={gifUrl}
-                      className="absolute inset-0 w-full h-full object-cover z-0"
+                      className="w-full h-full object-cover"
                       autoPlay
                       loop
                       muted
@@ -60,17 +57,10 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
                     <img
                       src={gifUrl}
                       alt={`${backText} animation`}
-                      className="absolute inset-0 w-full h-full object-cover z-0"
+                      className="w-full h-full object-cover"
                     />
                   )}
                 </div>
-                
-                <p className="text-lg text-center px-6 z-20">
-                  {/* {backText === "In-Game" && "Native ad placements within the gaming environment."} */}
-                  {/* {backText === "On-Game" && "Strategic ad placements around the game interface."}
-                  {backText === "Off-Game" && "Extend your reach beyond gameplay through our network."}
-                  {backText === "Pro-Game" && "Specialized solutions for esports events and tournaments."} */}
-                </p>
               </div>
             </div>
           </div>
