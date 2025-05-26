@@ -49,15 +49,14 @@ const Careers: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
             <h2 className="text-2xl font-disket text-white mb-4">Why Join Us?</h2>
-            <div className="space-y-4 text-gray-300 font-productSans">
-              <p>Work in an innovative technology environment where creativity meets cutting-edge solutions. We're at the forefront of gaming advertising technology, constantly pushing boundaries and exploring new possibilities.</p>
-              
-              <p>Make a global impact in the gaming industry by helping shape the future of how brands connect with players worldwide. Your work will directly influence millions of gaming experiences across different platforms and markets.</p>
-              
-              <p>Enjoy competitive compensation and comprehensive benefits designed to support your professional growth and personal well-being. We believe in rewarding talent and dedication with packages that reflect your value to our team.</p>
-              
-              <p>Access continuous learning opportunities through workshops, conferences, and skill development programs. We invest in our team's growth because your success drives our collective achievement in this rapidly evolving industry.</p>
-            </div>
+            <ul className="space-y-4 text-gray-300 font-productSans">
+              <li>• Innovative technology environment</li>
+              <li>• Global impact in gaming industry</li>
+              <li>• Competitive compensation</li>
+              <li>• Continuous learning opportunities</li>
+              <li>• Health and wellness benefits</li>
+              <li>• Regular team retreats</li>
+            </ul>
           </div>
           
           <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">

@@ -1,98 +1,255 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { motion } from 'framer-motion';
+import TeamMember from '@/components/TeamMember';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIsMobile } from '@/hooks/use-mobile';
 import StaticParticleCanvas from '@/components/StaticParticle';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const About: React.FC = () => {
+
+  const isMobile = useIsMobile();
+
+  // Team members data with consistent image formats
+  const teamMembers = [
+    {
+      name: "Alex Mercer",
+      position: "Co-Founder & CEO",
+      imageSrc: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1374&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example",
+      bgColor: "bg-gradient-to-br from-purple-100/20 via-teal-100/20 to-rose-100/20"
+    },
+    {
+      name: "Sarah Kim",
+      position: "Co-Founder & COO",
+      imageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example2",
+      bgColor: "bg-gradient-to-br from-rose-100/20 via-purple-100/20 to-teal-100/20"
+    },
+    {
+      name: "Michael Chen",
+      position: "Chief Financial Officer",
+      imageSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example3",
+      bgColor: "bg-gradient-to-br from-teal-100/20 via-rose-100/20 to-purple-100/20"
+    },
+    {
+      name: "David Rodriguez",
+      position: "Company Secretary",
+      imageSrc: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=1470&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example4",
+      bgColor: "bg-gradient-to-br from-blue-100/20 via-green-100/20 to-yellow-100/20"
+    },
+    {
+      name: "Jennifer Liu",
+      position: "VP, Head of Strategy",
+      imageSrc: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1522&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example5",
+      bgColor: "bg-gradient-to-br from-green-100/20 via-yellow-100/20 to-blue-100/20"
+    },
+    {
+      name: "Emily Watson",
+      position: "Executive Creative Director",
+      imageSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1376&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example6",
+      bgColor: "bg-gradient-to-br from-yellow-100/20 via-blue-100/20 to-green-100/20"
+    },
+    {
+      name: "Natasha Patel",
+      position: "Vice President, Client Services",
+      imageSrc: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1374&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example7",
+      bgColor: "bg-gradient-to-br from-purple-100/20 via-pink-100/20 to-indigo-100/20"
+    },
+    {
+      name: "Robert Kim",
+      position: "Director, Technology",
+      imageSrc: "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=1399&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example8",
+      bgColor: "bg-gradient-to-br from-pink-100/20 via-indigo-100/20 to-purple-100/20"
+    }
+  ];
+
+  const additionalMembers = [
+    {
+      name: "James Wilson",
+      position: "VP, Product Development",
+      imageSrc: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1374&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example9",
+      bgColor: "bg-gradient-to-br from-indigo-100/20 via-purple-100/20 to-pink-100/20"
+    },
+    {
+      name: "Michelle Garcia",
+      position: "Director, User Experience",
+      imageSrc: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?q=80&w=1470&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example10",
+      bgColor: "bg-gradient-to-br from-cyan-100/20 via-blue-100/20 to-indigo-100/20"
+    },
+    {
+      name: "Christopher Lee",
+      position: "Head of Marketing",
+      imageSrc: "https://images.unsplash.com/photo-1543132220-3ec99c6094dc?q=80&w=1374&auto=format=crop",
+      linkedinUrl: "https://linkedin.com/in/example11",
+      bgColor: "bg-gradient-to-br from-amber-100/20 via-orange-100/20 to-red-100/20"
+    },
+    {
+      name: "Olivia Martin",
+      position: "Lead Game Developer",
+      imageSrc: "https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example12",
+      bgColor: "bg-gradient-to-br from-orange-100/20 via-red-100/20 to-amber-100/20"
+    },
+    {
+      name: "Daniel Thompson",
+      position: "Director, Business Development",
+      imageSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1374&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example13",
+      bgColor: "bg-gradient-to-br from-stone-100/20 via-slate-100/20 to-zinc-100/20"
+    },
+    {
+      name: "Sophia Zhang",
+      position: "Senior Data Scientist",
+      imageSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example14",
+      bgColor: "bg-gradient-to-br from-emerald-100/20 via-teal-100/20 to-cyan-100/20"
+    },
+    {
+      name: "William Clark",
+      position: "Head of Customer Success",
+      imageSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop",
+      linkedinUrl: "https://linkedin.com/in/example15",
+      bgColor: "bg-gradient-to-br from-violet-100/20 via-fuchsia-100/20 to-pink-100/20"
+    }
+  ];
+
+  const allTeamMembers = [...teamMembers, ...additionalMembers];
+
+  // Moved offices here to show on about page before people section
+  const offices = [
+    { city: "Mumbai", country: "India" },
+    { city: "Dubai", country: "United Arab Emirates" },
+    { city: "Delhi", country: "India" },
+    { city: "Singapore", country: "Singapore" }
+  ];
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const values = [
-    {
-      title: "Innovation First",
-      description: "We pioneer cutting-edge advertising solutions that push the boundaries of what's possible in gaming.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=3543&h=2365&fit=crop"
-    },
-    {
-      title: "Player-Centric Approach",
-      description: "Every solution we create enhances the gaming experience rather than interrupting it.",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=7952&h=5304&fit=crop"
-    },
-    {
-      title: "Global Mindset",
-      description: "Our solutions are designed to work across cultures, markets, and gaming platforms worldwide.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=6000&h=4000&fit=crop"
-    }
-  ];
+  useEffect(() => {
+    const smoother = gsap.from(document.documentElement, {
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.2,
+      },
+      ease: "power2.out",
+    });
+
+    const teamCards = document.querySelectorAll('.team-member-card');
+    teamCards.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { 
+          opacity: 0, 
+          y: 20 
+        },
+        { 
+          opacity: 1, 
+          y: 0,
+          duration: 0.5,
+          delay: index * 0.05,
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom-=50",
+            toggleActions: "play none none reverse"
+          },
+          ease: "power1.out"
+        }
+      );
+
+      const nameElement = card.querySelector('.member-name');
+      if (nameElement) {
+        gsap.to(nameElement, {
+          textShadow: "0 0 15px rgba(41, 221, 59, 0.5), 0 0 20px rgba(41, 221, 59, 0.2)",
+          color: "#fff",
+          repeat: -1,
+          yoyo: true,
+          duration: 2,
+          ease: "sine.inOut"
+        });
+      }
+    });
+
+    return () => {
+      if (smoother) {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      }
+    };
+  }, []);
+
+ 
 
   return (
     <div className="min-h-screen bg-black">
-      <StaticParticleCanvas />
       <Navbar />
-      
+      <StaticParticleCanvas />
       <div className="container mx-auto pt-32 pb-20 px-4">
-        <h1 className="text-4xl md:text-6xl font-disket text-white mb-8 text-center">About Napptix</h1>
-        <p className="text-xl text-gray-300 mb-12 text-center font-productSans max-w-3xl mx-auto">
-          Revolutionizing the intersection of gaming and advertising through innovative, 
-          non-intrusive solutions that enhance player experiences.
-        </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-          <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
-            <h2 className="text-2xl font-disket text-white mb-4">Our Mission</h2>
-            <p className="text-gray-300 font-productSans">
-              To create seamless advertising experiences that add value to gaming environments 
-              while delivering measurable results for brands. We believe advertising should 
-              enhance, not interrupt, the player journey.
-            </p>
-          </div>
-          
-          <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
-            <h2 className="text-2xl font-disket text-white mb-4">Our Vision</h2>
-            <p className="text-gray-300 font-productSans">
-              To be the global leader in gaming advertising technology, setting new standards 
-              for how brands connect with players across all gaming platforms and regions.
-            </p>
-          </div>
-        </div>
-
-        <h2 className="text-3xl font-disket text-white mb-8 text-center pt-16">Our Values</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value, index) => (
-            <motion.div
-              key={value.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 hover:border-[#29dd3b]/50 transition-all duration-300"
+        <div className="mb-12">
+          <div className="w-full flex flex-col items-center mb-10">
+            <span
+              className="block text-[2.5rem] md:text-[4rem] font-syne font-extrabold text-white leading-none text-center"
+              style={{ textShadow: '0 0 10px #222' }}
             >
-              <div className="mb-4 overflow-hidden rounded-lg">
-                <img 
-                  src={value.image} 
-                  alt={value.title} 
-                  className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
-                />
+              Global Presence
+            </span>
+          </div>
+          <div className="relative w-full max-w-5xl mx-auto mb-12 flex flex-col items-center">
+            <img
+              src={isMobile ? "/lovable-uploads/small-screen-map.png" : "/lovable-uploads/world-map.png"}
+              alt="Global Presence Map"
+              className="w-full h-[300px] md:h-[500px] object-cover rounded-lg shadow-xl brightness-500 contrast-1000 saturate-125"
+              style={{ maxWidth: 1000, background: '#000' }}
+            />
+          </div>
+
+          <div className="max-w-7xl mx-auto mb-16">
+            {offices.map((office) => (
+              <div key={office.city} className="w-full">
+                <div className="flex justify-between items-center py-4 md:py-12 md:px-[-400px] border-b border-[#242424]">
+                  <span className="text-[2rem] md:text-[5.5rem] font-disket font-bold text-white text-left">
+                    {office.city}
+                  </span>
+                  <span className="text-[0.65rem] md:text-[1.35rem] uppercase font-productrSans font-semibold text-gray-300 tracking-wide text-right">
+                    {office.country}
+                  </span>
+                </div>
               </div>
-              <h3 className="text-xl text-white font-disket mb-3">{value.title}</h3>
-              <p className="text-gray-300 font-productSans">{value.description}</p>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        <div className="mt-16 text-center">
-          <h2 className="text-3xl font-disket text-white mb-8">Ready to Transform Your Gaming Advertising?</h2>
-          <p className="text-gray-300 mb-8 font-productSans">
-            Join the brands that are already revolutionizing their approach to gaming marketing.
-          </p>
-          <button 
-            onClick={() => window.location.href = "/contact"}
-            className="bg-[#29dd3b] text-black px-8 py-3 rounded-full font-bold hover:bg-[#29dd3b]/80 transition-colors"
-          >
-            Get Started
-          </button>
+        <h2 className="text-3xl font-disket text-white mt-[100px] md:mt-[200px] mb-6 text-center">Our Values</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[30px] md:mt-[50px]">
+          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-xl font-disket text-white mb-4">Innovation</h3>
+            <p className='font-productSans' 
+            >We constantly push the boundaries of what's possible in gaming advertising.</p>
+          </div>
+          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-xl font-disket text-white mb-4">Integrity</h3>
+            <p className='font-productSans' 
+            >We prioritize transparency and ethical practices in all our operations.</p>
+          </div>
+          <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20">
+            <h3 className="text-xl font-disket text-white mb-4">Player-First</h3>
+            <p className='font-productSans' 
+            >We believe that advertising should enhance, not detract from, the gaming experience.</p>
+          </div>
         </div>
       </div>
       <Footer />

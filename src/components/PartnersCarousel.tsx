@@ -19,19 +19,29 @@ const clientLogos = [
   { id: 12, name: "Virtual Play", logo: "/client_partners_logo/12.png" },
   { id: 13, name: "Virtual Play", logo: "/client_partners_logo/13.png" },
   { id: 14, name: "Virtual Play", logo: "/client_partners_logo/14.png" },
+  // { id: 15, name: "Virtual Play", logo: "/client_partners_logo/15.png" },
+  // { id: 16, name: "Virtual Play", logo: "/cli_pat_logos/16.png" },
+  // { id: 17, name: "Virtual Play", logo: "/cli_pat_logos/17.png" },
+  // { id: 18, name: "Virtual Play", logo: "/cli_pat_logos/18.png" },
 ];
 
-// Function to create multiple copies for seamless infinite scroll
-const createInfiniteArray = (items: any[], copies: number = 3) => {
-  const result = [];
-  for (let i = 0; i < copies; i++) {
-    result.push(...items);
-  }
-  return result;
-};
+// const partnerLogos = [
+//   { id: 1, name: "Tech Partner 1", logo: "TP1" },
+//   { id: 2, name: "Ad Network X", logo: "ANX" },
+//   { id: 3, name: "Marketing Co", logo: "MC" },
+//   { id: 4, name: "Media Group", logo: "MG" },
+//   { id: 5, name: "Adtech Solutions", logo: "AS" },
+//   { id: 6, name: "Data Analytics", logo: "DA" },
+//   { id: 7, name: "Platform Services", logo: "PS" },
+//   { id: 8, name: "Global Reach", logo: "GR" },
+// ];
+
+// Function to duplicate arrays for continuous carousel
+const duplicateForCarousel = (items: any[]) => [...items, ...items];
 
 const PartnersCarousel: React.FC = () => {
-  const infiniteClients = createInfiniteArray(clientLogos, 4);
+  const clients = duplicateForCarousel(clientLogos);
+  // const partners = duplicateForCarousel(partnerLogos);
 
 // --- Static Particle Canvas Logic ---
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -92,10 +102,10 @@ const PartnersCarousel: React.FC = () => {
       {/* First carousel (clients) - moving left */}
       <div className="relative overflow-hidden py-4 mb-8">
         <div className="flex animate-carousel-left">
-          {infiniteClients.map((client, index) => (
+          {clients.map((client, index) => (
             <div
               key={`${client.id}-${index}`}
-              className="w-40 h-24 flex-shrink-0 flex items-center justify-center mx-4 first:ml-0"
+              className="w-40 h-24 flex-shrink-0 flex items-center justify-center mx-4 first:ml-0 last:mr-0"
             >
               <img
                 src={client.logo}
@@ -111,10 +121,10 @@ const PartnersCarousel: React.FC = () => {
       {/* Second carousel (partners) - moving right */}
       <div className="relative overflow-hidden py-4">
         <div className="flex animate-carousel-right">
-          {infiniteClients.map((client, index) => (
+          {clients.map((client, index) => (
             <div 
-              key={`reverse-${client.id}-${index}`}
-              className="w-40 h-24 flex-shrink-0 flex items-center justify-center mx-4"
+              key={`${client.id}-${index}`}
+              className=" w-40 h-24 flex-shrink-0 flex items-center justify-center last:mr-0 "
             >
               <img
                   src={client.logo}
