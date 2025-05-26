@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import WorldMap from '@/components/WorldMap';
 import { motion } from 'framer-motion';
 import StaticParticleCanvas from '@/components/StaticParticle';
 
@@ -41,33 +40,22 @@ const About: React.FC = () => {
           non-intrusive solutions that enhance player experiences.
         </p>
         
-        {/* Global Presence Section */}
-        <div className="mb-20">
-          <h2 className="text-3xl md:text-4xl font-disket text-white mb-8 text-center">Our Global Presence</h2>
-          <p className="text-xl text-gray-300 mb-12 text-center font-productSans max-w-3xl mx-auto">
-            With offices strategically located across key markets, we deliver localized solutions 
-            that resonate with gaming communities worldwide.
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+          <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
+            <h2 className="text-2xl font-disket text-white mb-4">Our Mission</h2>
+            <p className="text-gray-300 font-productSans">
+              To create seamless advertising experiences that add value to gaming environments 
+              while delivering measurable results for brands. We believe advertising should 
+              enhance, not interrupt, the player journey.
+            </p>
+          </div>
           
-          <WorldMap />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 text-center">
-              <h3 className="text-xl font-disket text-white mb-2">Mumbai</h3>
-              <p className="text-gray-300 font-productSans">India</p>
-            </div>
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 text-center">
-              <h3 className="text-xl font-disket text-white mb-2">Dubai</h3>
-              <p className="text-gray-300 font-productSans">United Arab Emirates</p>
-            </div>
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 text-center">
-              <h3 className="text-xl font-disket text-white mb-2">Delhi</h3>
-              <p className="text-gray-300 font-productSans">India</p>
-            </div>
-            <div className="bg-napptix-dark p-6 rounded-xl border border-napptix-grey/20 text-center">
-              <h3 className="text-xl font-disket text-white mb-2">Singapore</h3>
-              <p className="text-gray-300 font-productSans">Singapore</p>
-            </div>
+          <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
+            <h2 className="text-2xl font-disket text-white mb-4">Our Vision</h2>
+            <p className="text-gray-300 font-productSans">
+              To be the global leader in gaming advertising technology, setting new standards 
+              for how brands connect with players across all gaming platforms and regions.
+            </p>
           </div>
         </div>
 
