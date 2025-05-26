@@ -32,11 +32,6 @@ const newsItems = [
     date: "April 10, 2025",
     title: "Beyond the Arena: How Brands Can Win Across the Competitive Gaming Ecosystem"
   },
-  // {
-  //   id: "news-5",
-  //   date: "April 5, 2025",
-  //   title: "Industry Award Recognition"
-  // }
 ];
 
 const NewsCarousel = () => {
@@ -46,17 +41,19 @@ const NewsCarousel = () => {
   const renderNewsCard = (item: typeof newsItems[0], index: number) => (
     <div 
       key={`news-item-${item.id}-${index}`}
-      className="bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-8 rounded-xl h-full"
+      className="bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-8 rounded-xl h-full relative"
     >
       <div className="mb-4">
         <span className="text-[#4c3bff] text-sm">{item.date}</span>
       </div>
-      <h3 className="text-2xl font-bold text-black mb-4 font-productSans uppercase">{item.title}</h3>
-      <Link
-       to={`/news/${item.id}`}
-       className="inline-block px-[12px] py-[6px] rounded-full bg-[#4c3bff] text-white font-semibold hover:bg-[#372bb3] transition-colors duration-200 text-sm ">
-        Read More
-      </Link>
+      <h3 className="text-2xl font-bold text-black mb-8 font-productSans uppercase">{item.title}</h3>
+      <div className="absolute bottom-8 left-8">
+        <Link
+         to={`/news/${item.id}`}
+         className="inline-block px-[12px] py-[6px] rounded-full bg-[#4c3bff] text-white font-semibold hover:bg-[#372bb3] transition-colors duration-200 text-sm ">
+          Read More
+        </Link>
+      </div>
     </div>
   );
 
