@@ -49,26 +49,16 @@ const Careers: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
             <h2 className="text-2xl font-disket text-white mb-4">Why Join Us?</h2>
-            <ul className="space-y-4 text-gray-300 font-productSans">
-              <li>• Innovative technology environment</li>
-              <li>• Global impact in gaming industry</li>
-              <li>• Competitive compensation</li>
-              <li>• Continuous learning opportunities</li>
-              <li>• Health and wellness benefits</li>
-              <li>• Regular team retreats</li>
-            </ul>
+            <p className="text-gray-300 font-productSans">
+              Join our innovative team and be part of a global company that's revolutionizing gaming advertising. We offer competitive compensation, comprehensive health benefits, continuous learning opportunities, and a work culture that values work-life harmony with regular team retreats.
+            </p>
           </div>
           
           <div className="bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
             <h2 className="text-2xl font-disket text-white mb-4">Our Values</h2>
-            <ul className="space-y-4 text-gray-300 font-productSans">
-              <li>• Innovation First</li>
-              <li>• Player-Centric Approach</li>
-              <li>• Global Mindset</li>
-              <li>• Continuous Learning</li>
-              <li>• Work-Life Harmony</li>
-              <li>• Diversity & Inclusion</li>
-            </ul>
+            <p className="text-gray-300 font-productSans">
+              We are driven by innovation and maintain a player-centric approach in everything we do. Our global mindset embraces diversity and inclusion while fostering continuous learning and promoting work-life harmony across all our teams.
+            </p>
           </div>
         </div>
 
