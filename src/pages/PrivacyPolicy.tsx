@@ -20,8 +20,8 @@ const PrivacyPolicy: React.FC = () => {
         <div className="max-w-4xl mx-auto bg-napptix-dark p-8 rounded-xl border border-napptix-grey/20">
           <div className="text-gray-300 space-y-6 font-productSans">
             <div className="mb-6">
-              <p className="text-sm text-gray-400 mb-2">Effective Date: [Insert Date]</p>
-              <p className="text-sm text-gray-400">Last Updated: [Insert Date]</p>
+              <p className="text-sm text-gray-400 mb-2">Effective Date: May 26, 2025</p>
+              <p className="text-sm text-gray-400">Last Updated: May 26, 2025</p>
             </div>
 
             <p>
@@ -126,7 +126,7 @@ const PrivacyPolicy: React.FC = () => {
               <li><strong>GDPR:</strong> Right to data portability, erasure ("right to be forgotten").</li>
               <li><strong>CCPA:</strong> Right to opt out of data sales (if applicable).</li>
             </ul>
-            <p>To exercise rights, contact: <a href="mailto:privacy@napptix.com" className="text-[#29dd3b] hover:underline">privacy@napptix.com</a></p>
+            <p>To exercise rights, contact: <a href="mailto:divyansh@napptix.com" className="text-[#29dd3b] hover:underline">divyansh@napptix.com</a></p>
 
             <h2 className="text-2xl font-disket text-white mt-8 mb-4">8. COOKIES & TRACKING TECHNOLOGIES</h2>
             <p>We use cookies, pixels, and SDKs for analytics and ads.</p>
@@ -152,8 +152,8 @@ const PrivacyPolicy: React.FC = () => {
             <h2 className="text-2xl font-disket text-white mt-8 mb-4">13. CONTACT & GRIEVANCE OFFICER</h2>
             <p>For questions, requests, or complaints:</p>
             <ul className="space-y-2">
-              <li>Email: <a href="mailto:contact@napptix.com" className="text-[#29dd3b] hover:underline">contact@napptix.com</a></li>
-              <li>Address: [Insert Registered Office Address in UAE]</li>
+              <li>Email: <a href="mailto:divyansh@napptix.com" className="text-[#29dd3b] hover:underline">divyansh@napptix.com</a></li>
+              <li>Address: HD21 B, First Floor, In5 Tech, Dubai Internet City, Dubai, United Arab Emirates</li>
             </ul>
           </div>
         </div>
