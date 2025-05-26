@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ArrowLeft } from 'lucide-react';
@@ -216,11 +216,16 @@ Esports fans don’t show up for just one match. They live in a world of rivalri
 
 const NewsArticle = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const article = newsItems.find(item => item.id === id);
   
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleBackToNews = () => {
+    navigate('/news');
+  };
 
   if (!article) {
     return (
@@ -231,10 +236,13 @@ const NewsArticle = () => {
             Article Not Found
           </h1>
           <div className="flex justify-center">
-            <Link to="/news" className="text-[#29dd3b] hover:underline flex items-center">
+            <button 
+              onClick={handleBackToNews}
+              className="text-[#29dd3b] hover:underline flex items-center cursor-pointer"
+            >
               <ArrowLeft className="mr-2" size={20} />
               Back to News
-            </Link>
+            </button>
           </div>
         </div>
         <Footer />
@@ -246,10 +254,13 @@ const NewsArticle = () => {
     <div className="min-h-screen bg-black">
       <Navbar />
       <div className="container mx-auto pt-32 pb-20 px-4 max-w-4xl">
-        <Link to="/news" className="text-[#29dd3b] hover:underline flex items-center mb-8 font-productSans">
+        <button 
+          onClick={handleBackToNews}
+          className="text-[#29dd3b] hover:underline flex items-center mb-8 font-productSans cursor-pointer bg-transparent border-none"
+        >
           <ArrowLeft className="mr-2" size={20} />
           Back to News
-        </Link>
+        </button>
         
         <article className="mx-auto">
           <div className="mb-6">
