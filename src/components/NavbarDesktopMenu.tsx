@@ -32,8 +32,8 @@ const NavbarDesktopMenu: React.FC<Props> = ({
     ? `bg-[${dropdownBgColor}]/95 border border-[${dropdownBgColor}]` 
     : "bg-black/95 border border-gray-800";
   
-  const textClass = dropdownTextColor || "text-gray-200";
-  const subTextClass = dropdownTextColor ? "text-gray-300" : "text-gray-400";
+  const textClass = dropdownTextColor || "text-[#fff]";
+  const subTextClass = dropdownTextColor ? "text-[#4c36ff]" : "text-white";
   const hoverClass = dropdownBgColor 
     ? "hover:bg-white/10" 
     : "hover:bg-gray-800";
@@ -97,7 +97,7 @@ const NavbarDesktopMenu: React.FC<Props> = ({
               className={`absolute top-full left-0 w-72 mt-2 ${dropdownClass} rounded-lg shadow-lg overflow-hidden z-50`}
             >
               <div className="py-8 px-6">
-                <p className={`${subTextClass} text-sm font-bold mb-6 uppercase`}>For Game Developers</p>
+                <p className={`${subTextClass} text-sm font-bold mb-6 uppercase`}>Game Developers</p>
                 <div className="space-y-6">
                   <Link to="/developers" onClick={scrollToTop} className={`flex items-center space-x-4 px-4 py-4 rounded-lg transition duration-200 transform hover:scale-105 hover:shadow-md ${hoverClass}`}>
                     <div className="p-2 bg-gray-800 rounded-lg">
