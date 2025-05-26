@@ -14,14 +14,12 @@ const Footer: React.FC<FooterProps> = ({className, headingColor}) => {
   const getNextPageInfo = () => {
     const routes = [
       { path: "/", name: "Wizora", to: "/advertisers/wizora" },
-       { path: "/advertisers/wizora", name: "Developers", to: "/developers" },
+      { path: "/advertisers/wizora", name: "Developers", to: "/developers" },
       { path: "/developers", name: "About", to: "/about" },
       { path: "/about", name: "Careers", to: "/careers" },
       { path: "/careers", name: "News", to: "/news" },
-      // { path: "/news", name: "About Us", to: "/about" },
       { path: "/news", name: "Let's talk", to: "/contact" },
       { path: "/contact", name: "Home", to: "/" },
-      // { path: "/contact", name: "Home", to: "/" }
     ];
     const currentIndex = routes.findIndex(route => route.path === location.pathname);
     return currentIndex >= 0 ? routes[currentIndex] : routes[0];
@@ -33,8 +31,6 @@ const Footer: React.FC<FooterProps> = ({className, headingColor}) => {
     window.scrollTo(0, 0);
   };
 
- 
-  
   return (
     <footer className={`relative ${className ? className : " "}  py-12 overflow-hidden`}>
       <div className="absolute inset-0 bg-gradient-to-t "></div>
