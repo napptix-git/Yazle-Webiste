@@ -18,7 +18,7 @@ import NewsArticle from "./pages/NewsArticle";
 import WizoraSoonPage from "./pages/WizoraSoonPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
-import WizoraPage from "./pages/advertisers/WizoraPage";
+import WizoraCS from "./pages/WizoraCS";
 import CaseStudiesPage from "./pages/advertisers/CaseStudiesPage";
 import CaseStudyDetailPage from "./pages/advertisers/CaseStudyDetailPage";
 import AdGalleryPage from "./pages/advertisers/AdGalleryPage";
@@ -26,7 +26,6 @@ import AdvertiserContactPage from "./pages/advertisers/ContactPage";
 
 import Developers from "./pages/Developers";
 import DeveloperContactPage from "./pages/developers/ContactPage";
-import WizoraCS from './pages/WizoraCS';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,7 +49,7 @@ const App = () => {
               <Route path="/solutions" element={<Solutions />} />
               
               <Route path="/advertisers" element={<Advertisers />} />
-              <Route path="/advertisers/wizora" element={<WizoraPage />} />
+              <Route path="/advertisers/wizora" element={<WizoraCS />} />
               <Route path="/wizora-soon" element={<WizoraSoonPage />} />
               <Route path="/advertisers/case-studies" element={<CaseStudiesPage />} />
               <Route path="/advertisers/case-studies/:slug" element={<CaseStudyDetailPage />} />
