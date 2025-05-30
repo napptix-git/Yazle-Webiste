@@ -146,7 +146,7 @@ const HeroSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.13 }}
           >
-            Innovative advertising solutions connecting brands with the gaming world
+           {/* Gaming 360: Where brands meet gamers. */}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 32 }}
@@ -154,7 +154,7 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.22 }}
             className="flex justify-center"
           >
-            <a href="#services">
+            <div>
               <button
                 className="px-8 py-3 rounded-full font-bold text-white text-lg"
                 style={{
@@ -164,9 +164,9 @@ const HeroSection: React.FC = () => {
                   boxShadow: "0 2px 16px 0 rgba(139,92,246,0.16)"
                 }}
               >
-                Discover Our Solutions
+                Gaming 360: Where brands meet gamers.
               </button>
-            </a>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -99,43 +99,46 @@ const PartnersCarousel: React.FC = () => {
         </p>
       </div>
       
-      {/* First carousel (clients) - moving left */}
-      <div className="relative overflow-hidden py-4 mb-8">
-        <div className="flex animate-carousel-left">
-          {clients.map((client, index) => (
-            <div
-              key={`${client.id}-${index}`}
-              className="w-40 h-24 flex-shrink-0 flex items-center justify-center mx-4 first:ml-0 last:mr-0"
-            >
-              <img
-                src={client.logo}
-                alt={client.name}
-                className="max-h-16 max-w-[120px] object-contain"
-                title={client.name}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Second carousel (partners) - moving right */}
-      <div className="relative overflow-hidden py-4">
-        <div className="flex animate-carousel-right">
-          {clients.map((client, index) => (
-            <div 
-              key={`${client.id}-${index}`}
-              className=" w-40 h-24 flex-shrink-0 flex items-center justify-center last:mr-0 "
-            >
-              <img
+         {/* First carousel (clients) - moving left */}
+        <div className="relative overflow-hidden py-4 mb-8">
+          <div className="flex flex-nowrap animate-carousel-infinite-left w-max">
+            {clients.map((client, index) => (
+              <div
+                key={`${client.id}-${index}`}
+                className="w-40 h-24 flex-shrink-0 flex items-center justify-center mx-4 first:ml-0 last:mr-0"
+              >
+                <img
                   src={client.logo}
                   alt={client.name}
                   className="max-h-16 max-w-[120px] object-contain"
                   title={client.name}
                 />
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+
+        {/* Second carousel (partners) - moving right */}
+        <div className="relative overflow-hidden py-4">
+          <div className="flex flex-nowrap animate-carousel-infinite-right w-max">
+            {clients.map((client, index) => (
+              <div
+                key={`${client.id}-${index}`}
+                className="w-40 h-24 flex-shrink-0 flex items-center justify-center last:mr-0"
+              >
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="max-h-16 max-w-[120px] object-contain"
+                  title={client.name}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      
+      
+    
     </section>
   );
 };

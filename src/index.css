@@ -236,23 +236,29 @@ html.lenis-smooth {
     animation: carousel-scroll-left 20s linear infinite;
   }
   
-  @keyframes carousel-scroll-left {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  @keyframes carousel-infinite-left {
+  0% {
+    transform: translateX(0);
   }
-
-  .animate-carousel-right {
-  animation: carousel-scroll-right 20s linear infinite;
+  100% {
+    transform: translateX(-50%);
   }
-  @keyframes carousel-scroll-right {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(0); }
+}
+@keyframes carousel-infinite-right {
+  0% {
+    transform: translateX(-50%);
   }
-
+  100% {
+    transform: translateX(0);
+  }
+}
+.animate-carousel-infinite-left {
+  animation: carousel-infinite-left 40s linear infinite;
+}
+.animate-carousel-infinite-right {
+  animation: carousel-infinite-right 40s linear infinite;
+}
+  
 }
 
 @keyframes border-glow {

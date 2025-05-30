@@ -17,28 +17,28 @@ const newsItems = [
   {
     id: "news-1",
     date: "April 28, 2025",
-    title: "Break the Bottleneck in Interactive Ad Creation🚀",
+    title: "Break the Bottleneck in Interactive Ad Creation",
     content: "Traditional interactive ad production requires third-party vendors, coordination with developers, and strict templates that stifle creativity. Every tweak - whether it is changing an asset for a regional holiday or adjusting reward mechanics - can trigger a new round of tickets and approvals. Those delays cost time, budget, and often miss shifting market moments.",
     image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1470&fit=crop"
   },
   {
     id: "news-2",
     date: "April 20, 2025",
-    title: "From Small Towns to Big Impact: How Tier 2 and Tier 3 India Are Powering the Next Gaming Boom🌎",
+    title: "From Small Towns to Big Impact: How Tier 2 and Tier 3 India Are Powering the Next Gaming Boom",
     content: "India’s gaming scene is taking off beyond the big cities. Across tier 2 and tier 3 towns, a surge of new players is redefining how entertainment, culture and commerce come together. Here, gaming is no longer just a pastime, it’s a daily ritual, a way to connect and a vibrant piece of the digital economy.",
     image: "https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?q=80&w=1471&fit=crop"
   },
   {
     id: "news-3",
     date: "April 15, 2025",
-    title: "Interactive by Design: Why the Future of Advertising Is Built for Play 🎯",
+    title: "Interactive by Design: Why the Future of Advertising Is Built for Play ",
     content: "At Napptix, we believe the future of brand engagement isn’t just about showing up in games. It’s about showing up in ways that feel native to gameplay, interactive, rewarding and story driven. This is the era of playable marketing.",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1470&fit=crop"
   },
   {
     id: "news-4",
     date: "April 10, 2025",
-    title: "Beyond the Arena: How Brands Can Win Across the Competitive Gaming Ecosystem🤖",
+    title: "Beyond the Arena: How Brands Can Win Across the Competitive Gaming Ecosystem",
     content: "The rise of esports has changed global entertainment over the last decade. What began as small LAN gatherings now fills stadiums, features celebrity players and draws millions of live viewers. For brands, esports goes far beyond jerseys and logo placement. It’s a vibrant world where fans play, stream, shop and share - and where brands can join the fun at every turn.",
     image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=1470&fit=crop"
   },

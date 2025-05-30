@@ -9,7 +9,7 @@ const newsItems = [
   {
     id: "news-1",
     date: "April 28, 2025",
-    title: "Break the Bottleneck in Interactive Ad Creation 🚀",
+    title: "Break the Bottleneck in Interactive Ad Creation",
     content: "Traditional interactive ad production requires third-party vendors, coordination with developers, and strict templates that stifle creativity. Every tweak - whether it is changing an asset for a regional holiday or adjusting reward mechanics - can trigger a new round of tickets and approvals. Those delays cost time, budget, and often miss shifting market moments.",
     image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=1470&fit=crop",
     fullContent: `
