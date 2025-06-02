@@ -129,7 +129,7 @@ const HeroSection: React.FC = () => {
         className="absolute inset-0 z-0 pointer-events-none"
       />
       {/* Main Content */}
-      <div className="relative z-10 flex w-full h-full items-center justify-center top-20">
+      <div className="relative z-10 flex w-full h-full items-center justify-center top-[100px]">
         <div className="flex flex-col items-center justify-center w-full">
           <motion.h1 
             className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 text-center"
@@ -151,7 +151,7 @@ const HeroSection: React.FC = () => {
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-disket">
               360 GAMING
             </h2>
-            <div className="inline-block bg-[#4c36ff] px-6 py-3 rounded">
+            <div className="inline-block bg-[#4c36ff] px-3 py-2">
               <p className="text-white text-lg md:text-xl font-bold" style={{ fontFamily: 'Retropix' }}>
                 EVERY PLATFORM. EVERY PLAYER.
               </p>
