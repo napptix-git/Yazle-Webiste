@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from "react-router-dom";
@@ -152,19 +151,10 @@ const HeroSection: React.FC = () => {
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-disket">
               360 GAMING
             </h2>
-            <div className="space-y-2">
-              <div className="inline-block bg-[#4c36ff] px-4 py-2 rounded">
-                <p className="text-white text-lg md:text-xl font-bold font-disket">
-                  EVERY PLATFORM.
-                </p>
-              </div>
-              <div className="block">
-                <div className="inline-block bg-[#4c36ff] px-4 py-2 rounded">
-                  <p className="text-white text-lg md:text-xl font-bold font-disket">
-                    EVERY PLAYER.
-                  </p>
-                </div>
-              </div>
+            <div className="inline-block bg-[#4c36ff] px-6 py-3 rounded">
+              <p className="text-white text-lg md:text-xl font-bold" style={{ fontFamily: 'Retropix' }}>
+                EVERY PLATFORM. EVERY PLAYER.
+              </p>
             </div>
           </motion.div>
 
@@ -176,26 +166,6 @@ const HeroSection: React.FC = () => {
           >
            {/* Gaming 360: Where brands meet gamers. */}
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.22 }}
-            className="flex justify-center"
-          >
-            <div>
-              <button
-                className="px-8 py-3 rounded-full font-bold text-white text-lg"
-                style={{
-                  background: "#4c36ff",
-                  fontFamily: 'Retropix',
-                  letterSpacing: '0.01em',
-                  boxShadow: "0 2px 16px 0 rgba(139,92,246,0.16)"
-                }}
-              >
-                Gaming 360: Where brands meet gamers.
-              </button>
-            </div>
-          </motion.div>
         </div>
       </div>
     </div>
