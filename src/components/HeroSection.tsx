@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from "react-router-dom";
@@ -153,17 +152,12 @@ const HeroSection: React.FC = () => {
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-disket">
               360 GAMING
             </h2>
-            <div className="inline-block bg-[#4c36ff] px-3 py-2">
+            <div className="inline-block bg-[#3b2db8] px-3 py-2">
               <div className="text-white text-lg md:text-xl font-bold" style={{ fontFamily: 'Retropix' }}>
                 <HyperText 
-                  text="EVERY PLATFORM"
-                  className="block text-white text-lg md:text-xl font-bold mb-1"
-                  duration={1200}
-                />
-                <HyperText 
-                  text="EVERY PLAYER"
-                  className="block text-white text-lg md:text-xl font-bold"
-                  duration={1200}
+                  text="EVERY PLATFORM EVERY GAMER"
+                  className="text-white text-lg md:text-xl font-bold"
+                  duration={2000}
                 />
               </div>
             </div>
