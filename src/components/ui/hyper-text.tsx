@@ -31,11 +31,11 @@ export default function HyperText({
 }: HyperTextProps) {
   const [displayText, setDisplayText] = useState(text.split(""));
   const [trigger, setTrigger] = useState(false);
-  const interations = useRef(0);
+  const iterations = useRef(0);
   const isFirstRender = useRef(true);
 
   const triggerAnimation = () => {
-    interations.current = 0;
+    iterations.current = 0;
     setTrigger(true);
   };
 
@@ -46,23 +46,23 @@ export default function HyperText({
         isFirstRender.current = false;
         return;
       }
-      if (interations.current < text.length) {
+      if (iterations.current < text.length) {
         setDisplayText((t) =>
           t.map((l, i) =>
             l === " "
               ? l
-              : i <= interations.current
+              : i <= iterations.current
               ? text[i]
               : alphabets[getRandomInt(26)]
           )
         );
-        interations.current = interations.current + 0.1;
+        iterations.current = iterations.current + 0.1;
       } else {
         setTrigger(false);
         clearInterval(interval);
       }
     }, duration / (text.length * 10));
-    // Clean up interval on unmount
+    
     return () => clearInterval(interval);
   }, [text, duration, trigger, animateOnLoad]);
 
@@ -76,13 +76,13 @@ export default function HyperText({
     >
       <AnimatePresence mode="wait">
         {displayText.map((letter, i) => (
-          <motion.h1
+          <motion.span
             key={i}
             className={cn("font-mono", letter === " " ? "w-3" : "")}
             {...framerProps}
           >
             {letter.toUpperCase()}
-          </motion.h1>
+          </motion.span>
         ))}
       </AnimatePresence>
     </div>
