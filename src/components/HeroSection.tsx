@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from "react-router-dom";
@@ -140,6 +141,33 @@ const HeroSection: React.FC = () => {
           >
             Reach Every <span className="text-[#29dd3b]">Gamer</span>
           </motion.h1>
+          
+          {/* New 360 Gaming text */}
+          <motion.div
+            className="text-center mb-6"
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-disket">
+              360 GAMING
+            </h2>
+            <div className="space-y-2">
+              <div className="inline-block bg-[#4c36ff] px-4 py-2 rounded">
+                <p className="text-white text-lg md:text-xl font-bold font-disket">
+                  EVERY PLATFORM.
+                </p>
+              </div>
+              <div className="block">
+                <div className="inline-block bg-[#4c36ff] px-4 py-2 rounded">
+                  <p className="text-white text-lg md:text-xl font-bold font-disket">
+                    EVERY PLAYER.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
           <motion.p 
             className="text-lg md:text-2xl text-napptix-light-grey max-w-2xl md:max-w-3xl mx-auto mb-10 font-productSans font-normal text-center"
             initial={{ opacity: 0, y: 32 }}
