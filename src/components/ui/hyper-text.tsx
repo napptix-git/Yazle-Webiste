@@ -29,7 +29,10 @@ export default function HyperText({
   className,
   animateOnLoad = true,
 }: HyperTextProps) {
-  const [displayText, setDisplayText] = useState(text.split(""));
+  // Split text into lines
+  const lines = text.split('\n');
+  // State: array of arrays, each line is an array of chars
+  const [displayLines, setDisplayLines] = useState(lines.map(line => line.split('')));
   const [trigger, setTrigger] = useState(false);
   const iterations = useRef(0);
   const isFirstRender = useRef(true);
@@ -40,20 +43,29 @@ export default function HyperText({
   };
 
   useEffect(() => {
+    const totalLength = lines.reduce((acc, line) => acc + line.length, 0);
     const interval = setInterval(() => {
       if (!animateOnLoad && isFirstRender.current) {
         clearInterval(interval);
         isFirstRender.current = false;
         return;
       }
-      if (iterations.current < text.length) {
-        setDisplayText((t) =>
-          t.map((l, i) =>
-            l === " "
-              ? l
-              : i <= iterations.current
-              ? text[i]
-              : alphabets[getRandomInt(26)]
+      if (iterations.current < totalLength) {
+        let charCount = 0;
+        setDisplayLines(
+          lines.map((line) =>
+            line.split('').map((l, i) => {
+              if (l === ' ') {
+                charCount++;
+                return l;
+              }
+              if (charCount <= iterations.current) {
+                charCount++;
+                return l;
+              }
+              charCount++;
+              return alphabets[getRandomInt(26)];
+            })
           )
         );
         iterations.current = iterations.current + 0.1;
@@ -61,28 +73,33 @@ export default function HyperText({
         setTrigger(false);
         clearInterval(interval);
       }
-    }, duration / (text.length * 10));
-    
+    }, duration / (totalLength * 10));
+
     return () => clearInterval(interval);
+    // eslint-disable-next-line
   }, [text, duration, trigger, animateOnLoad]);
 
   return (
     <div
       className={cn(
-        "overflow-hidden py-2 flex cursor-default scale-100",
+        "overflow-hidden py-2 flex flex-col cursor-default scale-100",
         className,
       )}
       onMouseEnter={triggerAnimation}
     >
       <AnimatePresence mode="wait">
-        {displayText.map((letter, i) => (
-          <motion.span
-            key={i}
-            className={cn("font-mono", letter === " " ? "w-3" : "")}
-            {...framerProps}
-          >
-            {letter.toUpperCase()}
-          </motion.span>
+        {displayLines.map((lineArr, lineIdx) => (
+          <span key={lineIdx} className="block">
+            {lineArr.map((letter, i) => (
+              <motion.span
+                key={i}
+                className={cn("font-mono", letter === " " ? "w-3" : "")}
+                {...framerProps}
+              >
+                {letter.toUpperCase()}
+              </motion.span>
+            ))}
+          </span>
         ))}
       </AnimatePresence>
     </div>
