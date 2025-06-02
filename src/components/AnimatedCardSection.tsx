@@ -195,7 +195,7 @@ const AnimatedCardSection: React.FC = () => {
             {serviceData.map((service, index) => (
               <section
                 key={service.id}
-                className="h-[80vh] flex items-center justify-center px-4 py-5 mt-32 "
+                className="h-[80vh] flex items-center justify-center px-4 py-5 lg:mt-32 "
               >
                 <FlipCard
                   id={`card-${index + 1}`}
