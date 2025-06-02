@@ -10,7 +10,7 @@ interface FlipCardProps {
 
 // GIF mapping based on card type
 const cardGifs = {
-  "IN-GAME": "/Videos/in_game_vid.mp4", // Gaming controller gif
+  "IN-GAME": "/Videos/inGame.gif", // Gaming controller gif
   "ON-GAME": "/Videos/on_game_vid.mp4", // Interface display gif
   "OFF-GAME": "/Videos/off_game_vid.mp4", // Network/connection gif
   "PRO-GAME": "/Videos/pro_game_vid.mp4"  // Tournament/trophy gif
@@ -44,7 +44,7 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
             <div className="flip-card-back">
               <div className="flex flex-col items-center justify-center h-full relative">
                 {/* Video container with proper dimensions */}
-                <div className="relative w-full h-64 overflow-hidden bg-black/30 mb-4 rounded-md">
+                <div className="relative w-full h-full overflow-hidden bg-black/30 mb-4 rounded-md">
                   {gifUrl.match(/\.(mp4|mov)$/i) ? (
                     <video
                       src={gifUrl}
