@@ -10,7 +10,7 @@ interface FlipCardProps {
 
 // GIF mapping based on card type
 const cardGifs = {
-  "IN-GAME": "/Videos/inGame.gif", // Gaming controller gif
+  "IN-GAME": "/Videos/in_game_vid.mp4", // Gaming controller gif
   "ON-GAME": "/Videos/on_game_vid.mp4", // Interface display gif
   "OFF-GAME": "/Videos/off_game_vid.mp4", // Network/connection gif
   "PRO-GAME": "/Videos/pro_game_vid.mp4"  // Tournament/trophy gif
@@ -42,41 +42,34 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
               </div>
             </div>
             <div className="flip-card-back">
-              <div className="flex flex-col items-center justify-center h-full relative">
-                {/* Video container with proper dimensions */}
-                <div className="relative w-full h-full overflow-hidden bg-black/30 mb-4 rounded-md">
-                  {gifUrl.match(/\.(mp4|mov)$/i) ? (
+              <div className="flex flex-col items-center justify-center h-full">
+                {/* <h3 className="text-3xl font-bold mb-4 z-20">{backText}</h3> */}
+                
+                {/* Larger rectangular GIF in the back */}
+                <div className=" overflow-hidden bg-black/30 p-1 mb-4 rounded-md">
+                {gifUrl.match(/\.(mp4|mov)$/i) ? (
                     <video
                       src={gifUrl}
-                      className="w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover z-0"
                       autoPlay
                       loop
                       muted
                       playsInline
-                      onError={(e) => {
-                        console.error('Video failed to load:', gifUrl, e);
-                      }}
-                      onLoadStart={() => {
-                        console.log('Video loading started:', gifUrl);
-                      }}
-                      onCanPlay={() => {
-                        console.log('Video can play:', gifUrl);
-                      }}
                     />
                   ) : (
                     <img
                       src={gifUrl}
                       alt={`${backText} animation`}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        console.error('Image failed to load:', gifUrl, e);
-                      }}
+                      className="absolute inset-0 w-full h-full object-cover z-0"
                     />
                   )}
                 </div>
                 
-                <p className="text-lg text-center px-6 z-20 text-white">
-                  {/* Add descriptions if needed */}
+                <p className="text-lg text-center px-6 z-20">
+                  {/* {backText === "In-Game" && "Native ad placements within the gaming environment."} */}
+                  {/* {backText === "On-Game" && "Strategic ad placements around the game interface."}
+                  {backText === "Off-Game" && "Extend your reach beyond gameplay through our network."}
+                  {backText === "Pro-Game" && "Specialized solutions for esports events and tournaments."} */}
                 </p>
               </div>
             </div>
