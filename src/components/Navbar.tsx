@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -97,16 +98,16 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
 
           <Link 
             to="/contact"
-            className={`hidden md:inline-flex ml-auto relative group font-bold py-2 px-3 rounded-full transition-all duration-300
+            className={`hidden md:inline-flex ml-auto relative group font-bold py-1 px-2 rounded-full transition-all duration-300
               ${isWizoraPage ? "bg-[#4c36ff] text-white " : "bg-[#29dd3b] text-black border-[#29dd3b] shimmer-glow-btn"}
-              overflow-hidden  -mr-2`}
+              overflow-hidden -mr-2`}
             style={{
-               backgroundColor: isWizoraPage ? "#4c36ff" : "#29dd3b", fontWeight: 800,
-               letterSpacing: 1.2
+               backgroundColor: isWizoraPage ? "#4c36ff" : "#29dd3b", fontWeight: 600,
+               letterSpacing: 0.5, fontSize: '14px'
                }}
           >
             <span className="relative font-disket z-10">LET'S TALK</span>
-            <span className={`absolute shimmer-effect inset-0 rounded-full border-2 pointer-events-none ${isWizoraPage ? "border-[#4c36ff]" : "border-[#29dd3b]"}`}></span>
+            <span className={`absolute shimmer-effect inset-0 rounded-full border pointer-events-none ${isWizoraPage ? "border-[#4c36ff]" : "border-[#29dd3b]"}`}></span>
           </Link>
           
           <div className="md:hidden flex items-center h-full">
@@ -140,7 +141,7 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
       />
       <style>{`
         .shimmer-glow-btn {
-          box-shadow: 0 0 16px 2px #29dd3b, 0 0 8px 2px #29dd3b55 inset;
+          box-shadow: 0 0 8px 1px #29dd3b, 0 0 4px 1px #29dd3b55 inset;
           position: relative;
           background: #29dd3b;
         }
