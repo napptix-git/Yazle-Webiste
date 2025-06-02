@@ -98,7 +98,7 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
 
           <Link 
             to="/contact"
-            className={`hidden md:inline-flex ml-auto relative group font-bold py-1 px-2 rounded-md transition-all duration-300
+            className={`hidden md:inline-flex ml-auto relative group font-bold py-1 px-2 rounded-full transition-all duration-300
               ${isWizoraPage ? "bg-[#4c36ff] text-white " : "bg-[#29dd3b] text-black border-[#29dd3b] shimmer-glow-btn"}
               overflow-hidden -mr-2`}
             style={{
@@ -107,7 +107,7 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
                }}
           >
             <span className="relative font-disket z-10">LET'S TALK</span>
-            <span className={`absolute shimmer-effect inset-0 rounded-md border pointer-events-none ${isWizoraPage ? "border-[#4c36ff]" : "border-[#29dd3b]"}`}></span>
+            <span className={`absolute shimmer-effect inset-0 rounded-full border pointer-events-none ${isWizoraPage ? "border-[#4c36ff]" : "border-[#29dd3b]"}`}></span>
           </Link>
           
           <div className="md:hidden flex items-center h-full">
@@ -154,7 +154,7 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
           background-size: 200% 200%;
           animation: shimmer-move 2s infinite linear;
           pointer-events: none;
-          border-radius: 6px;
+          border-radius: 9999px;
         }
         @keyframes shimmer-move {
           0% { background-position: 200% 0 }
