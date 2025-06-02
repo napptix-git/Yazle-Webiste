@@ -159,7 +159,7 @@ const HeroSection: React.FC = () => {
                 className="px-8 py-3 rounded-full font-bold text-white text-lg"
                 style={{
                   background: "#4c36ff",
-                  fontFamily: 'Disket mono, monospace',
+                  fontFamily: 'Retropix',
                   letterSpacing: '0.01em',
                   boxShadow: "0 2px 16px 0 rgba(139,92,246,0.16)"
                 }}

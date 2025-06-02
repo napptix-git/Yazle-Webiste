@@ -10,10 +10,10 @@ interface FlipCardProps {
 
 // GIF mapping based on card type
 const cardGifs = {
-  "IN-GAME": "/lovable-uploads/inGame.gif", // Gaming controller gif
-  "ON-GAME": "/lovable-uploads/onGame.gif", // Interface display gif
-  "OFF-GAME": "/lovable-uploads/offGame.gif", // Network/connection gif
-  "PRO-GAME": "/lovable-uploads/proGame.gif"  // Tournament/trophy gif
+  "IN-GAME": "/lovable-uploads/in_game_vid.mp4", // Gaming controller gif
+  "ON-GAME": "/lovable-uploads/on_game_vid.mp4", // Interface display gif
+  "OFF-GAME": "/lovable-uploads/off_game_vid.mp4", // Network/connection gif
+  "PRO-GAME": "/lovable-uploads/pro_game_vid.mp4"  // Tournament/trophy gif
 };
 
 const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
@@ -47,7 +47,7 @@ const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
                 
                 {/* Larger rectangular GIF in the back */}
                 <div className=" overflow-hidden bg-black/30 p-1 mb-4 rounded-md">
-                {gifUrl.endsWith('.mov') ? (
+                {gifUrl.match(/\.(mp4|mov)$/i) ? (
                     <video
                       src={gifUrl}
                       className="absolute inset-0 w-full h-full object-cover z-0"
