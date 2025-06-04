@@ -153,13 +153,20 @@ const HeroSection: React.FC = () => {
               360 GAMING
             </h2>
             
-             <div className="inline-flex items-center justify-center min-h-[50px] px-4 bg-[#4c46ff]/60 rounded">
-                <HyperText 
-                  text={"EVERY PLATFORM\nEVERY GAMER"}
-                  className="text-white text-lg md:text-2xl font-retropix text-center"
-                  duration={2000}
-                />
-              </div>
+            <div className=" flex flex-col items-center justify-center bg-[#4c46ff]/60 w-fit mx-auto py-0.5 px-2 ">
+              <HyperText 
+                text={"EVERY PLATFORM"}
+                className="text-white text-lg md:text-3xl font-disket text-center  "
+                duration={2000}
+              />
+            </div>
+             <div className="flex flex-col items-center justify-center  bg-[#4c46ff]/60 w-fit mx-auto px-1 ">
+              <HyperText  
+                text={"EVERY GAMER"}
+                className="text-white text-lg md:text-3xl font-disket text-center "
+                duration={2000}
+              />
+            </div> 
           </motion.div>
 
           <motion.p 

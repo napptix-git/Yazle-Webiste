@@ -204,7 +204,7 @@ const AnimatedCardSection: React.FC = () => {
                   ref={(el) => {
                     if (el instanceof HTMLDivElement) cardsRef.current[index] = el;
                   }}
-                />
+                />  
               </section>
             ))}
           </div>

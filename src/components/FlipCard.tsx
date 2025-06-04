@@ -10,10 +10,10 @@ interface FlipCardProps {
 
 // GIF mapping based on card type
 const cardGifs = {
-  "IN-GAME": "/Videos/inGame.gif", // Gaming controller gif
-  "ON-GAME": "/Videos/onGame.gif", // Interface display gif
-  "OFF-GAME": "/Videos/offGame.gif", // Network/connection gif
-  "PRO-GAME": "/Videos/proGame.gif"  // Tournament/trophy gif
+  "IN-GAME": "/Videos/inGameGif.gif", // Gaming controller gif
+  "ON-GAME": "/Videos/onGameGif.gif", // Interface display gif
+  "OFF-GAME": "/Videos/offGameGif.gif", // Network/connection gif
+  "PRO-GAME": "/Videos/proGameGif.gif"  // Tournament/trophy gif
 };
 
 const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(

@@ -93,7 +93,7 @@ export default function HyperText({
             {lineArr.map((letter, i) => (
               <motion.span
                 key={i}
-                className={cn("font-mono", letter === " " ? "w-3" : "")}
+                className={cn("font-bold", letter === " " ? "w-3" : "")}
                 {...framerProps}
               >
                 {letter.toUpperCase()}

@@ -52,7 +52,7 @@ const PrivacyPolicy: React.FC = () => {
             </ul>
 
             <h2 className="text-2xl font-disket text-white mt-8 mb-4">2. INFORMATION WE COLLECT</h2>
-            <h3 className="text-xl text-[#29dd3b] mt-6 mb-3">A. Personal Data</h3>
+            <h3 className="text-xl font-disket mt-6 mb-3">A. Personal Data</h3>
             <p>We may collect:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>Identifiers:</strong> Name, email, phone number, address, government ID (if required).</li>
@@ -61,7 +61,7 @@ const PrivacyPolicy: React.FC = () => {
               <li><strong>Marketing Preferences:</strong> Subscription choices, opt-in/opt-out status.</li>
             </ul>
 
-            <h3 className="text-xl text-[#29dd3b] mt-6 mb-3">B. Sources of Data</h3>
+            <h3 className="text-xl font-disket mt-6 mb-3">B. Sources of Data</h3>
             <ul className="list-disc pl-6 space-y-2">
               <li>Directly from you (e.g., forms, registrations, customer support).</li>
               <li>Automatically (via cookies, analytics tools like Google Analytics).</li>
@@ -107,21 +107,21 @@ const PrivacyPolicy: React.FC = () => {
             </ul>
 
             <h2 className="text-2xl font-disket text-white mt-8 mb-4">7. YOUR RIGHTS (DPDPA, UAE DPL, GDPR, CCPA)</h2>
-            <h3 className="text-xl text-[#29dd3b] mt-6 mb-3">A. Under India's DPDPA</h3>
+            <h3 className="text-xl font-disket mt-6 mb-3">A. Under India's DPDPA</h3>
             <ul className="list-disc pl-6 space-y-2">
               <li>Right to access, correct, or delete your data.</li>
               <li>Right to withdraw consent.</li>
               <li>Right to grievance redressal via a Data Protection Officer (DPO).</li>
             </ul>
 
-            <h3 className="text-xl text-[#29dd3b] mt-6 mb-3">B. Under UAE DPL</h3>
+            <h3 className="text-xl font-disket mt-6 mb-3">B. Under UAE DPL</h3>
             <ul className="list-disc pl-6 space-y-2">
               <li>Right to request data processing restrictions.</li>
               <li>Right to object to automated decision-making.</li>
               <li>Right to complain to the UAE Data Office.</li>
             </ul>
 
-            <h3 className="text-xl text-[#29dd3b] mt-6 mb-3">C. For EU & California Users</h3>
+            <h3 className="text-xl font-disket mt-6 mb-3">C. For EU & California Users</h3>
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>GDPR:</strong> Right to data portability, erasure ("right to be forgotten").</li>
               <li><strong>CCPA:</strong> Right to opt out of data sales (if applicable).</li>

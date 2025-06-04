@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
             <img 
               src={isWizoraPage ? "/lovable-uploads/napptix_black_logo.png" : "/lovable-uploads/napptix_white_logo.png"} 
               alt="Napptix" 
-              className="h-20 md:h-12 lg:h-32 w-auto object-contain transition-all duration-300"
+              className="h-20 md:h-12 lg:h-40 w-auto object-contain transition-all duration-300"
             />
           </Link>
 
@@ -98,13 +98,13 @@ const Navbar: React.FC<NavbarProps> = ({linkClassName, dropdownBgColor, dropdown
 
           <Link 
             to="/contact"
-            className={`hidden md:inline-flex ml-auto relative group font-bold py-1 px-2 rounded-full transition-all duration-300
+            className={`hidden md:inline-flex ml-auto relative group font-bold py-1.5 px-3 rounded-full transition-all duration-300
               ${isWizoraPage ? "bg-[#4c36ff] text-white " : "bg-[#29dd3b] text-black border-[#29dd3b] shimmer-glow-btn"}
               overflow-hidden -mr-2`}
             style={{
                backgroundColor: isWizoraPage ? "#4c36ff" : "#29dd3b", fontWeight: 600,
                letterSpacing: 0.5, fontSize: '14px'
-               }}
+               }} 
           >
             <span className="relative font-disket z-10">LET'S TALK</span>
             <span className={`absolute shimmer-effect inset-0 rounded-full border pointer-events-none ${isWizoraPage ? "border-[#4c36ff]" : "border-[#29dd3b]"}`}></span>
