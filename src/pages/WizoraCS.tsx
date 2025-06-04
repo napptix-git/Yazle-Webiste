@@ -112,13 +112,13 @@ return (
       dropdownBgColor="#4c36ff"
       dropdownTextColor="text-[#4c36ff]"
     />
-    <div className="flex-1 flex flex-col items-center justify-center z-10 text-center min-h-screen">
+    <div className="flex-1 flex flex-col items-center justify-center z-10 text-center min-h-screen" >
       <img
         src="/lovable-uploads/wizora_w_logo.png"
         alt="wiz"
-        className="w-[100px] h-auto md:w-[300px]"
+        className="w-[260px] h-auto md:w-[300px]"
       />
-      <p className="text-2xl md:text-xl text-black mb-4 mt-4 font-productSans uppercase">
+      <p className="text-base  md:text-2xl sm:text-sm text-black mb-4 mt-4 font-productSans uppercase">
         Your Playable Ad Wizard
       </p>
       <a
