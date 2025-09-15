@@ -23,10 +23,10 @@ const newsItems = [
   },
   {
     id: "news-2",
-    date: "April 20, 2025",
-    title: "From Small Towns to Big Impact: How Tier 2 and Tier 3 India Are Powering the Next Gaming Boom",
-    content: "India’s gaming scene is taking off beyond the big cities. Across tier 2 and tier 3 towns, a surge of new players is redefining how entertainment, culture and commerce come together. Here, gaming is no longer just a pastime, it’s a daily ritual, a way to connect and a vibrant piece of the digital economy.",
-    image: "https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?q=80&w=1471&fit=crop"
+    date: "June 19, 2025",
+    title: "Napptix Acquires Yazle to Revolutionize Gaming Advertising!",
+    content: "Napptix, the Dubai-based Gaming 360° ad-tech company, has acquired Yazle Marketing Management’s MENA business, including its client portfolio, commercial operations, and regional team across the Gulf and North Africa.",
+    image: "/public/lovable-uploads/nappYez.png"
   },
   {
     id: "news-3",

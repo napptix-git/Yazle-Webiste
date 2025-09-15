@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -13,19 +12,22 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 const newsItems = [
   {
-    id: "news-1",
-    date: "April 24, 2025",
-    title: "Break the Bottleneck in Interactive Ad Creation"
+    id: null,
+    link: "https://www.bizpreneurme.com/napptix-acquires-yazles-middle-east-north-africa-business-expanding-its-gaming-ad-technology-footprint-across-the-gulf/",
+    date: "June 19, 2025",
+    title: "Napptix acquires Yazle’s Middle-East & North-Africa business"
   },
   {
-    id: "news-2",
-    date: "April 20, 2025",
-    title: "From Small Towns to Big Impact: How Tier 2 and Tier 3 India Are Powering the Next Gaming Boom"
+    id: null,
+    link: "https://campaignme.com/gaming-adtech-company-napptix-acquires-yazles-mena-business/",
+    date: "June 19, 2025",
+    title: "Gaming adtech company Napptix acquires Yazle’s MENA business"
   },
   {
-    id: "news-3",
-    date: "April 15, 2025",
-    title: "Interactive by Design: Why the Future of Advertising Is Built for Play"
+    id: null,
+    link: "https://communicateonline.me/news/napptix-acquires-yazles-middle-east-north-africa-business-expanding-its-gaming-ad-technology-footprint-across-the-gulf/",
+    date: "June 19, 2025",
+    title: "Napptix acquires Yazle’s Middle-East & North-Africa business, expanding its gaming-ad technology footprint across the Gulf"
   },
   {
     id: "news-4",
@@ -40,7 +42,7 @@ const NewsCarousel = () => {
   
   const renderNewsCard = (item: typeof newsItems[0], index: number) => (
     <div 
-      key={`news-item-${item.id}-${index}`}
+      key={`news-item-${item.id || index}`}
       className="relative bg-white hover:bg-[#ff6b6b] transition-colors duration-300 p-4 sm:p-6 md:p-8 rounded-xl h-full flex flex-col justify-between min-h-[280px] sm:min-h-[320px]"
     >
       <div>
@@ -51,7 +53,9 @@ const NewsCarousel = () => {
       </div>
       <div className="mt-auto">
         <Link
-         to={`/news/${item.id}`}
+         to={item.link || `/news/${item.id}`}
+         target="_blank"
+         rel="noopener noreferrer"
          className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-[#4c36ff] text-white font-semibold hover:bg-[#372bb3] transition-all duration-200 text-xs sm:text-sm group">
           Read More
           <svg 
@@ -109,7 +113,7 @@ const NewsCarousel = () => {
           </div>
         </div>
 
-        <style jsx>{`
+        <style>{`
           .slides {
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;

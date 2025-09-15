@@ -4,17 +4,22 @@ import { X, Newspaper } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from "@/hooks/use-mobile";
 
-const AnnouncementBar: React.FC = () => {
+interface AnnouncementBarProps {
+  onCancel: () => void;
+}
+
+const AnnouncementBar: React.FC<AnnouncementBarProps> = ({ onCancel }) => {
   const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
   const isMobile = useIsMobile(); // Hook to detect mobile screens
 
   const handleDismiss = () => {
     setIsVisible(false);
+    onCancel();
   };
 
   const handleReadMore = () => {
-    navigate('/news/news-1');
+    navigate('/news/news-2');
     window.scrollTo(0, 0);
   };
 
@@ -37,9 +42,9 @@ const AnnouncementBar: React.FC = () => {
               }`}
             >
               {/* Announcement Text */}
-              <div className={`flex items-center gap-2 ${isMobile ? 'pr-[100px]' : 'pl-[400px]'}`}>
+              <div className={`flex items-center gap-2 ${isMobile ? 'pr-[100px]' : 'pl-[250px]'}`}>
                 <span className="text-base animate-pulse">🎮</span> {/* Adjusted icon size */}
-                <p className="text-white font-syne font-semibold truncate">
+                <p className="text-white font-disket truncate">
                   {isMobile
                     ? "Napptix Acquires Yazle!"
                     : "Breaking News: Napptix Acquires Yazle to Revolutionize Gaming Advertising!"}

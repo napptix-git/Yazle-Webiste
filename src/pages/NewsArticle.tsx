@@ -36,48 +36,26 @@ const newsItems = [
   },
   {
     id: "news-2",
-    date: "April 20, 2025",
-    title: "From Small Towns to Big Impact: How Tier 2 and Tier 3 India Are Powering the Next Gaming Boom",
+    date: "June 19, 2025",
+    title: "Napptix Acquires Yazle to Revolutionize Gaming Advertising!",
     content: "Playable ads deliver results because they turn passive impressions into active participation. With Wizora’s built-in analytics, you capture first-party engagement metrics the moment your campaign goes live.",
-    image: "https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?q=80&w=1471&fit=crop",
+    image: "/public/lovable-uploads/nappYez.png",
     fullContent: `
-      <p>India’s gaming scene is taking off beyond the big cities. Across tier 2 and tier 3 towns, a surge of new players is redefining how entertainment, culture and commerce come together. Here, gaming is no longer just a pastime, it’s a daily ritual, a way to connect and a vibrant piece of the digital economy.
+      <p>Dubai, UAE – Napptix, the Dubai-based ad-tech innovator behind the Gaming 360° platform, has announced the successful acquisition of Yazle Marketing Management’s Middle East & North Africa (MENA) business. The deal includes Yazle’s commercial operations, client portfolio, and regional team across the Gulf and North Africa. Yazle’s businesses in Asia-Pacific, Europe, and the Americas remain under existing ownership.
       </p>
             
-      <p>Affordable Access, Unlimited Potential
-      Thanks to low-cost smartphones and rock-bottom data plans, millions in smaller towns now have gaming at their fingertips. As signals and devices reached ever more corners of the country, titles like Free Fire, BGMI and Ludo King quickly followed. They’re not just games; they’re part of everyday conversation in places that used to face digital barriers.
+      <p>This strategic acquisition marks a significant milestone in Napptix’s mission to deliver context-aware, culturally relevant, and brand-safe gaming media solutions across the region. By integrating Yazle MENA’s experienced team and robust client base, Napptix further solidifies its position as the go-to GamingTech platform for brands seeking measurable, immersive, and gamer-centric advertising experiences in the MENA market.
       </p>
       
-      <p>With more than 450 million Indians playing online, the sector is on track to be worth $4.5 billion by 2025, and much of that growth is coming from outside metro areas.
+      <p>Saurabh Mehta, Co-Founder and General Manager of Napptix, described the move as more than an acquisition – “an alignment of vision” – aimed at embedding advertising within the region’s thriving gaming culture. With mobile gaming leading digital media consumption across the GCC, this partnership is poised to unlock new, emotionally intelligent ways for brands to engage Gen Z and gaming-native audiences.
       </p>
       
-      <p>A New Breed of Gamer
-      Players from tier 2 and tier 3 markets aren’t just catching up, they’re leading the way. They come from diverse backgrounds, play across genres and share a few key traits: they’re mobile first, they crave content that speaks their language and culture, and they’re open to meaningful brand experiences in the games they love.
+      <p>Yazle Co-Founder Gaurav Aidasani emphasized the opportunity for focus and expansion in other global markets, expressing confidence in Napptix’s ability to scale Yazle’s MENA operations to new heights. Jamie Atherton will continue as Managing Director of Yazle MENA, ensuring seamless transition and continued excellence in client service.
       </p>
       
-      <p>They don’t want off-the-shelf campaigns. They want stories, characters and challenges that feel local. They’re social, competitive and always eager to try formats that bring value and spark connection</p>
-
-      <p>Rethinking Brand Engagement
-      For marketers, this shift is both a challenge and a huge opportunity. One-size-fits-all strategies won’t cut it here. Success means understanding where these gamers hang out, what excites them and how they like to engage.
+      <p>As the gaming ecosystem in MENA rapidly evolves, this consolidation of strengths between two pioneering companies signals a bold new era in playable, immersive, and high-impact gaming advertising across the region.
       </p>
-
-      <p>That’s exactly where Napptix comes in. As your full-service gaming marketing partner, we connect brands and players at every touchpoint:
-        •	In-game ads that fit naturally into play
-        •	Branded characters, mods and custom skins
-        •	Community events, creator collaborations and regional storytelling
-        •	Esports integrations, event sponsorships and cross-platform fan engagement
-        </p>
-
-      <p>More Than a Trend: A Movement
-      This isn’t a passing phase. Gaming in India’s smaller cities is the lifeblood of a generation that skipped desktops and went straight to mobile. These players are building communities, earning livelihoods and shaping tomorrow’s online culture.
-      </p>
-      
-      <p>To reach the next wave of users, you need to look beyond the usual hotspots. It’s in the everyday moments of towns that were once overlooked. Napptix is here to guide you through that journey with strategy, insight and end-to-end execution, so you can make a real impact from the ground up.</p>
-      
-      <p></p>
-      
-      
-      
+    
       
     `
   },

@@ -1,5 +1,5 @@
-
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import PartnersCarousel from '@/components/PartnersCarousel';
@@ -8,21 +8,38 @@ import Footer from '@/components/Footer';
 import AnimatedCardSection from '@/components/AnimatedCardSection';
 import NewsCarousel from '@/components/NewsCarousel';
 import AnnouncementBar from '@/components/AnnouncementBar';
+import InteractiveFooter from '@/components/InteractiveFooter';
 
 const Index = () => {
   const pageRef = useRef<HTMLDivElement>(null);
+  const [navbarTop, setNavbarTop] = useState('25px');
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setNavbarTop('0px');
+    }
+  }, [location.pathname]);
+
+  const handleAnnouncementCancel = () => {
+    if (location.pathname === '/') {
+      setNavbarTop('-10px');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black" ref={pageRef}>
-      {/* <div className="">
-        <AnnouncementBar />
-      </div> */}
-      
-      <div className="">
+      {location.pathname === '/' && (
+        <div className="">
+          <AnnouncementBar onCancel={handleAnnouncementCancel} />
+        </div>
+      )}
+
+      <div style={{ position: 'relative', top: navbarTop }}>
         <Navbar />
       </div>
       
@@ -47,7 +64,7 @@ const Index = () => {
       </section>
       
       <section>
-        <Footer />
+        <InteractiveFooter />
       </section>
     </div>
   );
