@@ -62,10 +62,14 @@ const Index = () => {
       <section id="news" className="bg-black pb-[100px]">
         <NewsCarousel />
       </section>
-      
-      <section>
-        <InteractiveFooter />
+
+      <section id="footer" className="bg-black">
+        <Footer />
       </section>
+      
+      {/* <section>
+        <InteractiveFooter />
+      </section> */}
     </div>
   );
 };
